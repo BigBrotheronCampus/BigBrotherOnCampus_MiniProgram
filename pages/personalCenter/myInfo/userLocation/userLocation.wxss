@@ -1,0 +1,34 @@
+/* pages/personalCenter/personalInfo/userLocation/userLocation.wxss */
+#locationTitle{
+  padding-left:50rpx;
+}
+
+#inLocation{
+  padding-left: 50rpx;
+}
+
+.addressView{
+  width: 100%;
+  height: 100rpx;
+  display: flex;
+  font-size: 50rpx;
+  align-items: center;
+  justify-content: space-between;
+  color: #779dce;
+  background: #f1f0fe;
+}
+
+.addressText{
+  display: flex;
+}
+
+.icon{
+  width:100rpx;
+  height:100rpx;
+}
+
+.blank{
+  width: 100%;
+  height:640rpx;
+  background: #f1f0fe;
+}

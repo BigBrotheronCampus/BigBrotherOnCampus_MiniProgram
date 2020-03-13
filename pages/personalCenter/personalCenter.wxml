@@ -1,0 +1,56 @@
+<!--pages/personalCenter/personalCenter.wxml-->
+<view class="divLine">
+  <view id="divLine1"></view>
+  <view id="divLine2"></view>
+</view>
+
+<view class="avatar">
+  <view id="divLine1"></view>
+  <image id="userAvatar" src="{{userAvatarPath}}" bindtap="onTapAvatar"></image>
+  <text id="userID">ID:{{userID}}</text>
+</view>
+
+<view class="social">
+  <view class="social-txt" id="myActivity" bindtap="onTapSocial">动态</view>
+  <view class="social-txt" id="myFollows" bindtap="onTapSocial">关注</view>
+  <view class="social-txt" id="myFans" bindtap="onTapSocial">粉丝</view>
+</view>
+
+<view id="divLine3"></view>
+
+<view>
+  <view class="scrollBar" id="myInfo" bindtap="onTapFunctionBar">
+    <text id="dot">·</text>
+    <text id="function">个人信息</text>
+  </view>
+  <view id='divLine4'></view>
+
+  <view class="scrollBar" id="myFavorites" bindtap="onTapFunctionBar">
+    <text id="dot">·</text>
+    <text id="function">我的收藏</text>
+  </view>
+  <view id='divLine4'></view>
+
+  <view class="scrollBar" id="myHistory" bindtap="onTapFunctionBar">
+    <text id="dot">·</text>
+    <text id="function">浏览历史</text>
+  </view>
+  <view id='divLine4'></view>
+
+  <view class="scrollBar" id="communityManagement" bindtap="onTapFunctionBar">
+    <text id="dot">·</text>
+    <text id="function">社团管理</text>
+  </view>
+  <view id='divLine4'></view>
+
+  <view class="scrollBar" id="settings" bindtap="onTapFunctionBar">
+    <text id="dot">·</text>
+    <text id="function">账号设置</text>
+  </view>
+  <view id='divLine4'></view>
+
+  <view class="scrollBar" id="signOut" bindtap="onTapFunctionBar">
+    <text id="dot">·</text>
+    <text id="function">退出登录</text>
+  </view>
+</view>

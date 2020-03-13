@@ -1,0 +1,55 @@
+/* pages/personalCenter/OthersInfo/othersInfo.wxss */
+.avatar{
+  background-color: #cadbf9;
+  width:100%;
+  height: 380rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatarImg{
+  width: 280rpx;
+  height: 280rpx;
+  border-radius: 50%;
+  overflow:hidden;
+}
+
+#userID{
+  vertical-align: center;
+  font-size: 50rpx;
+  color:#ffffff;
+}
+
+.personalInfoTitle{
+  width: 100%;
+  height: 70rpx;
+  font-size: 50rpx;
+  color:#de979b;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.infoText{
+  display: flex;
+}
+
+.info{
+  text-indent: 50rpx;
+}
+
+.blank{
+  width: 100%;
+  height:145rpx;
+  background: #f1f0fe;
+}
+
+.followBtn{
+  position: fixed;
+  left:250rpx;
+  bottom: 50rpx;
+  font-size: 40rpx;
+  color: #779dce;
+  background: #ffffff;
+}

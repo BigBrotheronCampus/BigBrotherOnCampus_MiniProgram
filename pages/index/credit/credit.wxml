@@ -1,0 +1,24 @@
+<!--pages/credit/credit.wxml-->
+<view class="divLine">
+  <view class="divLine1"></view>
+  <view class="divLine2"></view>
+</view>
+
+<view class="title">
+  <image src='../../icons/return.png'></image>
+  <text>信用积分</text>
+</view>
+
+<view class="content">
+  <text class="head">个人/社团</text>
+  <view class="score">
+    <text>分数:    100</text>
+    <text>等级:    100</text>
+  </view>
+  <text class="time">评估时间:2020年3月1日</text>
+  <text class="count" decode="{{true}}" space="{{true}}">守约:5次&ensp;&ensp;&ensp;积分:20</text>
+  <view class="credit">
+    <text>我的信用</text>
+    <text>信用守护</text>
+  </view>
+</view>

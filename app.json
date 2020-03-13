@@ -1,0 +1,76 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/home/home",
+    "pages/personalCenter/othersInfo/othersInfo",
+    "pages/personalCenter/myFollows/myFollows",
+    "pages/personalCenter/myFans/myFans",
+    "pages/publish/wonderfulMovement/wonderfulMovement",
+    "pages/publish/publishActivity/publishActivity",
+    "pages/publish/recruitTeammates/recruitTeammates",
+    "pages/personalCenter/personalCenter",
+    "pages/personalCenter/myInfo/myInfo",
+    "pages/publish/publish",
+    "pages/personalCenter/myFavorite/myFavorite",
+    "pages/register/register",
+    "pages/index/index",
+    "pages/index/findmates/findmates",
+    "pages/plan/plan",
+    "pages/index/credit/credit",
+    "pages/ground/ground",
+    "pages/books/books",
+    "pages/personalCenter/myInfo/userAge/userAge",
+    "pages/personalCenter/myInfo/userLocation/userLocation",
+    "pages/personalCenter/myInfo/userName/userName",
+    "pages/personalCenter/myInfo/userSchool/userSchool",
+    "pages/personalCenter/myInfo/userSex/userSex",
+    "pages/personalCenter/myHistory/myHistory",
+    "pages/personalCenter/communityManagement/communityManagement",
+    "pages/personalCenter/settings/settings"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "校园大哥大",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#779dce",
+    "selectedColor": "#779dce",
+    "borderStyle": "white",
+    "list": [
+      {
+        "selectedIconPath": "icons/selectedHome.png",
+        "iconPath": "icons/home.png",
+        "pagePath": "pages/home/home",
+        "text": "首页"
+      },
+      {
+        "selectedIconPath": "icons/selectedGround.png",
+        "iconPath": "icons/ground.png",
+        "pagePath": "pages/ground/ground",
+        "text": "广场"
+      },
+      {
+        "selectedIconPath": "icons/publish.png",
+        "iconPath": "icons/publish.png",
+        "pagePath": "pages/publish/publish",
+        "text": "发布"
+      },
+      {
+        "selectedIconPath": "icons/selectedBooks.png",
+        "iconPath": "icons/books.png",
+        "pagePath": "pages/books/books",
+        "text": "精品策划"
+      },
+      {
+        "selectedIconPath": "icons/selectedPersonalCenter.png",
+        "iconPath": "icons/personalCenter.png",
+        "pagePath": "pages/personalCenter/personalCenter",
+        "text": "个人中心"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

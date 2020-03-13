@@ -1,0 +1,15 @@
+<!--pages/plan/plan.wxml-->
+<searchInput></searchInput>
+<view class="head">
+  <view wx:for="{{func}}" data-index="{{index}}" wx:key="index" bindtap="funcTap">
+    <image src="{{item.img}}"></image>
+    <text>{{item.txt}}</text>
+  </view>
+</view>
+
+<view class="body">
+  <view wx:for="{{content}}" data-index="{{item}}" wx:key="index" bindtap="contentTap">
+    <image src="../../icons/word.png"></image>
+    <text>{{item}}</text>
+  </view>
+</view>

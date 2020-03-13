@@ -1,0 +1,20 @@
+<!--pages/personalCenter/myFans/myFans.wxml-->
+<view class="divLine">
+  <view id="divLine1"></view>
+  <view id="divLine2"></view>
+</view>
+
+<view class="title">我的粉丝</view>
+
+<scroll-view class="scollView">
+  <view wx:for="{{fans}}" wx:key="fansID"class="imgRightBar" bindtap="onTapFansBar" data-fid="{{item.fansID}}" data-path="{{item.fansAvatarPath}}">
+    <view style="margin-left:20rpx;display:flex;align-items:center;">
+      <image class="icon" src="{{item.fansAvatarPath}}"></image>
+      <text >{{item.fansName}}</text>
+    </view>
+    <image class="icon" src="../../../icons/next.png"></image>
+  </view>
+  <view id='divLine4'></view>
+
+  <view class="blank" style="height:{{blankHeight}}rpx;"></view>
+</scroll-view>

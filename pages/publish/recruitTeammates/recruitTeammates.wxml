@@ -1,0 +1,48 @@
+<!--pages/publish/recruitTeammates/recruitTeammates.wxml-->
+<!--pages/publish/publishActivity/publishActivity.wxml-->
+<view class="divLine">
+  <view id="divLine1"></view>
+  <view id="divLine2"></view>
+</view>
+
+<view class="title">招募队友</view>
+
+<view id='divLine4' style="height:20rpx;"></view>
+
+<form bindsubmit="recruitSubmit">
+
+<view class="publishBar">
+  <text class="activityTxt">身份信息：</text>
+  <view style="width:20rpx;"></view>
+  <input name="recruitName" class="inActivity" focus="true" placeholder="年级-学院-姓名" placeholder-class="placeholderStyle" confirm-type="done" style="  background: #f1f0fe;" maxlength="50"></input>
+</view>
+
+<view id='divLine4' style="height:20rpx;"></view>
+
+<view class="publishBar">
+  <text class="activityTxt" >招募内容：</text>
+  <view style="width:20rpx;"></view>
+</view>
+
+<view id='divLine4' style="height:20rpx;"></view>
+
+<textarea name="recruitContent" class="inContent" focus="true" confirm-type="done" maxlength="500"></textarea>
+
+<view id='divLine4' style="height:20rpx;"></view>
+
+<view class="publishBar">
+  <text class="activityTxt">联系方式：</text>
+  <view style="width:20rpx;"></view>
+</view>
+
+<view id='divLine4' style="height:20rpx;"></view>
+
+<textarea name="recruitPhoneNum" class="inContent" focus="true" confirm-type="done" maxlength="500" style="height:200rpx;" maxlength="100"></textarea>
+
+<view id='divLine4' style="height:40rpx;"></view>
+
+<view style="display:flex;justify-content:center;">
+  <button class="activityTxt" id="push" style="height:fit-content;" form-type="submit">提交审核</button>
+</view>
+
+</form>

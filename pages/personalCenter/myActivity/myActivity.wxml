@@ -1,0 +1,28 @@
+<!--pages/myActivity/myActivity.wxml-->
+<view class="divLine">
+  <view id="divLine1"></view>
+  <view id="divLine2"></view>
+</view>
+
+<view class="title">
+  <image src='../../../icons/return.png'></image>
+  <text>个人动态</text>
+</view>
+
+<scroll-view class="scollView">
+  <view class="scrollBar" id="activity">
+    <text id="activityName">我的活动</text>
+    <image src="../../../icons/next.png"></image>
+  </view>
+  <view id='divLine4'></view>
+    <view class="scrollBar" id="activity">
+    <text id="activityName">我的发帖</text>
+    <image src="../../../icons/next.png"></image>
+  </view>
+  <view id='divLine4'></view>
+    <view class="scrollBar" id="activity">
+    <text id="activityName">我的信息</text>
+    <image src="../../../icons/next.png"></image>
+  </view>
+  <view id='divLine4'></view>
+</scroll-view>

@@ -1,0 +1,85 @@
+/* pages/ground/ground.wxss */
+page{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.navbar{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background-color:  #cadbf9;
+  margin-top: 5rpx;
+  align-items: center;
+}
+.navbar .item{
+  width: 33.33%;
+  text-align: center;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  color: white;
+}
+.navbar .active{
+  color: #de979b;
+}
+.title{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 5rpx;
+  justify-content:space-between;
+  background-color: #f1f0fe;
+}
+.poster{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 10rpx;
+}
+.title image{
+  width: 120rpx;
+  height: 120rpx;
+  margin-left: 20rpx;
+  margin-right: 10rpx;
+  border-radius: 50%;
+}
+.name{
+  font-size: 50rpx;
+}
+.time{
+  font-size: 30rpx;
+  margin-right: 20rpx;
+}
+.content{
+  display: flex;
+  justify-content: center;
+  padding-top: 10rpx;
+  background-color: #f1f0fe;
+  width: 100%;
+  align-items: center;
+}
+.content image{
+  width: 640rpx;
+  height: 350rpx;
+}
+.content_1{
+  display: flex;
+  padding-top: 50rpx;
+  background-color: #f1f0fe;
+  width: 100%;
+  height: 200rpx;
+}
+.content_txt{
+  text-align: left;
+  margin-left: 70rpx;
+}
+.operation{
+  display: flex;
+  flex-direction: row-reverse;
+  background-color: #f1f0fe;
+}
+.operation image{
+  width: 60rpx;
+  height: 60rpx;
+  margin: 10rpx;
+}

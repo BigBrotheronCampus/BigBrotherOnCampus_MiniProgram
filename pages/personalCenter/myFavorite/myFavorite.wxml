@@ -1,0 +1,21 @@
+<!--pages/personalCenter/myFavorites/myFavorites.wxml-->
+<view class="divLine">
+  <view id="divLine1"></view>
+  <view id="divLine2"></view>
+</view>
+
+<view class="title">
+  <image src='../../../icons/return.png'></image>
+  <text>我的收藏</text>
+</view>
+
+<scroll-view class="scollView">
+  <view wx:for="{{12}}" wx:key="id">
+    <view class="scrollBar" id="activity">
+      <text id="dot">·</text>
+      <text id="activityName">xx活动</text>
+      <image src="../../../icons/next.png"></image>
+    </view>
+    <view id='divLine4'></view>
+  </view>
+</scroll-view>

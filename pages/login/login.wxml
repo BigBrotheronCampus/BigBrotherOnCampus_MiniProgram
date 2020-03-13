@@ -1,0 +1,31 @@
+<!--pages/login/login.wxml-->
+<view class="login">
+  <view class="title">
+    <image src="../../icons/eye.png"></image>
+    <text>校园大哥大</text>
+  </view>
+  <view class="log">登录</view>
+  <view class="out_enter">
+    <view class="enter">
+      <view class="account">电话号</view>
+      <view class="in_account">
+        <image src="../../icons/person.png"></image>
+        <input bindinput="inputAccount"></input>
+      </view>
+      <view class="password">密码</view>
+      <view class="in_password">
+        <image src="../../icons/password.png"></image>
+        <input password="true" bindinput="inputPwd"></input>
+      </view>
+    </view>
+  </view>
+  <view class="enter_down"></view>
+  <view class="other">
+    <image src="../../icons/enter.png" class="log_enter" bindtap="login"></image>
+    <view>
+      <text>忘记密码</text>
+      <text bindtap="toRegister">注册账号</text>
+    </view>
+  </view>
+</view>
+ 

@@ -1,0 +1,78 @@
+<!--pages/publish/publishActivity/publishActivity.wxml-->
+<view class="divLine">
+  <view id="divLine1"></view>
+  <view id="divLine2"></view>
+</view>
+
+<view class="title">发布活动</view>
+
+<view id='divLine4' style="height:20rpx;"></view>
+
+<form bindsubmit="activitySubmit">
+
+  <view class="publishBar">
+    <text class="activityTxt">活动名称：</text>
+    <view style="width:20rpx;"></view>
+    <input class="inActivity" focus="true" confirm-type="done" style=" background: #f1f0fe;" name="activityName" maxlength="50"></input>
+  </view>
+
+  <view id='divLine4' style="height:20rpx;"></view>
+
+  <view class="publishBar">
+    <text class="activityTxt" style="width:200rpx;">发布者：</text>
+    <view style="width:20rpx;"></view>
+    <input class="inActivity"  confirm-type="done" style="width:470rpx;" name="activityPublisher" maxlength="100"></input>
+  </view>
+
+  <view id='divLine4' style="height:20rpx;"></view>
+
+  <view class="publishBar">
+    <text class="activityTxt">活动类型：</text>
+    <view style="width:20rpx;"></view>
+    <input class="inActivity"  confirm-type="done" name="activityType" maxlength="20"></input>
+  </view>
+
+  <view id='divLine4' style="height:20rpx;"></view>
+
+  <view class="publishBar">
+    <text class="activityTxt" style="width:300rpx;">活动负责人：</text>
+    <view style="width:20rpx;"></view>
+    <input class="inActivity"  confirm-type="done" style="width:370rpx;" name="activityLeader" maxlength="100"></input>
+  </view>
+
+  <view id='divLine4' style="height:20rpx;"></view>
+
+  <view class="publishBar">
+    <text class="activityTxt">联系方式：</text>
+    <view style="width:20rpx;"></view>
+    <input class="inActivity"  confirm-type="done" name="activityPhoneNum" maxlength="100"></input>
+  </view>
+
+  <view id='divLine4' style="height:20rpx;"></view>
+
+  <view class="publishBar">
+    <text class="activityTxt">活动内容：</text>
+    <view style="width:20rpx;"></view>
+  </view>
+
+  <view id='divLine4' style="height:20rpx;"></view>
+
+  <textarea class="inContent" confirm-type="done" maxlength="500" name="activityContent"></textarea>
+
+  <image src="{{attachedFilePath}}" class="attachedFile" style="display:{{disImgVal}}"></image>
+  <video src="{{attachedFilePath}}" class="attachedFile" style="display:{{disVideoVal}}"></video>
+
+
+  <view id='divLine4'></view>
+
+  <view style="margin-left:40rpx;margin-right:20rpx;display:flex;justify-content:space-between;">
+    <view>
+      <image class="icon" id="imgPush" src="../../../icons/img.png" style="height:75rpx;" bindtap="onTapImg"></image>
+      <image class="icon" id="imgPush" src="../../../icons/video.png" bindtap="onTapVideo"></image>
+    </view>
+    <view>
+      <button class="activityTxt" formType="submit" >提交审核</button>
+    </view>
+  </view>
+
+</form>

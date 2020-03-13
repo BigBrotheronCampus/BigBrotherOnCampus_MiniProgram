@@ -1,0 +1,60 @@
+<!--pages/personalCenter/OthersInfo/othersInfo.wxml-->
+<view class="divLine">
+  <view id="divLine1"></view>
+  <view id="divLine2"></view>
+</view>
+
+<view class="avatar">
+  <view id="divLine1"></view>
+  <image class="userAvatar" src="{{userAvatarPath}}" bindtap="onTapAvatar"></image>
+  <text id="userID">ID:{{userID}}</text>
+</view>
+
+<view class="personalInfoTitle">个人信息</view>
+
+<view id="divLine3"></view>
+
+<view>
+  <view class="imgRightBar" id="userName" bindtap="onTapInfoBar">
+    <view class="infoText">
+      <text id="dot">·</text>
+      <text >昵称</text>
+      <view class="info">{{info.userName}}</view>
+    </view>
+  </view>
+
+  <view class="imgRightBar" id="userSex" bindtap="onTapInfoBar">
+    <view class="infoText">
+      <text id="dot">·</text>
+      <text >性别</text>
+      <view class="info">{{info.userSex}}</view>
+    </view>
+  </view>
+
+  <view class="imgRightBar" id="userAge" bindtap="onTapInfoBar">
+    <view class="infoText">
+      <text id="dot">·</text>
+      <text >年龄</text>
+      <view class="info">{{info.userAge}}</view>
+    </view>
+  </view>
+
+  <view class="imgRightBar" id="userSchool" bindtap="onTapInfoBar">
+    <view class="infoText">
+      <text id="dot">·</text>
+      <text >学校</text>
+      <view class="info">{{info.userSchool}}</view>
+    </view>
+  </view>
+
+  <view class="imgRightBar" id="userLocation" bindtap="onTapInfoBar">
+    <view class="infoText">
+      <text id="dot">·</text>
+      <text >地区</text>
+      <view class="info">{{info.userLocation}}</view>
+    </view>
+  </view>
+  <view  class="blank"></view>
+  <button class="followBtn" bindtap="onTapFollowBtn" style="width:280rpx;height: fit-content;">{{followTxt}}</button>
+</view>
+

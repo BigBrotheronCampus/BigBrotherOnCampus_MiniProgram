@@ -1,0 +1,5 @@
+/* pages/personalCenter/myFollows/myFollows.wxss */
+.blank{
+  width: 100%;
+  background: #f1f0fe;
+}

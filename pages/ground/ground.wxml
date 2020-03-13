@@ -1,0 +1,77 @@
+<!--pages/ground/ground.wxml-->
+<searchInput></searchInput>
+
+<!-- 导航栏 -->
+<view class="navbar">
+  <text wx:for="{{navbar}}" data-index="{{index}}" wx:key="index" class="item {{currentTab==index ? 'active' : ''}}" bindtap="navbarTap">{{item.text}}</text>
+</view> 
+
+<!-- 内容 -->
+<!-- 实时活动 -->
+<scroll-view wx:if="{{currentTab==0}}">
+  <view wx:for="{{activity}}" wx:key="a_id">
+    <view class="title">
+      <view class="poster">
+        <image src="{{item.u_photo}}"></image>
+        <text class="name">{{item.u_name}}</text>
+      </view>
+      <view>
+        <text class="time">{{item.time}}</text>
+      </view>
+    </view>
+    <view class="content">
+      <image src="{{item.img}}"></image>
+    </view>
+    <view class="operation">
+      <image src="../../icons/message.png"></image>
+      <image src="../../icons/send.png"></image>
+      <image src="../../icons/like.png"></image>
+    </view>
+  </view>
+</scroll-view>
+
+<!-- 寻找队友 -->
+<scroll-view wx:elif="{{currentTab==1}}">
+  <view wx:for="{{findTeammate}}" wx:key="a_id">
+    <view class="title">
+      <view class="poster">
+        <image src="{{item.u_photo}}"></image>
+        <text class="name">{{item.u_name}}</text>
+      </view>
+      <view>
+        <text class="time">{{item.time}}</text>
+      </view>
+    </view>
+    <view class="content_1">
+      <text class="content_txt">{{item.content}}</text>
+    </view>
+    <view class="operation">
+      <image src="../../icons/message.png"></image>
+      <image src="../../icons/send.png"></image>
+      <image src="../../icons/like.png"></image>
+    </view>
+  </view>
+</scroll-view>
+
+<!-- 活动信息咨询 -->
+<scroll-view wx:elif="{{currentTab==2}}">
+  <view wx:for="{{consult}}" wx:key="a_id">
+    <view class="title">
+      <view class="poster">
+        <image src="{{item.u_photo}}"></image>
+        <text class="name">{{item.u_name}}</text>
+      </view>
+      <view>
+        <text class="time">{{item.time}}</text>
+      </view>
+    </view>
+    <view class="content_1">
+      <text class="content_txt">{{item.content}}</text>
+    </view>
+    <view class="operation">
+      <image src="../../icons/message.png"></image>
+      <image src="../../icons/send.png"></image>
+      <image src="../../icons/like.png"></image>
+    </view>
+  </view>
+</scroll-view>

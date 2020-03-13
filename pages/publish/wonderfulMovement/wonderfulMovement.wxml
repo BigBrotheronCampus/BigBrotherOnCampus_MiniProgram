@@ -1,0 +1,28 @@
+<!--pages/publish/wonderfulMovement/wonderfulMovement.wxml-->
+<view class="divLine">
+  <view id="divLine1"></view>
+  <view id="divLine2"></view>
+</view>
+
+<view class="title">精彩瞬间</view>
+
+<view id='divLine4' style="height:20rpx;"></view>
+
+<form bindsubmit="movementSubmit">
+
+<textarea name="movementContent" class="inContent" focus="true" confirm-type="done" maxlength="500"></textarea>
+
+<image src="{{attachedFilePath}}" class="attachedFile" style="display:{{disImgVal}}"></image>
+<video src="{{attachedFilePath}}" class="attachedFile" style="display:{{disVideoVal}}"></video>
+
+<view id='divLine4' style="height:20rpx;"></view>
+
+<view style="margin-left:40rpx;margin-right:20rpx;display:flex;justify-content:space-between;">
+  <view>
+  <image class="icon" id="imgPush" src="../../../icons/img.png" style="height:75rpx;" bindtap="onTapImg"></image>
+  <image class="icon" id="imgPush" src="../../../icons/video.png" bindtap="onTapVideo"></image>
+  </view>
+  <button class="activityTxt" form-type="submit">发表</button>
+</view>
+
+</form>

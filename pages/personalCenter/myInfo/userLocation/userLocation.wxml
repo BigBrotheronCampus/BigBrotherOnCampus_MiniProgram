@@ -1,0 +1,37 @@
+<!--pages/personalCenter/personalInfo/userLocation/userLocation.wxml-->
+<view class="divLine">
+  <view id="divLine1"></view>
+  <view id="divLine2"></view>
+</view>
+
+<view class="title">地区</view>
+
+<view class="scrollBar" id="currentLocation" bindtap="onTapLocation">使用当前位置</view>
+<view id='divLine4'></view>
+
+<view class="scrollBar" id="country" bindtap="onTapLocation">
+  <text>国家</text>
+  <view style="padding-left:50rpx;">中国</view>
+</view>
+<view id='divLine4'></view>
+
+<view class="addressView" id="province" bindtap="onTapLocation">
+  <view class="addressText">
+    <text style="text-indent:50rpx;">省</text>
+    <text style="text-indent:100rpx;">{{provinceName}}</text>
+  </view>
+  <image class="icon" src="../../../../icons/dropdown.png"></image>
+</view>
+
+<view id='divLine4'></view>
+
+<view class="addressView" id="city" bindtap="onTapLocation">
+  <view class="addressText">
+    <text style="text-indent:50rpx;">市</text>
+    <text style="text-indent:100rpx;">{{cityName}}</text>
+  </view>
+  <image class="icon" src="../../../../icons/dropdown.png"></image>
+</view>
+<view id='divLine4'></view>
+
+<view  class="blank"></view>

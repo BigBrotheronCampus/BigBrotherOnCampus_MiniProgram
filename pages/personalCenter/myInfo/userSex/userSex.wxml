@@ -1,0 +1,25 @@
+<!--pages/personalCenter/personalInfo/userSex/userSex.wxml-->
+<view class="divLine">
+  <view id="divLine1"></view>
+  <view id="divLine2"></view>
+</view>
+
+<view class="title">性别</view>
+
+<view class="sexView" id="male" bindtap="onTapSexBar">
+  <text style="text-indent:50rpx;">男</text>
+  <view wx:if="{{sex==1}}">
+  <image class="icon" src="../../../../icons/done.png"></image>
+  </view>
+</view>
+<view id='divLine4'></view>
+
+<view class="sexView" id="female" bindtap="onTapSexBar">
+  <text style="text-indent:50rpx;">女</text>
+  <view wx:if="{{sex==0}}">
+  <image class="icon" src="../../../../icons/done.png"></image>
+  </view>
+</view>
+<view id='divLine4'></view>
+
+<view  class="blank"></view>

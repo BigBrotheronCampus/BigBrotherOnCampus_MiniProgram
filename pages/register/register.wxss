@@ -1,0 +1,126 @@
+.login{
+  display: flex;
+  flex-direction: column;
+  background-color: #f1f0fe;
+  align-items: center;    /**子view垂直居中*/
+  vertical-align: center; /**垂直居中*/
+  justify-content: center; /**内容居中*/
+}
+.title{
+  width: 750rpx;
+  display: flex;
+  background-color: #f1f0fe;
+  flex-direction: row;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+  align-items: center;    /**子view垂直居中*/
+  vertical-align: center; /**垂直居中*/
+  justify-content: center; /**内容居中*/
+}
+.title image{
+  width: 150rpx;
+  height: 120rpx;
+}
+.title text{
+  height: 100%;
+  color: #de979b;
+  font-size: 80rpx;
+  line-height: 100%;
+}
+.register{
+  width: 100%;
+  height: 120rpx;
+  font-size: 80rpx;
+  color:white;
+  background-color: #cadbf9;
+  text-align: center;
+}
+.out_enter{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5rpx;
+  margin-bottom: 5rpx;
+  background-color: #de979b;
+}
+.enter{
+  display: flex;
+  width: 550rpx;
+  padding-top: 70rpx;
+  padding-bottom: 70rpx;
+  background-color: #f9f9f9;
+  flex-direction: column;
+}
+.phone{
+  font-size: 40rpx;
+  color:#de979b;
+  text-align: center;
+}
+.ver_code{
+  font-size: 40rpx;
+  color:#de979b;
+  text-align: center;
+}
+.in_phone{
+  display: flex;
+  flex-direction: row;
+}
+.in_code{
+  display: flex;
+  flex-direction: row;
+}
+.in_code button{
+  width: 110px;
+  height: 35px;
+  vertical-align:middle;
+  text-align: center;
+  line-height: 23px;
+}
+.in_code button text{
+  font-size: 24rpx;
+  text-align: center;
+  color:#de979b;
+  vertical-align: center;
+}
+.enter image{
+  width: 100rpx;
+  height: 100rpx;
+}
+.input_code{
+  width: 280rpx;
+}
+.enter input{
+  margin-top: 25rpx;
+  border-bottom: 1px solid #de979b;
+}
+.enter_down{
+  width: 100%;
+  height: 120rpx;
+  background-color: #cadbf9;
+}
+.other{
+  width: 100%;
+  height: 300rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 30rpx;
+  background: #f1f0fe;
+}
+.log_enter{
+  width: 100rpx;
+  height: 100rpx;
+  margin-top: 30rpx;
+}
+.other view{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin-top: 50rpx;
+  align-items: center;
+}
+.other view text{
+  padding: 30rpx;
+  color: #de979b;
+}

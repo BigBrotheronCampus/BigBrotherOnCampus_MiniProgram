@@ -1,0 +1,20 @@
+<!--pages/personalCenter/personalInfo/userSchool/userSchool.wxml-->
+<view class="divLine">
+  <view id="divLine1"></view>
+  <view id="divLine2"></view>
+</view>
+
+<view class="title">学校</view>
+
+<view class="schoolView" id="school" bindtap="onTapSchool">
+  <view class="schoolText">
+    <text style="text-indent:50rpx;">学校</text>
+    <text style="text-indent:50rpx;">重庆大学</text>
+  </view>
+  <image class="icon" src="../../../../icons/dropdown.png"></image>
+</view>
+<view id='divLine4'></view>
+
+<!--选择学校功能有待开发-->
+
+<view  class="blank"></view>

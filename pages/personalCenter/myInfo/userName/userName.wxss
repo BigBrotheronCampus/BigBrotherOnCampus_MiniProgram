@@ -1,0 +1,10 @@
+/* pages/personalCenter/personalInfo/userName/userName.wxss */
+.placeholderStyle{
+  font-size: 40rpx;
+}
+
+.blank{
+  width: 100%;
+  height:950rpx;
+  background: #f1f0fe;
+}

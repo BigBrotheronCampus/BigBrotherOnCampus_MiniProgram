@@ -1,0 +1,106 @@
+/**app.wxss**/
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+} 
+
+/*天蓝分割线-粗*/
+#divLine1{
+  background:#cadbf9;
+  width:100%;
+  height: 35rpx;
+}
+
+/*白色分割线-粗*/
+#divLine2{
+  background:#ffffff;
+  width:100%;
+  height: 35rpx;
+}
+
+/*粉红分割线-粗*/
+#divLine3{
+  background:#de979b;
+  width:100%;
+  height: 25rpx;
+}
+
+/*白色分割线-细*/
+#divLine4{
+  background:#ffffff;
+  width:100%;
+  height: 5rpx;
+}
+
+/*装饰点*/
+#dot{
+  text-indent:50rpx;
+  font-weight: bold;
+  color:#de979b;
+}
+
+/*返回标志*/
+#return{
+  width: 160rpx;
+  height: 80rpx;
+  align-self: left;
+}
+
+/*标题栏*/
+.title{
+  width: 100%;
+  height: 80rpx;
+  background: #cadbf9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50rpx;
+  color: #ffffff;
+}
+
+/*滚动栏*/
+.scrollView{
+  scroll-snap-type-y: true;
+
+}
+
+.scrollBar{
+  width: 100%;
+  height: 100rpx;
+  display: flex;
+  font-size: 50rpx;
+  align-items: center;
+  padding-left: 50rpx;
+  color: #779dce;
+  background: #f1f0fe;
+}
+
+/*右侧小图标*/
+.icon{
+  width:80rpx;
+  height:80rpx;
+}
+
+/*右侧带有图片的功能栏*/
+.imgRightBar{
+  width: 100%;
+  height: 100rpx;
+  margin-bottom: 5rpx;
+  display: flex;
+  font-size: 50rpx;
+  justify-content: space-between;
+  align-items: center;
+  color: #779dce;
+  background: #f1f0fe;
+}
+
+/*活动附带精彩图片*/
+.attachedImg{
+  width: 690rpx;
+  height: 400rpx;
+}
