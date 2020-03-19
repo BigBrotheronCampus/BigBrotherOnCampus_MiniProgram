@@ -7,7 +7,7 @@
 <view class="title">发布</view>
 
 <view>
-  <view class="publishBar" id="publishActivity" bindtap="onTapPublishBar">
+  <view class="imgRightBar" id="publishActivity" bindtap="onTapPublishBar">
     <view class="publishText">
       <text id="dot">·</text>
       <text >发布活动</text>
@@ -16,7 +16,7 @@
   </view>
   <view id='divLine4'></view>
 
-  <view class="publishBar" id="recruitTeammates" bindtap="onTapPublishBar">
+  <view class="imgRightBar" id="recruitTeammates" bindtap="onTapPublishBar">
     <view class="publishText">
       <text id="dot">·</text>
       <text >招募队友</text>
@@ -25,16 +25,14 @@
   </view>
   <view id='divLine4'></view>
 
-  <view class="publishBar" id="wonderfulMovement" bindtap="onTapPublishBar">
+  <view class="imgRightBar" id="wonderfulMovement" bindtap="onTapPublishBar">
     <view class="publishText">
       <text id="dot">·</text>
       <text >精彩瞬间</text>
     </view>
     <image class="icon" src="../../icons/next.png"></image>
   </view>
-  <view id='divLine4'></view>
 
-  <view id='divLine4'></view>
 
   <view  class="blank"></view>
 </view>

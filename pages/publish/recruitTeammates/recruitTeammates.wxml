@@ -1,5 +1,4 @@
 <!--pages/publish/recruitTeammates/recruitTeammates.wxml-->
-<!--pages/publish/publishActivity/publishActivity.wxml-->
 <view class="divLine">
   <view id="divLine1"></view>
   <view id="divLine2"></view>

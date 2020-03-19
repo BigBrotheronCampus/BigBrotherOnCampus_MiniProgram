@@ -190,7 +190,7 @@ Page({
         fail: function () { }
       })
     }
-    else if(targetID=="personalInfo"){
+    else if(targetID=="myInfo"){
       wx.navigateTo({
         url: "./" + targetID + "/" + targetID + "?title=" + this.data.userAvatarPath,
         fail:function(){}

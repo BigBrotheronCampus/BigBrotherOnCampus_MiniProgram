@@ -30,12 +30,6 @@
   height: 25rpx;
 }
 
-/*白色分割线-细*/
-#divLine4{
-  background:#ffffff;
-  width:100%;
-  height: 5rpx;
-}
 
 /*装饰点*/
 #dot{
@@ -72,6 +66,7 @@
 .scrollBar{
   width: 100%;
   height: 100rpx;
+  margin-bottom: 5rpx;
   display: flex;
   font-size: 50rpx;
   align-items: center;
@@ -80,7 +75,7 @@
   background: #f1f0fe;
 }
 
-/*右侧小图标*/
+/*普通小图标*/
 .icon{
   width:80rpx;
   height:80rpx;
@@ -103,4 +98,23 @@
 .attachedImg{
   width: 690rpx;
   height: 400rpx;
+}
+
+/*搜索栏*/
+.searchBar{
+  background: #cadbf9;
+  display: flex;
+  align-items: center;
+  height: 100rpx;
+}
+
+/*搜索栏输入框*/
+.searchIN{
+  width:fit-content;
+  height: 100rpx;
+  font-size: 50rpx;
+}
+
+.searchPlaceHolder{
+  font-size: 40rpx;
 }

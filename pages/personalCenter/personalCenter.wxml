@@ -23,31 +23,26 @@
     <text id="dot">·</text>
     <text id="function">个人信息</text>
   </view>
-  <view id='divLine4'></view>
 
   <view class="scrollBar" id="myFavorites" bindtap="onTapFunctionBar">
     <text id="dot">·</text>
     <text id="function">我的收藏</text>
   </view>
-  <view id='divLine4'></view>
 
   <view class="scrollBar" id="myHistory" bindtap="onTapFunctionBar">
     <text id="dot">·</text>
     <text id="function">浏览历史</text>
   </view>
-  <view id='divLine4'></view>
 
   <view class="scrollBar" id="communityManagement" bindtap="onTapFunctionBar">
     <text id="dot">·</text>
     <text id="function">社团管理</text>
   </view>
-  <view id='divLine4'></view>
 
   <view class="scrollBar" id="settings" bindtap="onTapFunctionBar">
     <text id="dot">·</text>
     <text id="function">账号设置</text>
   </view>
-  <view id='divLine4'></view>
 
   <view class="scrollBar" id="signOut" bindtap="onTapFunctionBar">
     <text id="dot">·</text>

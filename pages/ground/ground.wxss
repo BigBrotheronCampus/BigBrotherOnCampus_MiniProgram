@@ -8,6 +8,7 @@ page{
   display: flex;
   flex-direction: row;
   width: 100%;
+  font-size:50rpx;
   background-color:  #cadbf9;
   margin-top: 5rpx;
   align-items: center;
@@ -37,23 +38,24 @@ page{
   margin-top: 10rpx;
 }
 .title image{
-  width: 120rpx;
-  height: 120rpx;
   margin-left: 20rpx;
   margin-right: 10rpx;
   border-radius: 50%;
 }
 .name{
   font-size: 50rpx;
+  color: #779dce;
 }
 .time{
   font-size: 30rpx;
   margin-right: 20rpx;
+  color: #779dce;
 }
 .content{
-  display: flex;
-  justify-content: center;
   padding-top: 10rpx;
+  padding-left: 40rpx;
+  color: #779dce;
+  font-size: 50rpx;
   background-color: #f1f0fe;
   width: 100%;
   align-items: center;
@@ -82,4 +84,17 @@ page{
   width: 60rpx;
   height: 60rpx;
   margin: 10rpx;
+}
+
+.operationContent{
+  display:flex;
+  background: #f1f0fe;
+  font-size: 30rpx;
+  color:#779dce;
+}
+
+.attachedImg{
+  display: flex;
+  width:600rpx;
+
 }

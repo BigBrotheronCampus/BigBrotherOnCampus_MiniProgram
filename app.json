@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/ground/ground",
     "pages/login/login",
     "pages/home/home",
     "pages/personalCenter/othersInfo/othersInfo",
@@ -17,7 +18,6 @@
     "pages/index/findmates/findmates",
     "pages/plan/plan",
     "pages/index/credit/credit",
-    "pages/ground/ground",
     "pages/books/books",
     "pages/personalCenter/myInfo/userAge/userAge",
     "pages/personalCenter/myInfo/userLocation/userLocation",

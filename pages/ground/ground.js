@@ -6,13 +6,13 @@ Page({
    */
   data: {
     navbar:[
-      { index: 0, text: '实时活动' },
-      { index: 1, text: '寻找队友' },
-      { index: 2, text: '活动信息咨询' },
+      { index: 0, text: '活动发布' },
+      { index: 1, text: '队友招募' },
+      { index: 2, text: '精彩瞬间' },
     ],
     currentTab:0,
     activity:[],
-    findTeammate:[],
+    recruitTeammates:[],
     consult:[]
   },
 
@@ -35,9 +35,9 @@ Page({
           consult: this.data.consult.concat(this.allActivities[i])
         })
       }
-      else if (this.allActivities[i].theme == "findTeammate") {
+      else if (this.allActivities[i].theme == "recruitTeammates") {
         this.setData({
-          findTeammate: this.data.findTeammate.concat(this.allActivities[i])
+          recruitTeammates: this.data.recruitTeammates.concat(this.allActivities[i])
         })
       }
     }
