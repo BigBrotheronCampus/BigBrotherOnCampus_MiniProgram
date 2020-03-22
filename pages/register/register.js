@@ -54,7 +54,7 @@ Page({
   check: function(){
     var that = this;
     wx.request({
-      url: 'http://47.94.166.123:2333/users/register',
+      url: 'http://47.94.166.123:2333/users/check',
       method: 'post',
       data: {
         'get_code_time': that.data.get_code_time,
@@ -65,7 +65,7 @@ Page({
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
-        
+        //根据请求结果的成功与否选择是否跳转到具体的注册页
       }
     })
   }
