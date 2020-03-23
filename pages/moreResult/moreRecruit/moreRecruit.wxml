@@ -1,0 +1,46 @@
+<!--pages/moreResult/moreRecruit/moreRecruit.wxml-->
+<text>更多招募</text>
+
+<scroll-view >
+  <!--添加点击查看详情事件、长按收藏事件-->
+  <view wx:for="{{list}}" wx:key="a_id" bindtap="seeDetails" bindlongtap="collect" data-content="{{item}}">
+    <view class="title">
+      <view class="poster">
+        <image class="icon" src="{{item.u_photo}}"></image>
+        <text class="name">{{item.u_name}}</text>
+      </view>
+      <view>
+        <text class="time">{{item.time}}</text>
+      </view>
+    </view>
+    <view class="content">
+      <view style="display:flex;">
+        <text>招募条件：</text>
+        <text>{{item.recruitContent}}</text>
+      </view>
+    </view>
+    <view class="operation">
+      <image src="../../icons/message.png" bindtap="onTapMessage"></image>
+      <image src="../../icons/send.png" bindtap="onTapSend"></image>
+      <image src="../../icons/like.png" bindtap="onTapLike"></image>
+    </view>
+    <!--点赞者列表，点击跳转至othersInfo-->
+    <view class="operationContent" wx:if="{{item.liker.length!=0}}">
+      <view wx:for="{{item.liker}}" wx:key="likerID" data-id="{{likerID}}" bindtap="onTapLiker">{{item.likerName}}</view>
+      <view>已点赞</view>
+    </view>
+    <!--转发者列表，点击跳转至othersInfo-->
+    <view class="operationContent" wx:if="{{item.liker.length!=0}}">
+      <view wx:for="{{item.sender}}" wx:key="senderID" data-id="{{senderID}}" bindtap="onTapSender">{{item.senderName}}</view>
+      <view>已转发</view>
+    </view>
+    <!--评论详情列表，点击评论人名称跳转至othersInfo-->
+    <view class="operationContent" style="justify-content:column;" wx:if="{{item.liker.length!=0}}">
+      <view wx:for="{{item.comment}}" wx:key="commmentatorID" data-id="{{commmentatorID}}" bindtap="onTapCommentaor">
+        <text>{{item.commentatorName}}</text>
+        <text>：</text>
+        <text>{{item.comment}}</text>
+      </view>
+    </view>
+  </view>
+</scroll-view>

@@ -1,0 +1,6 @@
+/* pages/ground/searchResult/searchResult.wxss */
+.imgRightBar{
+  background: #de979b;
+  color:#ffffff;
+  text-indent: 50rpx;
+}

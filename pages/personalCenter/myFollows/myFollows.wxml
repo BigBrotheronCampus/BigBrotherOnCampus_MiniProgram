@@ -7,7 +7,7 @@
 <view class="title">我的关注</view>
 
 <scroll-view class="scollView">
-  <view wx:for="{{follows}}" wx:key="followsID"class="imgRightBar" bindtap="onTapFollowsBar" data-fid="{{item.followsID}}" data-path="{{item.followsAvatarPath}}">
+  <view wx:for="{{follows}}" wx:key="followsID" class="imgRightBar" bindtap="onTapFollowsBar" data-fid="{{item.followsID}}" data-path="{{item.followsAvatarPath}}">
     <view style="margin-left:20rpx;display:flex;align-items:center;">
       <image class="icon" src="{{item.followsAvatarPath}}"></image>
       <text >{{item.followsName}}</text>

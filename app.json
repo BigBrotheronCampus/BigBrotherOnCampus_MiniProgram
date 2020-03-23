@@ -26,7 +26,13 @@
     "pages/personalCenter/myInfo/userSex/userSex",
     "pages/personalCenter/myHistory/myHistory",
     "pages/personalCenter/communityManagement/communityManagement",
-    "pages/personalCenter/settings/settings"
+    "pages/personalCenter/settings/settings",
+    "pages/ground/searchResult/searchResult",
+    "pages/details/details",
+    "pages/moreResult/moreActivity/moreActivity",
+    "pages/moreResult/moreMovement/moreMovement",
+    "pages/moreResult/morePeople/morePeople",
+    "pages/moreResult/moreRecruit/moreRecruit"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -99,22 +99,3 @@
   width: 690rpx;
   height: 400rpx;
 }
-
-/*搜索栏*/
-.searchBar{
-  background: #cadbf9;
-  display: flex;
-  align-items: center;
-  height: 100rpx;
-}
-
-/*搜索栏输入框*/
-.searchIN{
-  width:fit-content;
-  height: 100rpx;
-  font-size: 50rpx;
-}
-
-.searchPlaceHolder{
-  font-size: 40rpx;
-}

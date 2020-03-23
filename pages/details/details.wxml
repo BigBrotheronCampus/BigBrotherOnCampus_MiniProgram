@@ -1,0 +1,84 @@
+<!--pages/ground/details/details.wxml-->
+<view class="title">
+  <view class="poster">
+    <image class="icon" src="{{item.u_photo}}"></image>
+    <text class="name">{{item.u_name}}</text>
+  </view>
+  <view>
+    <text class="time">{{item.time}}</text>
+  </view>
+</view>
+
+<!--活动发布-->
+<view class="content" wx:if="{{currentTap==0}}">
+  <view style="display:flex;">
+    <text>活动名称：</text>
+    <text>{{item.activityName}}</text>
+  </view>
+  <view style="display:flex;">
+    <text>发布者：</text>
+    <text>{{item.activityPublisher}}</text>
+  </view>
+  <view style="display:flex;">
+    <text>活动类型：</text>
+    <text>{{item.activityType}}</text>
+  </view>
+  <view style="display:flex;">
+    <text>活动负责人：</text>
+    <text>{{item.activityLeader}}</text>
+  </view>
+  <view style="display:flex;">
+    <text>联系方式：</text>
+    <text>{{item.activityPhoneNum}}</text>
+  </view>
+  <view style="display:flex;">
+    <text>活动内容：</text>
+    <text>{{item.activityContent}}</text>
+  </view>
+</view>
+
+<!--队友招募-->
+<view class="content" wx:if="{{currentTap==1}}">
+  <view style="display:flex;">
+    <text>姓名：</text>
+    <text>{{item.recruitName}}</text>
+  </view>
+  <view style="display:flex;">
+    <text>招募条件：</text>
+    <text>{{item.arecruitContent}}</text>
+  </view>
+  <view style="display:flex;">
+    <text>联系方式：</text>
+    <text>{{item.recruitPhoneNum}}</text>
+  </view>
+</view>
+
+<!--精彩瞬间-->
+<view class="content" wx:if="{{currentTap==2}}">
+  <text>{{item.movementContent}}</text>
+  <image src="{{item.attachedImg}}"></image>
+</view>
+
+<view class="operation">
+  <image src="../../../icons/message.png" bindtap="onTapMessage"></image>
+  <image src="../../../icons/send.png" bindtap="onTapSend"></image>
+  <image src="../../../icons/like.png" bindtap="onTapLike"></image>
+</view>
+<!--点赞者列表，点击跳转至othersInfo-->
+<view class="operationContent" wx:if="{{item.liker.length!=0}}">
+  <view wx:for="{{item.liker}}" wx:key="likerID" data-id="{{likerID}}" bindtap="onTapLiker">{{item.likerName}}</view>
+  <view>已点赞</view>
+</view>
+<!--转发者列表，点击跳转至othersInfo-->
+<view class="operationContent" wx:if="{{item.liker.length!=0}}">
+  <view wx:for="{{item.sender}}" wx:key="senderID" data-id="{{senderID}}" bindtap="onTapSender">{{item.senderName}}</view>
+  <view>已转发</view>
+</view>
+<!--评论详情列表，点击评论人名称跳转至othersInfo-->
+<view class="operationContent" style="justify-content:column;" wx:if="{{item.liker.length!=0}}">
+  <view wx:for="{{item.comment}}" wx:key="commmentatorID" data-id="{{commmentatorID}}" bindtap="onTapCommentaor">
+    <text>{{item.commentatorName}}</text>
+    <text>：</text>
+    <text>{{item.comment}}</text>
+  </view>
+</view>

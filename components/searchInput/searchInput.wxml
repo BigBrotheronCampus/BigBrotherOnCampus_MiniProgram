@@ -1,6 +1,0 @@
-<view class="search_input">
-  <image src="../../icons/search.png"></image>
-  <navigator class="nav" url="/pages/ground/ground" open-type="navigate">
-    查找
-  </navigator>
-</view>

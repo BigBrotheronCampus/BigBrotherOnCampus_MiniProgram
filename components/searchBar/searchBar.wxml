@@ -1,0 +1,4 @@
+<view class="searchBar">
+  <image class="icon" src="../../icons/search.png" bindtap="returnGround"></image>
+  <input class="searchIN" confirm-type="search" value="{{val}}" placeholder="搜索" placeholder-class="searchPlaceHolder" bindconfirm="search"></input>
+</view>

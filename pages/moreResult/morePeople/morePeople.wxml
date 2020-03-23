@@ -1,0 +1,14 @@
+<!--pages/moreResult/morePeople/morePeople.wxml-->
+<text>更多用户</text>
+
+<scroll-view class="scollView">
+  <view wx:for="{{list}}" wx:key="userID"class="imgRightBar" bindtap="onTapUserBar" data-fid="{{item.userID}}" data-path="{{item.userAvatarPath}}">
+    <view style="margin-left:20rpx;display:flex;align-items:center;">
+      <image class="icon" src="{{item.userAvatarPath}}"></image>
+      <text >{{item.userName}}</text>
+    </view>
+    <image class="icon" src="../../../icons/next.png"></image>
+  </view>
+
+  <view class="blank" style="height:{{blankHeight}}rpx;"></view>
+</scroll-view>

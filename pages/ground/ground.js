@@ -12,7 +12,8 @@ Page({
     ],
     currentTab:0,
     activity:[],
-    recruitTeammates:[],
+    recruit:[],
+    movement:[],
     consult:[]
   },
 
@@ -35,18 +36,24 @@ Page({
           consult: this.data.consult.concat(this.allActivities[i])
         })
       }
-      else if (this.allActivities[i].theme == "recruitTeammates") {
+      else if (this.allActivities[i].theme == "recruit") {
         this.setData({
-          recruitTeammates: this.data.recruitTeammates.concat(this.allActivities[i])
+          recruit: this.data.recruit.concat(this.allActivities[i])
         })
       }
     }
   },
 
+  /**
+   * 监听页面下拉刷新
+   */
   onPullDownRefresh: function () {
       this.onLoad()
   },
 
+  /**
+   * 顶部导航栏切换
+   */
   navbarTap: function(e){
     this.setData({
       currentTab: e.currentTarget.dataset.index
@@ -73,5 +80,26 @@ Page({
         })
       }
     })
+  },
+
+  /**
+   * 点击查看详情
+   */
+  seeDetails:function(e){
+    var that= this;
+
+    // 将详细信息传给详情界面，需要调试
+    var item=e.currentTarget.dataset.item;
+    console.log(typeof(item));
+    wx.navigateTo({
+      url: 'details/details?item='+ item + "&currentTap=" + that.data.currentTab,
+    })
+  },
+
+  /**
+   * 长按收藏事件
+   */
+  collect:function(e){
+    // 待补充
   }
 })
