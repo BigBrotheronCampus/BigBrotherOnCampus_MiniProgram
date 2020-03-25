@@ -24,7 +24,7 @@
     <text id="function">个人信息</text>
   </view>
 
-  <view class="scrollBar" id="myFavorites" bindtap="onTapFunctionBar">
+  <view class="scrollBar" id="myFavorite" bindtap="onTapFunctionBar">
     <text id="dot">·</text>
     <text id="function">我的收藏</text>
   </view>

@@ -108,7 +108,7 @@ Page({
     var path = event.currentTarget.dataset.path;
     console.log(path);
     wx.navigateTo({
-      url: '../othersInfo/othersInfo?type=userFollowsInfo&id=' + id + "&path=" + path,
+      url: '/pages/othersInfo/othersInfo?type=userFollowsInfo&id=' + id + "&path=" + path,
       fail:function(err){
         console.log(err);
       }

@@ -107,7 +107,7 @@ Page({
     var boolFollow = event.currentTarget.dataset.boolFollow;
     console.log(id);
     wx.navigateTo({
-      url: '../othersInfo/othersInfo?type=userFansInfo&id=' + id + "&booFollow=" + boolFollow + "&path=" + path,
+      url: '/pages/othersInfo/othersInfo?type=userFansInfo&id=' + id + "&booFollow=" + boolFollow + "&path=" + path,
       fail: function (err) {
         console.log(err);
       }

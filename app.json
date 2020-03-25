@@ -1,15 +1,15 @@
 {
   "pages": [
+    "pages/personalCenter/personalCenter",
     "pages/ground/ground",
     "pages/login/login",
     "pages/home/home",
-    "pages/personalCenter/othersInfo/othersInfo",
+    "pages/othersInfo/othersInfo",
     "pages/personalCenter/myFollows/myFollows",
     "pages/personalCenter/myFans/myFans",
     "pages/publish/wonderfulMovement/wonderfulMovement",
     "pages/publish/publishActivity/publishActivity",
     "pages/publish/recruitTeammates/recruitTeammates",
-    "pages/personalCenter/personalCenter",
     "pages/personalCenter/myInfo/myInfo",
     "pages/publish/publish",
     "pages/personalCenter/myFavorite/myFavorite",

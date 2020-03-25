@@ -5,16 +5,99 @@
 </view>
 
 <view class="title">
-  <image src='../../../icons/return.png'></image>
   <text>浏览历史</text>
 </view>
 
-<scroll-view class="scollView">
-  <view wx:for="{{12}}" wx:key="id">
-    <view class="scrollBar" id="activity">
-      <text id="activityName">xx活动</text>
-      <image src="../../../icons/next.png"></image>
-    </view>
-    <view id='divLine4'></view>
+
+<!--活动发布-->
+<view class="imgRightBar" id="moreActivity" bindtap="getMoreResult">
+  <text>活动发布</text>
+  <view style="display:flex;">
+    <text>更多</text>
+    <image class="icon" src="../../../icons/searchNext.png"></image>
   </view>
-</scroll-view>
+</view>
+
+<view class="scrollBar" wx:if="{{activity.length==0}}">没有相关活动发布</view>
+
+<view wx:for="{{activity}}" wx:key="a_id" bindtap="seeDetails" bindlongtap="collect" data-content="{{item}}" wx:if="{{index<3}}">
+  <view class="title">
+    <view class="poster">
+      <image class="icon" src="{{item.u_photo}}"></image>
+      <text class="name">{{item.u_name}}</text>
+    </view>
+    <view>
+      <text class="time">{{item.time}}</text>
+    </view>
+  </view>
+  <view class="content">
+    <view style="display:flex;">
+      <text>活动名称：</text>
+      <text>{{item.activityName}}</text>
+    </view>
+    <view style="display:flex;">
+      <text>活动内容：</text>
+      <text>{{item.activityContent}}</text>
+    </view>
+  </view>
+</view>
+
+
+<!--队友招募-->
+<view class="imgRightBar" id="moreRecruit" bindtap="getMoreResult">
+  <text>队友招募</text>
+  <view style="display:flex;">
+    <text>更多</text>
+    <image class="icon" src="../../../icons/searchNext.png"></image>
+  </view>
+</view>
+
+<view class="scrollBar" wx:if="{{recruit.length==0}}">没有相关队友招募</view>
+
+<!--添加点击查看详情事件、长按收藏事件-->
+<view wx:for="{{recruit}}" wx:key="a_id" bindtap="seeDetails" bindlongtap="collect" data-content="{{item}}" wx:if="{{index<3}}">
+  <view class="title">
+    <view class="poster">
+      <image class="icon" src="{{item.u_photo}}"></image>
+      <text class="name">{{item.u_name}}</text>
+    </view>
+    <view>
+      <text class="time">{{item.time}}</text>
+    </view>
+  </view>
+  <view class="content">
+    <view style="display:flex;">
+      <text>招募条件：</text>
+      <text>{{item.recruitContent}}</text>
+    </view>
+  </view>
+</view>
+
+
+<!--精彩瞬间-->
+<view class="imgRightBar" id="moreMovement" bindtap="getMoreResult">
+  <text>精彩瞬间</text>
+  <view style="display:flex;">
+    <text>更多</text>
+    <image class="icon" src="../../../icons/searchNext.png"></image>
+  </view>
+</view>
+
+<view class="scrollBar" wx:if="{{movement.length==0}}">没有相关精彩瞬间</view>
+
+<!--添加点击查看详情事件、长按收藏事件-->
+<view wx:for="{{movement}}" wx:key="a_id" bindtap="seeDetails" bindlongtap="collect" data-content="{{item}}" wx:if="{{index<3}}">
+  <view class="title">
+    <view class="poster">
+      <image class="icon" src="{{item.u_photo}}"></image>
+      <text class="name">{{item.u_name}}</text>
+    </view>
+    <view>
+      <text class="time">{{item.time}}</text>
+    </view>
+  </view>
+  <view class="content">
+    <text>{{item.movementContent}}</text>
+    <image src="{{item.attachedImg}}"></image>
+  </view>
+</view>
