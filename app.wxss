@@ -14,6 +14,7 @@
   background:#cadbf9;
   width:100%;
   height: 35rpx;
+  margin-bottom: 35rpx;
 }
 
 /*白色分割线-粗*/

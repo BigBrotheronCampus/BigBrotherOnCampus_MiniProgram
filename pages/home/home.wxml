@@ -1,2 +1,57 @@
 <!--pages/home/home.wxml-->
-<text>pages/home/home.wxml</text>
+<view id="divLine1"></view>
+
+<view class="homeBar">
+  <image class="homeAvatar" src="{{userAvatarPath}}"></image>
+  <searchBar id="searchBar"></searchBar>
+  <image style="width:100rpx;height:100rpx;" src="../../icons/add.png"></image>
+</view>
+
+<view class="functionBar">
+  <view class="function" id="recommend" bindtap="onTapFunctionBar">
+    <image src="../../icons/recommend.png" class="bigicon"></image>
+    <text class="txt">推荐</text>
+  </view>
+  <view class="function" id="news" bindtap="onTapFunctionBar">
+    <image src="../../icons/news.png" class="bigicon"></image>
+    <text class="txt">新闻</text>
+  </view>
+</view>
+
+<view class="functionBar" style="background:#f1f0fe;">
+  <view class="function" id="volunteer" bindtap="onTapFunctionBar">
+    <image src="../../icons/point.png" class="icon"></image>
+    <text class="txt">志愿活动</text>
+  </view>
+  <view class="function" id="sports" bindtap="onTapFunctionBar">
+    <image src="../../icons/point.png" class="icon"></image>
+    <text class="txt">文体活动</text>
+  </view>
+  <view class="function" id="competition" bindtap="onTapFunctionBar">
+    <image src="../../icons/point.png" class="icon"></image>
+    <text class="txt">科研竞赛</text>
+  </view>
+  <view class="function" id="lecture" bindtap="onTapFunctionBar">
+    <image src="../../icons/point.png" class="icon"></image>
+    <text class="txt">校园讲座</text>
+  </view>
+</view>
+
+<view class="functionBar" style="background:#f1f0fe;">
+  <view class="function" id="books" bindtap="onTapFunctionBar">
+    <image src="../../icons/point.png" class="icon"></image>
+    <text class="txt">活动策划</text>
+  </view>
+  <view class="function" id="teachers" bindtap="onTapFunctionBar">
+    <image src="../../icons/point.png" class="icon"></image>
+    <text class="txt">指导老师</text>
+  </view>
+  <view class="function" id="recruit" bindtap="onTapFunctionBar">
+    <image src="../../icons/point.png" class="icon"></image>
+    <text class="txt">招募队友</text>
+  </view>
+  <view class="function" id="sign" bindtap="onTapFunctionBar">
+    <image src="../../icons/point.png" class="icon"></image>
+    <text class="txt">红包签到</text>
+  </view>
+</view>

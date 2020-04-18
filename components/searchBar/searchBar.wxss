@@ -13,6 +13,7 @@
   width:fit-content;
   height: 100rpx;
   font-size: 50rpx;
+  color:#779dce;
 }
 
 .searchPlaceHolder{

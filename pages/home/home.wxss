@@ -1,1 +1,52 @@
 /* pages/home/home.wxss */
+.homeBar{
+  width: 100%;
+  height: 200rpx;
+  background: #cadbf9;
+  display: flex;
+}
+
+.homeAvatar{
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 50%;
+  overflow:hidden;
+  align-self: center;
+}
+
+#searchBar{
+  border: 5rpx solid #ffffff;
+  width: 600rpx;
+  height: 100rpx;
+}
+
+.functionBar{
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  width: 100%;
+  height: 200rpx;
+}
+
+.function{
+    display: flex;
+    flex-direction:column; 
+    align-content: center;
+    flex-grow: 1;
+    align-items: center;
+}
+
+.bigicon{
+  width: 150rpx;
+  height: 150rpx;
+}
+
+.txt{
+  font-size: 40rpx;
+  color: #779dce;
+}
+
+.icon{
+  width: 50rpx;
+  height: 50rpx;
+}

@@ -92,7 +92,7 @@ Page({
     var item=e.currentTarget.dataset.item;
     console.log(typeof(item));
     wx.navigateTo({
-      url: 'details/details?item='+ item + "&currentTap=" + that.data.currentTab,
+      url: '../details/details?item='+ item + "&currentTap=" + that.data.currentTab,
     })
   },
 
