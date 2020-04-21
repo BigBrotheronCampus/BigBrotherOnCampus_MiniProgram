@@ -1,1 +1,55 @@
 /* pages/books/books.wxss */
+/*搜索栏*/
+.searchBar{
+  background: #cadbf9;
+  display: flex;
+  align-items: center;
+  height: 100rpx;
+  color:#ffffff;
+}
+
+/*搜索栏输入框*/
+.searchIN{
+  width:fit-content;
+  height: 100rpx;
+  font-size: 50rpx;
+  color:#779dce;
+}
+
+.searchPlaceHolder{
+  font-size: 40rpx;
+  color:#779dce;
+}
+
+/*普通小图标*/
+.icon{
+  width:80rpx;
+  height:80rpx;
+}
+
+.functionBar{
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  width: 100%;
+  height: 250rpx;
+  background: #f1f0fe;
+}
+
+.function{
+    display: flex;
+    flex-direction:column; 
+    align-content: center;
+    flex-grow: 1;
+    align-items: center;
+}
+
+.bigicon{
+  width: 200rpx;
+  height: 200rpx;
+}
+
+.txt{
+  font-size: 40rpx;
+  color: #779dce;
+}

@@ -1,5 +1,5 @@
 <!--pages/moreResult/moreMovement/moreMovement.wxml-->
-<text>更多精彩瞬间</text>
+<text>精彩瞬间</text>
 
 <scroll-view >
   <!--添加点击查看详情事件、长按收藏事件-->

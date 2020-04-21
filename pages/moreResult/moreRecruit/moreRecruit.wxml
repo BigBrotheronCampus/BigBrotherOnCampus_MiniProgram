@@ -1,5 +1,5 @@
 <!--pages/moreResult/moreRecruit/moreRecruit.wxml-->
-<text>更多招募</text>
+<text>招募队友</text>
 
 <scroll-view >
   <!--添加点击查看详情事件、长按收藏事件-->

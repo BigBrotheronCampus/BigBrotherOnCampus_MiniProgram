@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/books/books",
     "pages/home/home",
     "pages/personalCenter/personalCenter",
     "pages/ground/ground",
@@ -18,7 +19,6 @@
     "pages/index/findmates/findmates",
     "pages/plan/plan",
     "pages/index/credit/credit",
-    "pages/books/books",
     "pages/personalCenter/myInfo/userAge/userAge",
     "pages/personalCenter/myInfo/userLocation/userLocation",
     "pages/personalCenter/myInfo/userName/userName",
@@ -32,7 +32,8 @@
     "pages/moreResult/moreActivity/moreActivity",
     "pages/moreResult/moreMovement/moreMovement",
     "pages/moreResult/morePeople/morePeople",
-    "pages/moreResult/moreRecruit/moreRecruit"
+    "pages/moreResult/moreRecruit/moreRecruit",
+    "pages/moreResult/moreBooks/moreBooks"
   ],
   "window": {
     "backgroundTextStyle": "light",

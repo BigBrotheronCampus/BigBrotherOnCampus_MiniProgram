@@ -1,5 +1,5 @@
-<!--pages/moreResult/moreActivity/moreActivity.wxml-->
-<text>活动发布</text>
+<!--pages/moreResult/moreBooks/moreBooks.wxml-->
+<text>精品策划</text>
 
 <scroll-view>
   <!--添加点击查看详情事件、长按收藏事件-->

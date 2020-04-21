@@ -1,5 +1,5 @@
 <!--pages/moreResult/morePeople/morePeople.wxml-->
-<text>更多用户</text>
+<text>相关用户</text>
 
 <scroll-view class="scollView">
   <view wx:for="{{list}}" wx:key="userID"class="imgRightBar" bindtap="onTapUserBar" data-fid="{{item.userID}}" data-path="{{item.userAvatarPath}}">
