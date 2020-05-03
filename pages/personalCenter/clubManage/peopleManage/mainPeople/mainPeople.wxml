@@ -1,0 +1,37 @@
+<!--pages/personalCenter/clubManage/peopleManage/mainPeople/mainPeople.wxml-->
+<view id="divLine1"></view>
+
+<view class="title">主要成员</view>
+
+<form bindsubmit="mainPeopleSubmit">
+
+  <view class="inputBar">
+    <text class="txt">指导老师：</text>
+    <view style="width:20rpx;"></view>
+    <input placeholder="请输入姓名和联系方式" placeholder-class="placeHolderTxt" class="inTxt" focus="true" confirm-type="done" style="background: #f1f0fe;" name="teacherName" maxlength="50"></input>
+  </view>
+
+  <view class="inputBar">
+    <text class="txt" style="width:150rpx;">社长：</text>
+    <view style="width:20rpx;"></view>
+    <input placeholder="请输入姓名和联系方式" placeholder-class="placeHolderTxt" class="inTxt" focus="true" confirm-type="done" style="background: #f1f0fe;" name="teacherName" maxlength="50" style="width:520rpx;"></input>
+  </view>
+
+  <view class="inputBar">
+    <text class="txt" style="width:200rpx;">副社长：</text>
+    <view style="width:20rpx;"></view>
+    <input placeholder="请输入姓名和联系方式" placeholder-class="placeHolderTxt" class="inTxt" focus="true" confirm-type="done" style="background: #f1f0fe;" name="teacherName" maxlength="50" style="width:470rpx;"></input>
+  </view>
+
+  <view class="inputBar">
+    <text class="inTxt" style="width:150rpx;">社员：</text>
+  </view>
+
+  <textarea class="inTextarea" confirm-type="done" maxlength="500" name="peopleContent" placeholder="请点击编辑修改" placeholder-class="placeHolderTxt"></textarea>
+
+  <view style="display:flex;">
+    <button class="inTxt" bindtap="edit" style="width:200rpx;">编辑</button>
+    <button class="inTxt" formType="submit" style="width:200rpx;">保存</button>
+  </view>
+
+</form>

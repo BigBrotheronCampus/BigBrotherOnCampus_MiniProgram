@@ -1,0 +1,19 @@
+<!--pages/personalCenter/clubManage/peopleManage/workScore/scoreIndex/scoreIndex.wxml-->
+<view class="table">
+      <view class="tableTitle">
+        <text>{{term}}</text>
+        <text>{{period}}</text>
+      </view>
+      <view class="header">
+          <view class="headerColumn">姓名</view>
+          <view class="headerColumn">工作内容</view>
+          <view class="headerColumn">打分</view>
+      </view>
+        <scroll-view class="scrollView">
+        <view class="row" wx:for="{{work}}" wx:key="index" data-set="score">
+          <view class="dd">{{item.name}}</view>
+          <view class="dd" id='content'>点击查看</view>
+          <input class="dd" id="score"></input>
+        </view>
+        </scroll-view> 
+</view>

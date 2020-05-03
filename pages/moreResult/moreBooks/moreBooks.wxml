@@ -1,5 +1,9 @@
 <!--pages/moreResult/moreBooks/moreBooks.wxml-->
-<text>精品策划</text>
+<view id="divLine1"></view>
+
+<view class="title">精品策划</view>
+
+<searchBar id="searchBar"></searchBar>
 
 <scroll-view>
   <!--添加点击查看详情事件、长按收藏事件-->

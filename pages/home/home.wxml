@@ -23,7 +23,7 @@
     <image src="../../icons/point.png" class="icon"></image>
     <text class="txt">志愿活动</text>
   </view>
-  <view class="function" id="sports" bindtap="onTapFunctionBar">
+  <view class="function" id="sport" bindtap="onTapFunctionBar">
     <image src="../../icons/point.png" class="icon"></image>
     <text class="txt">文体活动</text>
   </view>
@@ -40,7 +40,7 @@
 <view class="functionBar" style="background:#f1f0fe;">
   <view class="function" id="books" bindtap="onTapFunctionBar">
     <image src="../../icons/point.png" class="icon"></image>
-    <text class="txt">活动策划</text>
+    <text class="txt">精品策划</text>
   </view>
   <view class="function" id="teachers" bindtap="onTapFunctionBar">
     <image src="../../icons/point.png" class="icon"></image>

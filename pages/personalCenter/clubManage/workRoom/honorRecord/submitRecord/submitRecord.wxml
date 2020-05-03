@@ -1,0 +1,22 @@
+<!--pages/personalCenter/clubManage/workRoom/honorRecord/submitRecord/submitRecord.wxml-->
+<view id="divLine1"></view>
+
+<view class="title">记录荣誉记录</view>
+
+<form bindsubmit="mainPeopleSubmit">
+
+  <view class="inputBar">
+    <text class="txt" style="width:150rpx;">时间：</text>
+    <view style="width:20rpx;"></view>
+    <input placeholder="xxxx年xx月xx日" placeholder-class="placeHolderTxt" class="inTxt" focus="true" confirm-type="done" style="background: #f1f0fe;" name="teacherName" maxlength="50" style="width:520rpx;"></input>
+  </view>
+
+  <view class="inputBar">
+    <text class="inTxt" style="width:150rpx;">奖项：</text>
+  </view>
+
+  <textarea class="inTextarea" confirm-type="done" maxlength="500" name="peopleContent"></textarea>
+
+  <button class="inTxt" formType="submit" style="width:200rpx;">保存</button>
+
+</form>

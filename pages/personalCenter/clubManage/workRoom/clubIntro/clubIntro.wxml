@@ -1,0 +1,33 @@
+<!--pages/personalCenter/clubManage/workRoom/clubIntro/clubIntro.wxml-->
+<view id="divLine1"></view>
+
+<view class="title">社团简介</view>
+
+<view class="header">
+  <image class="avatar" src="{{avatarPath}}"></image>
+  <input value="{{name}}" placeholder="社团名称" placeholder-class="headerPlaceholderTxt" class="name"></input>
+</view>
+
+<form bindsubmit="submit">
+
+  <view class="inputBar">
+    <text class="txt" style="width:200rpx;">成立于：</text>
+    <view style="width:20rpx;"></view>
+    <input placeholder="xxxx年xx月xx日" placeholder-class="placeHolderTxt" class="inTxt" focus="true" confirm-type="done" style="background: #f1f0fe;" name="teacherName" maxlength="50" style="width:470rpx;"></input>
+  </view>
+
+  <view class="inputBar">
+    <text class="inTxt" style="width:250rpx;">社团简介：</text>
+  </view>
+
+  <textarea class="inTextarea" confirm-type="done" maxlength="500" name="peopleContent"></textarea>
+
+  <view class="inputBar">
+    <text class="txt" style="width:250rpx;">现任社长：</text>
+    <view style="width:20rpx;"></view>
+    <input class="inTxt" placeholder="社长名称" placeholder-class="placeHolderTxt" focus="true" confirm-type="done" style="background: #f1f0fe;" name="teacherName" maxlength="50" style="width:420rpx;"></input>
+  </view>
+
+  <button class="inTxt" formType="submit" style="width:200rpx;">保存</button>
+
+</form>

@@ -7,6 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    index: 0,
+    types: ['志愿活动', '文体活动', '科研竞赛', '校园讲座'],
     userID: app.globalData.id,
     attachedFilePath: "",
     disImgVal: "none",
@@ -261,5 +263,15 @@ Page({
         url: '../../ground/ground',
       })
     }
+  },
+
+  /**
+   * 选择活动类别
+   */
+  bindPickerChange: function(e) {
+    var that = this;
+    that.setData({
+      index: e.detail.value
+    })
   }
 })

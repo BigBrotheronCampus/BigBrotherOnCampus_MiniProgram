@@ -1,0 +1,21 @@
+<!--pages/personalCenter/clubManage/peopleManage/peopleManage.wxml-->
+<view id="divLine1"></view>
+
+<view class="title">人员管理</view>
+
+<view class="scollView">
+  <view class="imgRightBar" id="mainPeople" bindtap="onTapFunctionBar">
+    <text style="text-indent:50rpx;">主要人员</text>
+    <image class="icon" src="../../../../icons/next.png"></image>
+  </view>
+
+  <view class="imgRightBar" id="workRecord" bindtap="onTapFunctionBar">
+    <text style="text-indent:50rpx;">工作记录</text>
+    <image class="icon" src="../../../../icons/next.png"></image>
+  </view>
+
+  <view class="imgRightBar" id="workScore" bindtap="onTapFunctionBar">
+    <text style="text-indent:50rpx;">考核评分</text>
+    <image class="icon" src="../../../../icons/next.png"></image>
+  </view>
+</view>

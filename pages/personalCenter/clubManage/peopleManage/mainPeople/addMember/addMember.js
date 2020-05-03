@@ -1,4 +1,4 @@
-// pages/personalCenter/communityManagement/communityManagement.js
+// pages/personalCenter/clubManage/peopleManage/mainPeople/addMember/addMember.js
 Page({
 
   /**

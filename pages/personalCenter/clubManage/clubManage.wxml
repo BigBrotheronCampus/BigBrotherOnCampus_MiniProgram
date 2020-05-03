@@ -1,0 +1,16 @@
+<!--pages/personalCenter/clubManage/communityManagement.wxml-->
+<view id="divLine1"></view>
+
+<view class="title">社团管理</view>
+
+<view class="scollView">
+  <view class="imgRightBar" id="peopleManage" bindtap="onTapFunctionBar">
+    <text style="text-indent:50rpx;">人员管理</text>
+    <image class="icon" src="../../../icons/next.png"></image>
+  </view>
+
+  <view class="imgRightBar" id="workRoom" bindtap="onTapFunctionBar">
+    <text style="text-indent:50rpx;">社团工作室</text>
+    <image class="icon" src="../../../icons/next.png"></image>
+  </view>
+</view>

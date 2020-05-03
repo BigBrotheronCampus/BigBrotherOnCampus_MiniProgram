@@ -1,0 +1,17 @@
+<!--pages/personalCenter/clubManage/workRoom/activityInfo/activityInfo.wxml-->
+<view id="divLine1"></view>
+
+<view class="title">活动资料</view>
+
+<scroll-view class="scrollView">
+  <view wx:for="{{records}}" wx:key="index" class="imgRightBar" id="userName" style="height:fit-content;" bindtap="onTapFunctionBar">
+    <view class="recordTxt">
+      {{item.time}}{{item.name}}
+    </view>
+    <image class="icon" src="../../../../../icons/next.png"></image>
+  </view>
+</scroll-view>
+
+<view class="img" id="addIcon" bindtap="add">
+  <image class="icon" src="../../../../../icons/publish.png"></image>
+</view>

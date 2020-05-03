@@ -34,7 +34,7 @@
     <text id="function">浏览历史</text>
   </view>
 
-  <view class="scrollBar" id="communityManagement" bindtap="onTapFunctionBar">
+  <view class="scrollBar" id="clubManage" bindtap="onTapFunctionBar">
     <text id="dot">·</text>
     <text id="function">社团管理</text>
   </view>

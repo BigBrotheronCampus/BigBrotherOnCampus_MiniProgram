@@ -1,0 +1,31 @@
+/* pages/books/upBook/upBook.wxss */
+.activityTxt{
+  width: 150rpx;
+  height: fit-content;
+  font-size: 50rpx;
+  color: #779dce;
+  background: #f1f0fe;
+}
+
+.inContent{
+  width:auto;
+  height:400rpx;
+  word-wrap:break-wrap;
+  font-size:50rpx;
+  color: #779dce;
+  background: #f1f0fe;
+}
+
+.attachedFile{
+  margin-left:40rpx;
+  margin-right:20rpx;
+  width:690rpx;
+  height: 600rpx;
+}
+
+.imgBar{
+  background: #f1f0fe;
+  display:flex;
+  justify-content:space-between;
+  margin-bottom: 5rpx;
+}

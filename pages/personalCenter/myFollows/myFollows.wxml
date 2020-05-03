@@ -1,8 +1,5 @@
 <!--pages/personalCenter/myFollows/myFollows.wxml-->
-<view class="divLine">
-  <view id="divLine1"></view>
-  <view id="divLine2"></view>
-</view>
+<view id="divLine1"></view>
 
 <view class="title">我的关注</view>
 

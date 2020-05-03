@@ -1,0 +1,62 @@
+<!--pages/personalCenter/clubManage/workRoom/activityInfo/submitInfo/submitInfo.wxml-->
+<view id="divLine1"></view>
+
+<view class="title">上传活动资料</view>
+
+<form bindsubmit="mainPeopleSubmit">
+
+  <view class="inputBar">
+    <text class="txt" style="width:250rpx;">活动名称：</text>
+    <view style="width:20rpx;"></view>
+    <input class="inTxt" focus="true" confirm-type="done" style="background: #f1f0fe;" name="teacherName" maxlength="50" style="width:420rpx;"></input>
+  </view>
+
+  <view class="inputBar">
+    <text class="txt" style="width:250rpx;">举办时间：</text>
+    <view style="width:20rpx;"></view>
+    <input placeholder="xxxx年或第x届" placeholder-class="placeHolderTxt" class="inTxt" focus="true" confirm-type="done" style="background: #f1f0fe;" name="teacherName" maxlength="50" style="width:420rpx;"></input>
+  </view>
+
+  <view class="inputBar">
+    <text class="inTxt" style="width:250rpx;">活动策划：</text>
+    <image class="icon" src="../../../../../../icons/word.png"></image>
+  </view>
+
+  <view class="inputBar">
+    <text class="inTxt" style="width:250rpx;">精彩图片：</text>
+  </view>
+
+  <view class="gallery">
+    <view class="item" wx:for="{{images}}" wx:key="">
+        <image src="{{item}}" data-src="{{item}}" bindtap="previewImage" mode="aspectFill" ></image>
+
+        <!-- 删除按钮 -->
+        <view class="delete" bindtap="delete" data-index="{{index}}">X</view>
+    </view>
+    <view class="item" bindtap="chooseImage">
+        <view class='addIcon'>+</view>
+    </view>
+</view>
+<button type="primary" bindtap="submit">提交</button>
+
+  <view class="inputBar">
+    <text class="inTxt" style="width:250rpx;">精彩视频：</text>
+  </view>
+
+    <view class="gallery">
+    <view class="item" wx:for="{{images}}" wx:key="">
+        <image src="{{item}}" data-src="{{item}}" bindtap="previewImage" mode="aspectFill" ></image>
+
+        <!-- 删除按钮 -->
+        <view class="delete" bindtap="delete" data-index="{{index}}">X</view>
+    </view>
+    <view class="item" bindtap="chooseImage">
+        <view class='addIcon'>+</view>
+    </view>
+</view>
+<button type="primary" bindtap="submit">提交</button>
+
+
+  <button class="inTxt" formType="submit" style="width:200rpx;">保存</button>
+
+</form>

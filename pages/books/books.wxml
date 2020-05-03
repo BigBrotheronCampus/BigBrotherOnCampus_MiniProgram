@@ -1,52 +1,52 @@
 <!--pages/books/books.wxml-->
 <view id="divLine1"></view>
 
-<view class="title">
+<view class="title" style="justify-content: space-between;">
   <view></view>
-  <text style="text-indent:100rpx;">精品策划</text>
-  <view id="upload" style="display:flex;align-items:center;">
+  <text style="text-indent:100rpx;justify-content: space-between;">精品策划</text>
+  <view id="upBook" style="display:flex;align-items:center;" bindtap="onTapFunctionBar">
     <text>上传</text>
     <image class="icon" src="../../icons/upload.png" style="align-items:right;"></image>
   </view>
 </view>
 
-<view class="searchBar">
-  <image class="icon" src="../../icons/searchbooks.png" bindtap="returnGround"></image>
+<view class="searchBar" >
+  <image class="icon" src="../../icons/searchbooks.png"></image>
   <input class="searchIN" confirm-type="search" value="{{val}}" placeholder="查找" placeholder-class="searchPlaceHolder" bindconfirm="search"></input>
 </view>
 
 <view class="functionBar" style="background:#f1f0fe;">
-  <view class="function" id="volunteer" bindtap="onTapFunctionBar">
+  <view class="function" id="recentlyview" bindtap="onTapFunctionBar">
     <image src="../../icons/recentlyview.png" class="icon"></image>
     <text class="txt">最近浏览</text>
   </view>
-  <view class="function" id="sports" bindtap="onTapFunctionBar">
+  <view class="function" id="favorites" bindtap="onTapFunctionBar">
     <image src="../../icons/favorites.png" class="icon"></image>
     <text class="txt">收藏夹</text>
   </view>
-  <view class="function" id="competition" bindtap="onTapFunctionBar">
+  <view class="function" id="cloudfile" bindtap="onTapFunctionBar">
     <image src="../../icons/cloudfile.png" class="icon"></image>
     <text class="txt">云文件</text>
   </view>
 </view>
 
 <view class="functionBar">
-  <view class="function" id="recommend" bindtap="onTapFunctionBar">
+  <view class="function" id="practice" bindtap="onTapFunctionBar">
     <image src="../../icons/word.png" class="bigicon"></image>
     <text class="txt">实践活动</text>
   </view>
-  <view class="function" id="news" bindtap="onTapFunctionBar">
+  <view class="function" id="art" bindtap="onTapFunctionBar">
     <image src="../../icons/word.png" class="bigicon"></image>
     <text class="txt">文艺活动</text>
   </view>
 </view>
 
 <view class="functionBar">
-  <view class="function" id="recommend" bindtap="onTapFunctionBar">
+  <view class="function" id="sport" bindtap="onTapFunctionBar">
     <image src="../../icons/word.png" class="bigicon"></image>
     <text class="txt">体育活动</text>
   </view>
-  <view class="function" id="news" bindtap="onTapFunctionBar">
+  <view class="function" id="volunteer" bindtap="onTapFunctionBar">
     <image src="../../icons/word.png" class="bigicon"></image>
     <text class="txt">公益活动</text>
   </view>

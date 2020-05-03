@@ -86,9 +86,29 @@ Page({
         break;
       }
       case "volunteer":
+      case "sport":
+      case "competition":
+      case "lecture":
       {
-
+        wx.navigateTo({
+          url: '../moreResult/moreActivity/moreActivity?value='+targetID,
+        })
+        break;
       }
+      case "books":
+      {
+        wx.navigateTo({
+          url: '../moreResult/moreBooks/moreBooks?value=all',
+        })
+        break;
+      }
+      case "recruit":
+      {
+        wx.navigateTo({
+          url: '../moreResult/moreRecruit/moreRecruit?value=all',
+        })
+      }
+      default:break;
     }
   }
 })

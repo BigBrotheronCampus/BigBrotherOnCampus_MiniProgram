@@ -1,0 +1,17 @@
+<!--pages/personalCenter/clubManage/workRoom/honorRecord/honorRecord.wxml-->
+<view id="divLine1"></view>
+
+<view class="title">荣誉记录</view>
+
+<scroll-view class="scrollView">
+  <view wx:for="{{records}}" wx:key="index" class="imgRightBar" id="userName" style="height:fit-content;" bindtap="onTapInfoBar">
+    <view class="recordTxt">
+      {{item.time}}荣获{{item.award}}
+    </view>
+    <image class="icon" src="../../../../../icons/delete.png"></image>
+  </view>
+</scroll-view>
+
+<view class="img" id="addIcon" bindtap="add">
+  <image class="icon" src="../../../../../icons/publish.png"></image>
+</view>

@@ -1,0 +1,21 @@
+/* pages/personalCenter/clubManage/workRoom/activityInfo/activityInfo.wxss */
+.recordTxt{
+  display: flex;
+  text-indent:50rpx;
+  width: 800rpx;
+  height: fit-content;
+  word-break:break-all;
+}
+
+.txt{
+  height: fit-content;
+  font-size:50rpx;
+  color: #779dce;
+  background: #f1f0fe;
+}
+
+.img{
+  display:flex;
+  justify-content: center;
+  margin-top:100rpx; 
+}

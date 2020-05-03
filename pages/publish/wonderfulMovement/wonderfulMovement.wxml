@@ -1,8 +1,5 @@
 <!--pages/publish/wonderfulMovement/wonderfulMovement.wxml-->
-<view class="divLine">
-  <view id="divLine1"></view>
-  <view id="divLine2"></view>
-</view>
+<view id="divLine1"></view>
 
 <view class="title">精彩瞬间</view>
 

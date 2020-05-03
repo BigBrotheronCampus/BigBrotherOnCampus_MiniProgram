@@ -1,0 +1,21 @@
+<!--pages/personalCenter/clubManage/peopleManage/mainPeople/addMember/addMember.wxml-->
+<view id="divLine1"></view>
+
+<view class="title" style="margin-bottom:50rpx;">添加成员</view>
+
+<view style="width: 100%;height:fit-content;justify-items:center;">
+
+  <view class="inputBar">
+    <input placeholder="用户ID/学号" placeholder-class="placeHolderTxt" class="inTxt" focus="true" confirm-type="done" style="background: #f1f0fe;" maxlength="50"></input>
+  </view>
+
+  <button class="inTxt" bindtap="search" style="width:400rpx;">查找</button>
+</view>
+
+<view class="searchResult" wx:if="1">
+  <image src="../../../../../../icons/dropdown.png" style="width:150rpx;height:150rpx;"></image>
+  <image src="../../../../../../icons/dropdown.png" style="width:200rpx;height:200rpx;"></image>
+  <text class="txt" style="margin-bottom:20rpx;">{{userName}}</text>
+  <button class="inTxt" bindtap="add" style="width:400rpx;">确认</button>
+</view>
+
