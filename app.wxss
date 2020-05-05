@@ -105,10 +105,12 @@
 .blueTxt{
   font-size: 40rpx;
   color:#779dce;
+  word-break:break-all;
 }
 
 /*红色文字*/
 .redTxt{
   font-size: 40rpx;
   color:#de979b;
+  word-break:break-all;
 }

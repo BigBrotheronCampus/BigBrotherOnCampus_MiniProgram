@@ -11,44 +11,27 @@ Page({
       { index: 2, text: '精彩瞬间' },
     ],
     currentTab:0,
-    activity:[],
-    recruit:[],
-    movement:[],
-    consult:[]
+    activities:[],
+    recruits:[],
+    movements:[]
   },
-
-  allActivities: [],
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) { 
-    this.getActivities();
-    this.allActivities = wx.getStorageSync("activities");
-    for(var i in this.allActivities){
-      if (this.allActivities[i].theme == "activity"){
-        this.setData({ 
-          activity: this.data.activity.concat(this.allActivities[i])
-        })
-      }
-      else if (this.allActivities[i].theme == "consult") {
-        this.setData({
-          consult: this.data.consult.concat(this.allActivities[i])
-        })
-      }
-      else if (this.allActivities[i].theme == "recruit") {
-        this.setData({
-          recruit: this.data.recruit.concat(this.allActivities[i])
-        })
-      }
-    }
+    var that=this;
+    that.getActivities();
+    that.getRecruits();
+    that.getMoments();
+    console.log(that.data);
   },
 
   /**
    * 监听页面下拉刷新
    */
   onPullDownRefresh: function () {
-      this.onLoad()
+      this.onLoad();
   },
 
   /**
@@ -60,34 +43,121 @@ Page({
     })
   },
 
+  /**
+   * 获取所有活动发布信息
+   */
   getActivities(){
     var that = this; 
     wx.request({
-      url: 'http://47.94.166.123:2333/activities/all',
+      url: 'https://tzl.cyyself.name/activities/all',
       method: 'get',
       header: {
         "Content-Type": 'application/json'
       },
       success: function (res) {
-        that.allActivities = res.data.data.activities;
-        wx.setStorageSync('activities', res.data.data.activities);
+        if(res.data.code==0){
+          that.setData({
+            activities: res.data.data.activities
+          }) 
+          wx.setStorageSync('activities', res.data.data.activities);
+        } else {
+          wx.showToast({
+            title: '获取活动发布信息失败,请重试！',
+            icon: 'none',
+            duration: 1500
+          })
+        }
       },
-      fail: function () {
+      fail: function (err) {
+        console.log(err);
         wx.showToast({
-          title: '网络错误', 
-          icon: 'loading',
-          duration: 1000
+          title: '未连接到服务器',
+          icon: 'none',
+          duration: 1500
         })
       }
     })
   },
 
   /**
+   * 获取所有队友招募信息
+   */
+  getRecruits() {
+    var that = this;
+    wx.request({
+      url: 'https://tzl.cyyself.name/findTeammates/allPost',
+      method: 'get',
+      header: {
+        "Content-Type": 'application/json'
+      },
+      success: function (res) {
+        if (res.data.code == 0) {
+          that.setData({
+            recruits: res.data.data.posts
+          })
+          wx.setStorageSync('recruits', res.data.data.posts);
+        } else {
+          wx.showToast({
+            title: '获取队友招募信息失败,请重试！',
+            icon: 'none',
+            duration: 1500
+          })
+        }
+      },
+      fail: function (err) {
+        console.log(err);
+        wx.showToast({
+          title: '未连接到服务器',
+          icon: 'none',
+          duration: 1500
+        })
+      }
+    })
+  },
+
+
+  /**
+   * 获取所有精彩瞬间信息
+   */
+  getMoments() {
+    var that = this;
+    wx.request({
+      url: 'https://tzl.cyyself.name/moments/allMoments',
+      method: 'get',
+      header: {
+        "Content-Type": 'application/json'
+      },
+      success: function (res) {
+        if (res.data.code == 0) {
+          that.setData({
+            movements: res.data.data.moments
+          })
+          wx.setStorageSync('movements', res.data.data.moments);
+        } else {
+          wx.showToast({
+            title: '获取精彩瞬间信息失败,请重试！',
+            icon: 'none',
+            duration: 1500
+          })
+        }
+      },
+      fail: function (err) {
+        console.log(err);
+        wx.showToast({
+          title: '未连接到服务器',
+          icon: 'none',
+          duration: 1500
+        })
+      }
+    })
+  },
+
+
+  /**
    * 点击查看详情
    */
   seeDetails:function(e){
     var that= this;
-
     // 将详细信息传给详情界面，需要调试
     var item=e.currentTarget.dataset.item;
     console.log(typeof(item));

@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -24,7 +24,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.10.2",
-	"appid": "wxa28d01d464800d3d",
+	"appid": "wxe398a2b1ff3df4c9",
 	"projectname": "BigBrotheronCampus",
 	"debugOptions": {
 		"hidedInDevtools": []

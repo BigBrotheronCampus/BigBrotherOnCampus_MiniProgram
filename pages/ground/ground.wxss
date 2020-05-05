@@ -23,7 +23,8 @@ page{
 .navbar .active{
   color: #de979b;
 }
-.title{
+
+.header{
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -37,13 +38,13 @@ page{
   align-items: center;
   margin-top: 10rpx;
 }
-.title image{
+.header image{
   margin-left: 20rpx;
   margin-right: 10rpx;
   border-radius: 50%;
 }
 .name{
-  font-size: 50rpx;
+  font-size: 40rpx;
   color: #779dce;
 }
 .time{
@@ -55,7 +56,7 @@ page{
   padding-top: 10rpx;
   padding-left: 40rpx;
   color: #779dce;
-  font-size: 50rpx;
+  font-size: 40rpx;
   background-color: #f1f0fe;
   width: 100%;
   align-items: center;
@@ -93,8 +94,8 @@ page{
   color:#779dce;
 }
 
-.attachedImg{
-  display: flex;
-  width:600rpx;
-
+.attachedFile{
+  margin-left:20rpx;
+  margin-right: 20rpx;
+  height: 690rpx;
 }

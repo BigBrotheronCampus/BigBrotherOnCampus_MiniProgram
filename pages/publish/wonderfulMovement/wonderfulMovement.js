@@ -1,5 +1,6 @@
 // pages/publish/wonderfulMovement/wonderfulMovement.js
 const app = getApp(); // 获取全局数据
+var myDate = new Date(); //获取系统当前时间
 
 Page({
 
@@ -7,17 +8,25 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userID: app.globalData.id,
-    attachedFilePath: "",
+    userID: app.globalData.info.id,
+    imgPath: "",
+    videoPath: "",
     disImgVal: "none",
-    disVideoVal: "none"
+    disVideoVal: "none",
+    time: ""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    // 获取当前日期
+    var y = myDate.getFullYear(); //年份
+    var m = myDate.getMonth() + 1; //月份
+    var d = myDate.getDate(); //日期
+    this.setData({
+      time: y + "/" + m + "/" + d
+    })
   },
 
   /**
@@ -79,10 +88,26 @@ Page({
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
       success(res) {
-        that.setData({
-          attachedFilePath: res.tempFilePaths[0],
-          disImgVal: "",
-          disVideoVal: "none"
+        if (res.size > 1 * 1024 * 1024) {
+          wx.showToast({
+            title: '图片文件不能超过1M！',
+            icon: 'none',
+            duration: 1500,
+          })
+        } else {
+          console.log(res);
+          that.setData({
+            imgPath: res.tempFilePaths[0],
+            disImgVal: "",
+          })
+        }
+      },
+      fail: function(err) {
+        console.log(err);
+        wx.showToast({
+          title: '选择图片错误请重试！',
+          icon: 'none',
+          duration: 1500
         })
       }
     })
@@ -94,163 +119,230 @@ Page({
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
       success(res) {
-        if (res.size > 100 * 1024 * 1024) {
+        if (res.size > 500 * 1024 * 1024) {
           wx.showToast({
-            title: '视频文件不能超过100M！',
-            icon: 'none',
-            duration: 1500,
-          })
-        } else if (res.duration > 60) {
-          wx.showToast({
-            title: '视频时长不能超过一分钟！',
+            title: '视频文件不能超过500M！',
             icon: 'none',
             duration: 1500,
           })
         } else {
+          //console.log(res);
           that.setData({
-            attachedFilePath: res.tempFilePath,
-            disImgVal: "none",
+            videoPath: res.tempFilePath,
             disVideoVal: ""
           })
+        }
+      },
+      fail: function(err) {
+        console.log(err);
+        wx.showToast({
+          title: '选择视频错误请重试！',
+          icon: 'none',
+          duration: 1500
+        })
+      }
+    })
+  },
+
+  /**
+   * 长按选好的图片删除
+   */
+  delete: function(e) {
+    var targetID = e.currentTarget.id;
+    var that = this;
+    wx.showModal({
+      title: '提示',
+      content: '确定是否删除',
+      success: function(res) {
+        if (res.confirm) { // 用户确定修改
+          if (targetID == 'img') {
+            that.setData({
+              imgPath: "",
+              disImgVal: "none"
+            })
+          } else {
+            that.setData({
+              videoPath: "",
+              disVideoVal: "none"
+            })
+          }
+        } else {
+          // 取消删除
         }
       }
     })
   },
 
   /**
+   * 提交图片/视频，返回执行结果
+   */
+  uploadImg: function() {
+    var that = this;
+    var bool = true;
+    if (that.data.imgPath == "") {
+      return true;
+    }
+    wx.showLoading({
+      title: '正在上传图片',
+    })
+    wx.uploadFile({
+      url: "https://tzl.cyyself.name/file/saveActivityImg",
+      filePath: that.data.imgPath,
+      name: "file",
+      method: "POST",
+      header: {
+        'content-type': 'multipart/form-data',
+      },
+      success: function(res) {
+        console.log(res);
+        if (res.data.code == 0) {
+          wx.showToast({
+            title: '图片已上传！',
+            icon: 'success',
+            duration: 1000
+          })
+          that.setData({
+            // 将图片路径改为返回的url
+            imgPath: res.data.data
+          })
+        } else {
+          wx.showToast({
+            title: '图片上传失败，请重试！',
+            icon: "none",
+            duration: 1500
+          })
+          bool = false;
+        }
+      },
+      fail: function(err) {
+        console.log(err);
+        wx.showToast({
+          title: '未连接到服务器',
+          icon: "none",
+          duration: 1500
+        })
+        bool = false;
+      }
+    })
+    return bool;
+  },
+
+  uploadVideo: function() {
+    var that = this;
+    var bool = true;
+    if (that.data.videoPath == "") {
+      return true;
+    }
+    wx.showLoading({
+      title: '正在上传视频',
+    })
+    wx.uploadFile({
+      url: "https://tzl.cyyself.name/file/saveActivityVideo",
+      filePath: that.data.videoPath,
+      name: "file",
+      method: "POST",
+      header: {
+        'content-type': 'multipart/form-data',
+      },
+      success: function(res) {
+        if (res.data.code == 0) {
+          wx.showToast({
+            title: '视频已上传！',
+            icon: 'success',
+            duration: 1000
+          })
+          that.setData({
+            // 将图片路径改为返回的url
+            videoPath: res.data.data
+          })
+        } else {
+          wx.showToast({
+            title: '视频上传失败，请重试！',
+            icon: "none",
+            duration: 1500
+          })
+          bool = false;
+        }
+      },
+      fail: function(err) {
+        console.log(err);
+        wx.showToast({
+          title: '未连接到服务器',
+          icon: "none",
+          duration: 1500
+        })
+        bool = false;
+      }
+    })
+    return bool;
+  },
+
+  /**
    * 单击按钮提交表单信息事件
    */
   movementSubmit: function(event) {
-    // 生成活动项目随机数
-    var randNum = Math.floor(Math.random() * 10000);
     var that = this;
-    //console.log(event.detail.value);
-    const tempFilePath = that.data.attachedFilePath;
+    // 检查表单信息是否完整
     var formData = event.detail.value;
-    if (tempFilePath.length == 0 &&
-      formData.movementContent.length == 0) { // 媒体与文字不能同时为空
+    if (that.data.imgPath == "" &&
+      that.data.videoPath == "" &&
+      formData.movementContent == "") { // 媒体与文字不能同时为空
       wx.showToast({
         title: '请添加内容！',
         icon: 'loading',
         duration: 1500,
       })
     } else {
-      // 上传表单信息
-      wx.request({
-        url: 'http://47.94.45.122:88/publishInfo.php',
-        header: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        method: "POST",
-        data: {
-          tableName: "movementInfo",
-          userID: that.data.userID,
-          movementRandNum: randNum,
-          movementContent: formData.movementContent,
-        },
-        success: function(res) {
-          //console.log(res.data);
-          if (res.data == true) {
-            wx.showToast({
-              title: '提交成功！',
-              icon: 'success',
-              duration: 1500
-            })
-          } else {
-            wx.showToast({
-              title: "精彩瞬间提交失败，后台将尽快为您解决！",
-              icon: "none",
-              duration: 1500
-            })
-            return
-          }
-        },
-        fail: function(err) {
-          console.log(err);
-          wx.showToast({
-            title: "网络连接错误，请重试！",
-            icon: "none",
-            duration: 1500
-          })
-          return
-        }
-      })
-
-      // 活动信息提交成功再上传图片/视频
-      if (tempFilePath.length != 0) {
+      // 先上传图片/视频，返回上传结果，再上传表单信息
+      if (that.uploadImg() && that.uploadVideo() && formData.movementContent != "") {
+        // 上传表单信息
         wx.showLoading({
-          title: '上传文件中',
+          title: '正在上传其他信息',
         })
-        wx.uploadFile({
-          url: "http://47.94.45.122:88/uploadImg_Video.php",
-          filePath: tempFilePath,
-          name: "file",
-          method: "POST",
-          formData: {
-            tableName: "activityInfo", // 数据表名称
-            userID: that.data.userID,
-            activityRandNum: randNum
-          },
+        wx.request({
+          url: 'https://tzl.cyyself.name/moments/add?uid=' + that.data.userID,
           header: {
-            'content-type': 'multipart/form-data',
-            'cache-control': 'no-cache',
+            "Content-Type": "application/json"
+          },
+          method: "POST",
+          data: {
+            'content': formData.movementContent,
+            'img': that.data.imgPath,
+            'video': that.data.videoPath,
+            'time': that.data.time
           },
           success: function(res) {
             //console.log(res.data);
-            //console.log(res);
-            wx.hideLoading(); // 隐藏加载框
-            var result = JSON.parse(res.data); // 将JSON字符串转换成对象
-            var message = "";
-            switch (result.status) {
-              case 1:
-                message = "文件格式不正确！";
-                break;
-              case 2:
-                message = "上传图片不能大于2M！";
-                break;
-              case 3:
-                message = "发布活动成功！";
-                break;
-              case 4:
-                message = "网络连接错误，请重试！";
-                break;
-              case 5:
-                message = "网络连接错误，请重试！";
-                break;
-              case 6:
-                message = "上传方式错误！";
-                break;
-              default:
-                message = "上传文件错误，后台将尽快为您解决！";
-            }
-            if (result.status == 3) {
+            if (res.data.code == 0) {
               wx.showToast({
                 title: '提交成功！',
                 icon: 'success',
-                duration: 1500
+                duration: 1000
               })
+              setTimeout(function() {
+                wx.switchTab({
+                  url: '../../ground/ground',
+                })
+              }, 1000);
+
             } else {
               wx.showToast({
-                title: message,
+                title: "信息提交失败，请重试！",
                 icon: "none",
                 duration: 1500
               })
             }
           },
           fail: function(err) {
-            console.log("fail");
             console.log(err);
             wx.showToast({
-              title: '网络连接错误，请重试！',
-              icon: "loading",
+              title: "未连接到服务器！",
+              icon: "none",
               duration: 1500
             })
           }
         })
       }
-      wx.switchTab({
-        url: '../../ground/ground',
-      })
     }
   }
 })

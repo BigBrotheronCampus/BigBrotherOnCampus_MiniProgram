@@ -10,7 +10,7 @@ Page({
     whoIndex: 0,
     typeIndex: 0,
     types: ['实践活动', '文艺活动', '体育活动', '公益活动'],
-    who: ['所有人可见', '仅社团成员可见', '仅自己可见'],
+    who: ['所有人可见', '仅自己可见'],
     id: app.globalData.id,
     content: "",
     filePath:""
@@ -134,6 +134,7 @@ Page({
         duration:1500
       })
     } else {
+
       wx.uploadFile({
         url: 'http://tzl.cyyself.name:2333/plans/uploadPlan', //仅为示例，非真实的接口地址
         filePath: that.data.filePath,

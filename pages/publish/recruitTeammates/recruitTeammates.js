@@ -1,5 +1,6 @@
 // pages/publish/recruitTeammates/recruitTeammates.js
 const app = getApp(); // 获取全局数据
+var myDate = new Date(); //获取系统当前时间
 
 Page({
 
@@ -7,14 +8,21 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userID: app.globalData.id,
+    userID: app.globalData.info.id,
+    time: ""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    // 获取当前日期
+    var y = myDate.getFullYear(); //年份
+    var m = myDate.getMonth() + 1; //月份
+    var d = myDate.getDate(); //日期
+    this.setData({
+      time: y + "/" + m + "/" + d
+    })
   },
 
   /**
@@ -49,7 +57,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-  
+
   },
 
   /**
@@ -72,7 +80,6 @@ Page({
   recruitSubmit: function(event) {
     var that = this;
     // 检查表单信息是否完整
-    console.log(event.detail.value);
     var formData = event.detail.value;
     if (formData.recruitName.length == 0 ||
       formData.recruitPhoneNum.length == 0 ||
@@ -85,46 +92,45 @@ Page({
     } else {
       // 上传表单信息
       wx.request({
-        url: 'http://47.94.45.122:88/publishInfo.php',
+        url: 'https://tzl.cyyself.name/findTeammates/add?uid=' + that.data.userID,
         header: {
-          "Content-Type": "application/x-www-form-urlencoded"
+          "Content-Type": "application/json"
         },
         method: "POST",
         data: {
-          tableName: "recruitInfo",
-          userID: that.data.userID,
-          recruitName: formData.recruitName,
-          recruitPhoneNum: formData.recruitPhoneNum,
-          recruitContent: formData.recruitContent,
+          'name': formData.recruitName,
+          'contact': formData.recruitPhoneNum,
+          'content': formData.recruitContent,
+          'time': that.data.time
         },
         success: function(res) {
-          console.log(res.data);
-          if (res.data==true) {
+          //console.log(res.data);
+          if (res.data.code == 0) {
             wx.showToast({
               title: '提交成功！',
               icon: 'success',
-              duration: 1500
+              duration: 1000
             })
-            wx.switchTab({
-              url: '../../ground/ground',
-            })
+            setTimeout(function() {
+              wx.switchTab({
+                url: '../../ground/ground',
+              })
+            }, 1000);
           } else {
             wx.showToast({
-              title: "招募信息提交失败，后台将尽快为您解决！",
+              title: "招募信息提交失败，请重试！",
               icon: "none",
               duration: 1500
             })
-            return
           }
         },
         fail: function(err) {
           console.log(err);
           wx.showToast({
-            title: "网络连接错误，请重试！",
+            title: "未连接到服务器！",
             icon: "none",
             duration: 1500
           })
-          return
         }
       })
     }

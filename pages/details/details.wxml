@@ -1,8 +1,8 @@
 <!--pages/ground/details/details.wxml-->
-<view class="title">
+<view class="header">
   <view class="poster">
-    <image class="icon" src="{{item.u_photo}}"></image>
-    <text class="name">{{item.u_name}}</text>
+    <image class="icon" src="{{item.photo}}"></image>
+    <text class="name">{{item.name}}</text>
   </view>
   <view>
     <text class="time">{{item.time}}</text>
@@ -13,27 +13,27 @@
 <view class="content" wx:if="{{currentTap==0}}">
   <view style="display:flex;">
     <text>活动名称：</text>
-    <text>{{item.activityName}}</text>
+    <text>{{item.title}}</text>
   </view>
   <view style="display:flex;">
     <text>发布者：</text>
-    <text>{{item.activityPublisher}}</text>
+    <text>{{item.publisher}}</text>
   </view>
   <view style="display:flex;">
     <text>活动类型：</text>
-    <text>{{item.activityType}}</text>
+    <text>{{item.type}}</text>
   </view>
   <view style="display:flex;">
     <text>活动负责人：</text>
-    <text>{{item.activityLeader}}</text>
+    <text>{{item.principal}}</text>
   </view>
   <view style="display:flex;">
     <text>联系方式：</text>
-    <text>{{item.activityPhoneNum}}</text>
+    <text>{{item.contact}}</text>
   </view>
   <view style="display:flex;">
     <text>活动内容：</text>
-    <text>{{item.activityContent}}</text>
+    <text>{{item.content}}</text>
   </view>
 </view>
 
@@ -41,15 +41,15 @@
 <view class="content" wx:if="{{currentTap==1}}">
   <view style="display:flex;">
     <text>姓名：</text>
-    <text>{{item.recruitName}}</text>
+    <text>{{item.name}}</text>
   </view>
   <view style="display:flex;">
     <text>招募条件：</text>
-    <text>{{item.arecruitContent}}</text>
+    <text>{{item.content}}</text>
   </view>
   <view style="display:flex;">
     <text>联系方式：</text>
-    <text>{{item.recruitPhoneNum}}</text>
+    <text>{{item.contact}}</text>
   </view>
 </view>
 

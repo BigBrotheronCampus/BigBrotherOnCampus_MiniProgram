@@ -7,18 +7,18 @@
 
 <form bindsubmit="movementSubmit">
 
-<textarea name="movementContent" class="inContent" focus="true" confirm-type="done" maxlength="500"></textarea>
+<textarea name="movementContent" class="inContent" focus="true" confirm-type="done" maxlength="500" placeholder="长按可删除图片/视频"></textarea>
 
-<image src="{{attachedFilePath}}" class="attachedFile" style="display:{{disImgVal}}"></image>
-<video src="{{attachedFilePath}}" class="attachedFile" style="display:{{disVideoVal}}"></video>
+  <image src="{{imgPath}}" class="attachedFile" style="display:{{disImgVal}}" id='img' bindlongtap="delete"></image>
+  <video src="{{videoPath}}" class="attachedFile" style="display:{{disVideoVal}}" id='video'bindlongtap="delete"></video>
 
 <view id='divLine4' style="height:20rpx;"></view>
 
 <view style="margin-left:40rpx;margin-right:20rpx;display:flex;justify-content:space-between;">
-  <view>
-  <image class="icon" id="imgPush" src="../../../icons/img.png" style="height:75rpx;" bindtap="onTapImg"></image>
-  <image class="icon" id="imgPush" src="../../../icons/video.png" bindtap="onTapVideo"></image>
-  </view>
+    <view>
+      <image class="icon" src="../../../icons/img.png"  style="height:75rpx;" bindtap="onTapImg"></image>
+      <image class="icon" src="../../../icons/video.png" bindtap="onTapVideo"></image>
+    </view>
   <button class="activityTxt" form-type="submit">发表</button>
 </view>
 
