@@ -3,14 +3,12 @@
 
 <view class="title">上传策划</view>
 
-<form bindsubmit="bookSubmit">
-
-<textarea name="bookDiscripe" class="inContent" focus="true" confirm-type="done" maxlength="500" placeholder="简要描述此策划······"></textarea>
+<textarea class="inContent" focus="true" confirm-type="done" maxlength="500" placeholder="简要描述此策划······" bindinput="inputContent"></textarea>
 
 <view class="imgBar">
   <view>
-  <image class="icon" id="chooseFile" src="../../../icons/word.png" style="height:75rpx;" bindtap="onTapImg"></image>
-  <image class="icon" id="chooseFile" src="../../../icons/pdf.png" bindtap="onTapVideo"></image>
+  <image class="icon" id="word" src="../../../icons/word.png" bindtap="chooseFile"></image>
+  <image class="icon" id="pdf" src="../../../icons/pdf.png" bindtap="chooseFile"></image>
   </view>
 </view>
 
@@ -34,6 +32,4 @@
   </view>
 </view>
 
-<button class="activityTxt" form-type="submit">发表</button>
-
-</form>
+<button class="activityTxt" bindtap="uploadFile">发表</button>

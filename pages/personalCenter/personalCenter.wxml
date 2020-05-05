@@ -1,8 +1,5 @@
 <!--pages/personalCenter/personalCenter.wxml-->
-<view class="divLine">
-  <view id="divLine1"></view>
-  <view id="divLine2"></view>
-</view>
+<view id="divLine1"></view>
 
 <view class="avatar">
   <view id="divLine1"></view>
@@ -41,7 +38,7 @@
 
   <view class="scrollBar" id="settings" bindtap="onTapFunctionBar">
     <text id="dot">·</text>
-    <text id="function">账号设置</text>
+    <text id="function">系统设置</text>
   </view>
 
   <view class="scrollBar" id="signOut" bindtap="onTapFunctionBar">

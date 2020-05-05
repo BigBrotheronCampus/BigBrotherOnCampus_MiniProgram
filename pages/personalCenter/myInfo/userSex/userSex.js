@@ -1,5 +1,5 @@
 // pages/personalCenter/personalInfo/userSex/userSex.js
-const app = getApp(); // 获取全局数据
+var app = getApp(); // 获取全局数据
 
 Page({
 
@@ -7,15 +7,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userID: app.globalData.id,
-    sex: null,
+    userID: app.globalData.info.id,
+    gender:app.globalData.info.gender,
+    sex: 1,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    if (options.title == "女") {
+    if (this.data.gender == "女") {
       this.setData({
         sex: 0,
       })
@@ -88,22 +89,21 @@ Page({
         content: '确定是否修改',
         success: function(res) {
           if (res.confirm) { // 用户确定修改
-            var inValue;
+            var inValue=null;
             if (option == "female") inValue = "女";
             else inValue = "男";
             wx.request({
-              url: 'http://47.94.45.122:88/infoUpdate.php',
+              url: 'https://tangzl7.club:2333/users/updateInfo',
               header: {
-                "Content-Type": "application/x-www-form-urlencoded"
+                "Content-Type": "application/json"
               },
               method: "POST",
               data: {
-                userID: that.data.userID,
-                infotype: "userSex",
-                targetinfo: inValue
+                'id': that.data.userID,
+                'gender': inValue
               },
               success: function(res) {
-                if (res.data == true) {
+                if (res.data.code == 0) {
                   if (option == "female") {
                     that.setData({
                       sex: 0,
@@ -113,25 +113,30 @@ Page({
                       sex: 1,
                     })
                   }
+                  app.globalData.info.gender = inValue;
+                  wx.setStorageSync("information", app.globalData.info);
                   wx.showToast({
-                    title: '提交成功！',
+                    title: '信息修改成功！',
                     icon: 'success',
                     duration: 1000
                   });
+                  that.setData({
+                    flag: true,
+                  })
                 } else {
                   wx.showToast({
-                    title: "提交失败，后台将尽快为您解决！",
+                    title: "信息修改失败，请重试！",
                     icon: "none",
-                    duration: 2000
+                    duration: 1500
                   })
                 }
               },
-              fail: function(err) {
+              fail: function (err) {
                 console.log(err);
                 wx.showToast({
-                  title: "提交失败，后台将尽快为您解决！",
+                  title: "未连接到服务器！",
                   icon: "none",
-                  duration: 2000
+                  duration: 1500
                 })
               }
             })

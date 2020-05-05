@@ -25,41 +25,34 @@ Page({
     // 获取粉丝信息列表
     var that = this;
     wx.request({
-      url: 'http://47.94.45.122:88/fans_followsQuery.php', //此处不能用https，需勾选不校验合法域名，上线需使用https协议
+      url: 'https://tzl.cyyself.name:2333/users/myFollowers',
       data: {
-        userID: that.data.userID,
-        tableName: "userFansInfo"
+        'uid': that.data.userID,
       }, //传参
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
-      method: "POST",
+      method: "GET",
       success: function (res) {
-        var result = res.data;
-        if (result == false) {
+        if (res.data.code == 0) {
+          that.setData({
+            follows: res.data.data
+          })
+        } else {
           wx.showToast({
-            title: '粉丝信息获取失败，后台尽快为您解决',
+            title: '获取粉丝信息失败,请重试',
             icon: 'none',
             duration: 1500
           })
         }
-        else {
-          that.setData({
-            fans: result //设置数据，将表中查询出来的信息传给fans列表
-          })
-        }
       },
       fail: function (err) {
-        var checkNetWork = require("../../../function/checkNet.js");
-        if (checkNetWork.checkNetStatu() == false) console.log("无网络");
-        else {
-          console.log(err),
-            wx.showToast({
-              title: "关注信息获取失败，后台将尽快为您解决！",
-              icon: "none",
-              duration: 2000
-            })
-        }
+        console.log(err);
+        wx.showToast({
+          title: '未连接到服务器',
+          icon: 'none',
+          duration: 1500
+        })
       }
     })
   },
@@ -107,7 +100,7 @@ Page({
     var boolFollow = event.currentTarget.dataset.boolFollow;
     console.log(id);
     wx.navigateTo({
-      url: '/pages/othersInfo/othersInfo?type=userFansInfo&id=' + id + "&booFollow=" + boolFollow + "&path=" + path,
+      url: '/pages/othersInfo/othersInfo?type=userFansInfo&id=' + id,
       fail: function (err) {
         console.log(err);
       }

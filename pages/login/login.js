@@ -1,6 +1,6 @@
 // pages/login/login.js
 
-// 账号15181655581 123456
+var app = getApp();     // 全局信息
 
 Page({
 
@@ -26,7 +26,7 @@ Page({
 
   login: function () {
     wx.request({
-      url: 'http://47.94.166.123:2333/users/log',
+      url: 'https://tzl.cyyself.name:2333/users/log',
       method: 'post',
       data: {
         phone: this.data.phone,
@@ -49,21 +49,42 @@ Page({
           wx.switchTab({
             url: '../home/home'
           })
+          app.globalData.info=res.data.data;
+          console.log(app.globalData.info);
+        }
+        else{
+          wx.showToast({
+            title: '登陆失败，请重试！',
+            icon:'none',
+            duration:1500
+          })
         }
       },
       fail: function () {
         wx.showToast({
           title: '未连接到服务器',
           icon: 'loading',
-          duration: 1000
+          duration: 1500
         })
       }
     })
   },
+
+  /**
+   * 注册界面
+   */
   toRegister: function () {
     wx.navigateTo({
       url: '../register/register',
     })
-  }
+  },
 
+  /**
+   * 找回密码界面
+   */
+  toFindPassword:function(){
+    wx.navigateTo({
+      url:'./findPassword/findPassword',
+    })
+  }
 })

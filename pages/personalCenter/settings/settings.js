@@ -62,5 +62,22 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  /**
+   * 功能栏点击跳转
+   */
+  onTapFunctionBar:function(e){
+    var targetID = e.currentTarget.id;
+    if(targetID=="updatePwd"){
+      wx.navigateTo({
+        url: '../../login/findPassword/findPassword',
+      })
+    }
+    else if(targetID == "aboutUs"){
+      wx.navigateTo({
+        url: './aboutUs/aboutUs',
+      })
+    }
   }
 })

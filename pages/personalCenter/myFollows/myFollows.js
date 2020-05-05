@@ -6,8 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    blankHeight:0,
-    userID: app.globalData.id,
+    userID: app.globalData.info.id,
     follows: []
   },
 
@@ -25,42 +24,34 @@ Page({
   // 获取关注信息列表
     var that = this;
     wx.request({
-      url: 'http://47.94.45.122:88/fans_followsQuery.php', //此处不能用https，需勾选不校验合法域名，上线需使用https协议
+      url: 'https://tzl.cyyself.name:2333/users/myFollowers', 
       data: {
-        userID: that.data.userID,
-        tableName: "userFollowsInfo"
+        'uid': that.data.userID,
       }, //传参
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
-      method: "POST",
+      method: "GET",
       success: function (res) {
-        var result = res.data;
-        console.log(result);
-        if (result == false) {
+        if (res.data.code == 0) {
+          that.setData({
+            follows:res.data.data
+          })
+        } else {
           wx.showToast({
-            title: '关注信息获取失败，后台尽快为您解决',
+            title: '获取关注信息失败,请重试',
             icon: 'none',
             duration: 1500
           })
         }
-        else {
-          that.setData({
-            follows: result //设置数据，将表中查询出来的信息传给fans列表
-          })
-        }
       },
       fail: function (err) {
-        var checkNetWork = require("../../../function/checkNet.js");
-        if (checkNetWork.checkNetStatu() == false) console.log("无网络");
-        else {
-          console.log(err),
-            wx.showToast({
-              title: "关注信息获取失败，后台将尽快为您解决！",
-              icon: "none",
-              duration: 2000
-            })
-        }
+        console.log(err);
+        wx.showToast({
+          title: '未连接到服务器',
+          icon: 'none',
+          duration: 1500
+        })
       }
     })
   },
@@ -108,7 +99,7 @@ Page({
     var path = event.currentTarget.dataset.path;
     console.log(path);
     wx.navigateTo({
-      url: '/pages/othersInfo/othersInfo?type=userFollowsInfo&id=' + id + "&path=" + path,
+      url: '/pages/othersInfo/othersInfo?type=userFollowsInfo&id=' + id,
       fail:function(err){
         console.log(err);
       }

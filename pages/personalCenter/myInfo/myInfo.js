@@ -1,30 +1,19 @@
 // pages/personalCenter/myInfo/myInfo.js
-const app = getApp(); // 获取全局数据
+var app = getApp(); // 获取全局数据
 
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    userID: app.globalData.id,
-    info: {
-      userName: "",
-      userSex: "",
-      userAge: "",
-      userSchool: "",
-      userLocation: "",
-    },
-    userAvatarPath: ""
+    info:app.globalData.info
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    // 加载头像
-    this.setData({
-      userAvatarPath: options.title,
-    })
+    
   },
 
   /**
@@ -38,34 +27,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    var that = this;
-    // 获取并加载个人信息
-    wx.request({
-      url: 'http://47.94.45.122:88/infoQuery.php?userID='+that.data.userID,  //此处不能用https，需勾选不校验合法域名，上线需使用https协议
-      data: {
-        
-      }, //传参
-      header: {
-        'content-type': 'application/json'
-      },
-      method: "GET",
-      success: function(res) {
-        that.setData({
-          info: res.data[0] //设置数据，将表中查询出来的信息传给info
-        })
-      },
-      fail: function(err) {
-        var checkNetWork = require("../../../function/checkNet.js");
-        if (checkNetWork.checkNetStatu() == false) console.log("无网络");
-        else {
-          console.log(err);
-          wx.showToast({
-            title: "个人信息获取失败，后台将尽快为您解决！",
-            icon: "none",
-            duration: 2000
-          })
-        }
-      }
+    var that=this;
+    that.setData({
+      info:app.globalData.info
     })
   },
 
@@ -87,7 +51,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
+   
   },
 
   /**
@@ -207,7 +171,7 @@ Page({
    */
   onTapInfoBar: function(event) {
     wx.navigateTo({
-      url: "./" + event.currentTarget.id + "/" + event.currentTarget.id + '?title=' + this.data.info[event.currentTarget.id], // 依据id进行不同的跳转，传参
+      url: "./" + event.currentTarget.id + "/" + event.currentTarget.id, // 依据id进行不同的跳转，传参
       fail: function() {}
     })
   },

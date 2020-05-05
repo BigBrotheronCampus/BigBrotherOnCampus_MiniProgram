@@ -1,45 +1,19 @@
 <!--pages/personalCenter/systemSettings/systemSettings.wxml-->
-<view class="divLine">
-  <view id="divLine1"></view>
-  <view id="divLine2"></view>
-</view>
+<view id="divLine1"></view>
 
-<view class="title">设置</view>
+<view class="title">系统设置</view>
 
-<scroll-view class="scollView">
-  <view class="imgRightBar" id="userName" bindtap="onTapFollowsBar">
-    <text style="text-indent:50rpx;">系统设置</text>
+<view class="scrollView">
+  <view class="imgRightBar" id="updatePwd" bindtap="onTapFunctionBar">
+    <text style="text-indent:50rpx;">修改密码</text>
     <image class="icon" src="../../../icons/next.png"></image>
   </view>
-  <view id='divLine4'></view>
 
-  <view class="imgRightBar" id="userName" bindtap="onTapFollowsBar">
-    <text style="text-indent:50rpx;">账号管理</text>
-    <image class="icon" src="../../../icons/next.png"></image>
-  </view>
-  <view id='divLine4'></view>
-
-  <view class="imgRightBar" id="userName" bindtap="onTapFollowsBar">
-    <text style="text-indent:50rpx;">消息推送设置</text>
-    <image class="icon" src="../../../icons/next.png"></image>
-  </view>
-  <view id='divLine4'></view>
-
-  <view class="imgRightBar" id="userName" bindtap="onTapFollowsBar">
-    <text style="text-indent:50rpx;">隐私设置</text>
-    <image class="icon" src="../../../icons/next.png"></image>
-  </view>
-  <view id='divLine4'></view>
-
-  <view class="imgRightBar" id="userName" bindtap="onTapFollowsBar">
-    <text style="text-indent:50rpx;">客服中心</text>
-    <image class="icon" src="../../../icons/next.png"></image>
-  </view>
-  <view id='divLine4'></view>
-
-  <view class="imgRightBar" id="userName" bindtap="onTapFollowsBar">
+  <view class="imgRightBar" id="aboutUs" bindtap="onTapFunctionBar">
     <text style="text-indent:50rpx;">关于我们</text>
     <image class="icon" src="../../../icons/next.png"></image>
   </view>
-  <view id='divLine4'></view>
-</scroll-view>
+
+</view>
+
+<view style="background:#f1f0fe;height:840rpx;"></view>

@@ -6,32 +6,21 @@
 
 <view class="title">地区</view>
 
-<view class="scrollBar" id="currentLocation" bindtap="onTapLocation">使用当前位置</view>
-<view id='divLine4'></view>
-
 <view class="scrollBar" id="country" bindtap="onTapLocation">
   <text>国家</text>
-  <view style="padding-left:50rpx;">中国</view>
+  <view style="padding-left:100rpx;">中国</view>
 </view>
-<view id='divLine4'></view>
 
-<view class="addressView" id="province" bindtap="onTapLocation">
+<view class="addressView" style="height:200rpx;">
   <view class="addressText">
-    <text style="text-indent:50rpx;">省</text>
-    <text style="text-indent:100rpx;">{{provinceName}}</text>
+    <text style="padding-left:50rpx;width:200rpx;">省市区</text>
+    <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+    <view style="padding-left:50rpx;">
+      {{region[0]}}{{region[1]}}{{region[2]}}
+    </view>
+  </picker>
   </view>
   <image class="icon" src="../../../../icons/dropdown.png"></image>
 </view>
 
-<view id='divLine4'></view>
-
-<view class="addressView" id="city" bindtap="onTapLocation">
-  <view class="addressText">
-    <text style="text-indent:50rpx;">市</text>
-    <text style="text-indent:100rpx;">{{cityName}}</text>
-  </view>
-  <image class="icon" src="../../../../icons/dropdown.png"></image>
-</view>
-<view id='divLine4'></view>
-
-<view  class="blank"></view>
+<view style="background:#f1f0fe;height:700rpx;"></view>

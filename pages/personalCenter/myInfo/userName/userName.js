@@ -1,5 +1,5 @@
 // pages/personalCenter/personalInfo/userName/userName.js
-const app = getApp();       // 获取全局数据
+var app = getApp();       // 获取全局数据
 
 Page({
 
@@ -7,63 +7,61 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userID:app.globalData.id,
-    userName:"",
-    flag:false,
+    userID: app.globalData.info.id,
+    userName: app.globalData.info.name,
+    flag: false,
   },
 
-  // 输入完成时通过PHPH接口上传到MySQL，并显示完成图标
+  // 输入完成时通过接口上传到MySQL，并显示完成图标
   bindconfirm:function(event){
     var that = this;
     var inValue = event.detail.value;
-    console.log(inValue);           // 打印修改的值
     if (inValue.length == 0) {      // 昵称不能为空
       wx.showToast({
         title: '昵称不能为空',
         icon:'none',
-        duration: 1000
+        duration: 1500
       })
     }
     else{
       wx.request({
-        url: 'http://47.94.45.122:88/infoUpdate.php',
+        url: 'https://tzl.cyyself.name:2333/users/updateInfo',
         header: {
-          "Content-Type": "application/x-www-form-urlencoded"
-          },
+          "Content-Type": "application/json"
+        },
         method: "POST",
-        data: { 
-          userID: that.data.userID,
-          infotype:"userName",
-          targetinfo:inValue
+        data: {
+          'id': that.data.userID,
+          'name': inValue,
         },
         success: function (res) {
-          if (res.data == true){
+          if (res.data.code == 0) {
+            app.globalData.info.name = inValue;
+            wx.setStorageSync("information", app.globalData.info);
             wx.showToast({
-              title: '提交成功！',
+              title: '信息修改成功！',
               icon: 'success',
               duration: 1000
             });
             that.setData({
               flag: true,
             })
-          }
-          else{
+          } else {
             wx.showToast({
-              title: "提交失败，后台将尽快为您解决！",
+              title: "信息修改失败，请重试！",
               icon: "none",
-              duration: 2000
+              duration: 1500
             })
           }
         },
-        fail:function(err){
+        fail: function (err) {
           console.log(err);
           wx.showToast({
-            title: "提交失败，后台将尽快为您解决！",
+            title: "未连接到服务器！",
             icon: "none",
-            duration: 2000
+            duration: 1500
           })
         }
-
       })
     }
   },
@@ -79,9 +77,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      userName: options.title
-    })   
+    
   },
 
   /**

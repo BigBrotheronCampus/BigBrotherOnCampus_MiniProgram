@@ -23,9 +23,11 @@
   <view class="other">
     <image src="../../icons/enter.png" class="log_enter" bindtap="login"></image>
     <view>
-      <text>忘记密码</text>
+      <text bindtap="toFindPassword">忘记密码</text>
       <text bindtap="toRegister">注册账号</text>
     </view>
   </view>
 </view>
+
+<view style="background:#f1f0fe;height:60rpx;"></view>
  

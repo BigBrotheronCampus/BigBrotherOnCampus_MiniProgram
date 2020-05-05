@@ -100,3 +100,15 @@
   width: 690rpx;
   height: 400rpx;
 }
+
+/*蓝色文字*/
+.blueTxt{
+  font-size: 40rpx;
+  color:#779dce;
+}
+
+/*红色文字*/
+.redTxt{
+  font-size: 40rpx;
+  color:#de979b;
+}

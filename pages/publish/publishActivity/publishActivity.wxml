@@ -1,8 +1,5 @@
 <!--pages/publish/publishActivity/publishActivity.wxml-->
-<view class="divLine">
-  <view id="divLine1"></view>
-  <view id="divLine2"></view>
-</view>
+<view id="divLine1"></view>
 
 <view class="title">发布活动</view>
 
@@ -78,7 +75,7 @@
       <image class="icon" id="imgPush" src="../../../icons/img.png" style="height:75rpx;" bindtap="onTapImg"></image>
       <image class="icon" id="imgPush" src="../../../icons/video.png" bindtap="onTapVideo"></image>
     </view>
-    <view>
+    <view style="margin-top:10rpx;">
       <button class="activityTxt" formType="submit">提交审核</button>
     </view>
   </view>

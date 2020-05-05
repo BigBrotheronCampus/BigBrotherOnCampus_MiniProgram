@@ -1,16 +1,12 @@
 <!--pages/personalCenter/personalInfo/userName/userName.wxml-->
-<view class="divLine">
-  <view id="divLine1"></view>
-  <view id="divLine2"></view>
-</view>
+<view id="divLine1"></view>
 
 <view class="title">昵称</view>
 
 <view class="imgRightBar">
-  <input id="inName" placeholder="昵称（6个字符以内）" placeholder-class="placeholderStyle" maxlength="6" focus="true" value="{{userName}}" style="padding-left:50rpx;" confirm-type="done" bindconfirm="bindconfirm" bindfocus="bindfocus"></input>
+  <input id="inName" placeholder="昵称" placeholder-class="placeholderStyle" focus="true" value="{{userName}}" style="padding-left:50rpx;" confirm-type="done" bindconfirm="bindconfirm" bindfocus="bindfocus"></input>
   <image wx:if="{{!flag}}" class="icon" src="../../../../icons/edit.png"></image>
   <image wx:if="{{flag}}" class="icon" src="../../../../icons/done.png"></image>
 </view>
-<view id='divLine4'></view>
 
 <view  class="blank"></view>

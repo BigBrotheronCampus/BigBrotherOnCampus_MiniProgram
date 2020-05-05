@@ -1,0 +1,6 @@
+<!--pages/register/policy/policy.wxml-->
+<view id="divLine1"></view>
+
+<view class="title">服务协议和隐私协议</view>
+
+<text class="blueTxt">{{policy}}</text>

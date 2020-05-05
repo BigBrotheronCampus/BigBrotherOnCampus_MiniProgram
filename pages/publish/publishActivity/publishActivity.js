@@ -9,7 +9,7 @@ Page({
   data: {
     index: 0,
     types: ['志愿活动', '文体活动', '科研竞赛', '校园讲座'],
-    userID: app.globalData.id,
+    userID: app.globalData.info.id,
     attachedFilePath: "",
     disImgVal: "none",
     disVideoVal: "none"
@@ -123,8 +123,6 @@ Page({
    * 单击按钮提交表单信息事件
    */
   activitySubmit: function(event) {
-    // 生成活动项目随机数
-    var randNum = Math.floor(Math.random() * 10000);
     var that = this;
     // 检查表单信息是否完整
     //console.log(event.detail.value);
@@ -145,7 +143,7 @@ Page({
       wx.request({
         url: 'http://47.94.45.122:88/publishInfo.php',
         header: {
-          "Content-Type": "application/x-www-form-urlencoded"
+          "Content-Type": "application/json"
         },
         method: "POST",
         data: {

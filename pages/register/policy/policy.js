@@ -1,11 +1,11 @@
-// pages/credit/credit.js
+// pages/register/policy/policy.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    policy:""
   },
 
   /**

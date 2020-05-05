@@ -1,4 +1,4 @@
-// pages/findmates/findmates.js
+// pages/personalCenter/settings/aboutUs/aboutUs.js
 Page({
 
   /**

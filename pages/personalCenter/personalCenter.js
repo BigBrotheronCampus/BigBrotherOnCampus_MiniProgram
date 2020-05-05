@@ -1,101 +1,79 @@
 // pages/personalCenter/personalCenter.js
-const app = getApp();       // 获取全局数据
+var app = getApp(); // 获取全局数据
 
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    userID:app.globalData.id,
-    userAvatarPath:""
+    userID: app.globalData.info.id,
+    userAvatarPath: app.globalData.info.photo
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
 
-     },
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-  
+  onReady: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-    // 加载头像
+  onShow: function() {
     var that = this;
-    wx.request({
-      url: 'http://47.94.45.122:88/avatarQuery.php?userID=' + that.data.userID, //此处不能用https，需勾选不校验合法域名，上线需使用https协议
-      data: {}, //传参
-      header: {
-        'content-type': 'application/json'
-      },
-      method: "GET",
-      success: function (res) {
-        that.setData({
-          userAvatarPath: res.data[0].userAvatarPath //设置数据，将表中查询出来的信息传给userAvatarPath
-        })
-      },
-      fail: function (err) {
-        var checkNetWork = require("../../function/checkNet.js");
-        if (checkNetWork.checkNetStatu() == false) console.log("无网络");
-        else {
-          console.log(err),
-            wx.showToast({
-              title: "个人信息获取失败，后台将尽快为您解决！",
-              icon: "none",
-              duration: 2000
-            })
-        }
-      }
+    that.setData({
+      userAvatarPath: app.globalData.info.photo
     })
+    // 修改本地缓存信息，每次更新app.globalData都需修改
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   },
 
   /**
    * 单击头像上传头像
    */
-  onTapAvatar: function () {
+  onTapAvatar: function() {
     var that = this;
     wx.chooseImage({
       count: 1,
@@ -111,7 +89,7 @@ Page({
           name: "file",
           method: "POST",
           formData: {
-            tableName:"userInfo",
+            tableName: "userInfo",
             userID: that.data.userID
           },
           header: {
@@ -119,7 +97,7 @@ Page({
             'cache-control': 'no-cache',
           },
           timeout: 2500,
-          success: function (res) {
+          success: function(res) {
             console.log(res.data);
             var result = JSON.parse(res.data); // 将JSON字符串转换成对象
             console.log(result);
@@ -148,14 +126,14 @@ Page({
             }
             if (result.status == 3) {
               var value = "userAvatarPath"
-              that.setData({      // 上传成功后更新头像
-                [value]: tempFilePaths[0]
-              }),
-              wx.showToast({
-                title: message,
-                icon: "success",
-                duration: 1500
-              })
+              that.setData({ // 上传成功后更新头像
+                  [value]: tempFilePaths[0]
+                }),
+                wx.showToast({
+                  title: message,
+                  icon: "success",
+                  duration: 1500
+                })
             } else {
               wx.showToast({
                 title: message,
@@ -164,7 +142,7 @@ Page({
               })
             }
           },
-          fail: function (err) {
+          fail: function(err) {
             console.log("fail");
             console.log(err);
             wx.showToast({
@@ -181,25 +159,17 @@ Page({
   /** 
    * 单击功能栏跳转事件
    */
-  onTapFunctionBar:function(event){
+  onTapFunctionBar: function(event) {
     var targetID = event.currentTarget.id;
-    if(targetID=="signOut"){
-      // 跳转到登录界面,有待修缮！！！！
+    if (targetID == "signOut") {
+      // 跳转到登录界面，必须设置login界面为初始索引界面
       wx.reLaunch({
-        url: "../login/login",
-        fail: function () { }
+        url: '../login/login',
       })
-    }
-    else if(targetID=="myInfo"){
+    } else {
       wx.navigateTo({
-        url: "./" + targetID + "/" + targetID + "?title=" + this.data.userAvatarPath,
-        fail:function(){}
-      })
-    }
-    else{
-      wx.navigateTo({
-      url: "./" + targetID + "/" + targetID,   // 依据id进行不同的跳转
-      fail:function(){}  
+        url: "./" + targetID + "/" + targetID, // 依据id进行不同的跳转
+        fail: function() {}
       })
     }
   },
@@ -207,10 +177,10 @@ Page({
   /**
    * 单击社交栏跳转事件
    */
-  onTapSocial:function(event){
+  onTapSocial: function(event) {
     wx.navigateTo({
-      url: "./" + event.currentTarget.id + "/" + event.currentTarget.id,    //依据id进行不同的跳转
-      fail: function () { }  
+      url: "./" + event.currentTarget.id + "/" + event.currentTarget.id, //依据id进行不同的跳转
+      fail: function() {}
     })
   }
 })

@@ -1,5 +1,5 @@
 // pages/personalCenter/personalInfo/userAge/userAge.js
-const app = getApp();       // 获取全局数据
+var app = getApp(); // 获取全局数据
 
 Page({
 
@@ -7,62 +7,62 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userID: app.globalData.id,
-    userAge:null,
+    userID: app.globalData.info.id,
+    userAge: app.globalData.info.age,
     flag: false,
   },
 
   /**
    * 输入完成时上传数据到数据库并显示完成图标
    */
-  bindconfirm: function (event) {
-    var that=this;
-    var inValue=event.detail.value;
-    console.log(inValue);         // 打印修改的值
+  bindconfirm: function(event) {
+    var that = this;
+    var inValue = Number(event.detail.value);
     if (inValue.length == 0) {
       wx.showToast({
         title: '请输入真实年龄!',
         icon: 'loading',
         duration: 1500
       })
-    }
-    else{
+    } else {
       wx.request({
-        url: 'http://47.94.45.122:88/infoUpdate.php',
+        url: 'https://tzl.cyyself.name:2333/users/updateInfo',
         header: {
-          "Content-Type": "application/x-www-form-urlencoded"
+          "Content-Type": "application/json"
         },
         method: "POST",
         data: {
-          userID: that.data.userID,
-          infotype: "userAge",
-          targetinfo: inValue
+          'id': that.data.userID,
+          'age': inValue,
         },
-        success: function (res) {
-          if (res.data == true) {
+        success: function(res) {
+          if (res.data.code == 0) {
+            app.globalData.info.age=inValue;
+            // 修改本地缓存信息，每次更新app.globalData都需修改
+            wx.setStorageSync("information", app.globalData.info);
             wx.showToast({
-              title: '提交成功！',
+              title: '信息修改成功！',
               icon: 'success',
               duration: 1000
             });
             that.setData({
-              flag: true,
+              userAge:inValue,
+              flag: true
             })
-          }
-          else {
+          } else {
             wx.showToast({
-              title: "提交失败，后台将尽快为您解决！",
+              title: "信息修改失败，请重试！",
               icon: "none",
-              duration: 2000
+              duration: 1500
             })
           }
         },
-        fail: function (err) {
+        fail: function(err) {
           console.log(err);
           wx.showToast({
-            title: "提交失败，后台将尽快为您解决！",
+            title: "未连接到服务器！",
             icon: "none",
-            duration: 2000
+            duration: 1500
           })
         }
       })
@@ -73,7 +73,7 @@ Page({
   /**
    * 输入框聚焦时显示编辑图标
    */
-  bindfocus: function () {
+  bindfocus: function() {
     this.setData({
       flag: false,
     })
@@ -82,58 +82,56 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    this.setData({
-      userAge: options.title
-    })    
+  onLoad: function(options) {
+
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-
+  onPullDownRefresh: function() {
+    this.onLoad();
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })
