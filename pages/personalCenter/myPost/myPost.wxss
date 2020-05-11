@@ -1,4 +1,30 @@
-/* pages/moreResult/moreRecruit/moreRecruit.wxss */
+/* pages/personalCenter/myPost/myPost.wxss */
+.imgRightBar{
+  background: #de979b;
+  color:#ffffff;
+  text-indent: 50rpx;
+}
+
+.navbar{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  font-size:50rpx;
+  background-color:  #cadbf9;
+  margin-top: 5rpx;
+  align-items: center;
+}
+.navbar .item{
+  width: 33.33%;
+  text-align: center;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  color: white;
+}
+.navbar .active{
+  color: #de979b;
+}
+
 .header{
   display: flex;
   flex-direction: row;
@@ -11,11 +37,11 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-top: 5rpx;
+  margin-top: 10rpx;
 }
-.header image{
+.icon{
   margin-left: 20rpx;
-  margin-right: 10rpx;
+  margin-right: 10rpx; 
   border-radius: 50%;
 }
 .name{
@@ -50,4 +76,10 @@
 .content_txt{
   text-align: left;
   margin-left: 70rpx;
+}
+
+.attachedFile{
+  margin-left:20rpx;
+  margin-right: 20rpx;
+  height: 690rpx;
 }

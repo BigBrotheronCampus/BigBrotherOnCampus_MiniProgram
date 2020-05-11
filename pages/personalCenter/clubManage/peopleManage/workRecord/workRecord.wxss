@@ -1,40 +1,24 @@
 /* pages/personalCenter/clubManage/peopleManage/workRecord/workRecord.wxss */
-.inputBar{
-  width: auto;
-  display: flex;
-  align-items: center;
-  margin-left: 40rpx;
-  margin-bottom: 20rpx;
-}
-
-.txt{
-  width: 250rpx;
+.activityTxt{
+  width: 150rpx;
   height: fit-content;
   font-size: 50rpx;
   color: #779dce;
   background: #f1f0fe;
 }
 
-.inTxt{
-  width:420rpx;
-  height: fit-content;
-  font-size:50rpx;
-  color: #779dce;
-  background: #f1f0fe;
-}
-
-.inTextarea{
-  margin-left:40rpx;
-  margin-right:20rpx;
-  margin-bottom: 20rpx;
-  width:690rpx;
+.inContent{
+  width:auto;
   height:400rpx;
+  word-wrap:break-wrap;
   font-size:50rpx;
   color: #779dce;
   background: #f1f0fe;
 }
 
-.placeHolderTxt{
-  font-size: 40rpx;
-  color:#779dce;
+.imgBar{
+  background: #f1f0fe;
+  display:flex;
+  justify-content:space-between;
+  margin-bottom: 5rpx;
 }

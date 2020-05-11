@@ -1,0 +1,39 @@
+<!--pages/books/bookDetails/bookDetails.wxml-->
+<view id="divLine1"></view>
+
+<view class="title"></view>
+
+<view class="content">{{book.content}}</view>
+
+<view class="scrollBar" bindtap="delete" wx:if='{{title!=""}}' style="height:fit-content;padding-left:0rpx;">
+  <view style="display:flex;align-items:center;">
+    <image class="icon" src="../../../icons/word.png"></image>
+    <text style="width:80%;">{{book.title}}</text>
+  </view>
+</view>
+
+<view class="imgRightBar">
+  <view>策划类别</view>
+  <view style="display:flex;">
+    <view>{{book.theme}}活动</view>
+  </view>
+</view>
+
+<view class="imgRightBar">
+  <view>谁能看见</view>
+  <view style="display:flex;">
+    <view>{{who[book.visible]}}</view>
+  </view>
+</view>
+
+<view class="imgRightBar">
+  <view>上传时间</view>
+  <view style="display:flex;">
+    <view>{{book.time}}</view>
+  </view>
+</view>
+
+<view style="display:flex;">
+  <button class="activityTxt" bindtap="collect">收藏</button>
+  <button class="activityTxt" bindtap="downloadBook">下载</button>
+</view>

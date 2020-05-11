@@ -1,19 +1,21 @@
 <!--pages/personalCenter/clubManage/peopleManage/workScore/scoreIndex/scoreIndex.wxml-->
 <view class="table">
-      <view class="tableTitle">
-        <text>{{term}}</text>
-        <text>{{period}}</text>
-      </view>
-      <view class="header">
-          <view class="headerColumn">姓名</view>
-          <view class="headerColumn">工作内容</view>
-          <view class="headerColumn">打分</view>
-      </view>
-        <scroll-view class="scrollView">
-        <view class="row" wx:for="{{work}}" wx:key="index" data-set="score">
-          <view class="dd">{{item.name}}</view>
-          <view class="dd" id='content'>点击查看</view>
-          <input class="dd" id="score"></input>
-        </view>
-        </scroll-view> 
+  <view class="tableTitle">
+    <text>{{term}}</text>
+    <text>{{period}}</text>
+  </view>
+  <view class="header">
+    <view class="headerColumn">姓名</view>
+    <view class="headerColumn">工作内容</view>
+    <view class="headerColumn">打分</view>
+  </view>
+  <scroll-view class="scrollView">
+    <view class="row" wx:for="{{work}}" wx:key="index" data-item="{{item}}" id="work" bindtap="seeContent">
+      <view class="dd" id="name">{{item.name}}</view>
+      <view class="dd" id="content">点击查看</view>
+      <input class="dd" id="{{index}}" bindinput="inputScore" catchtap="tap"></input>
+    </view>
+  </scroll-view>
 </view>
+
+<button class="activityTxt" bindtap="submitScore" style="width:200rpx;">提交</button>

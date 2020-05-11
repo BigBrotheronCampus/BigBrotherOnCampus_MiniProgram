@@ -1,10 +1,10 @@
-<!--pages/moreResult/morePeople/morePeople.wxml-->
+<!--pages/personalCenter/myFansFollows/myFansFollows.wxml-->
 <view id="divLine1"></view>
 
-<view class="title">相关用户</view>
+<view class="title">{{navBar[index].text}}</view>
 
 <scroll-view class="scollView">
-  <view wx:for="{{people}}" wx:key="uid" class="imgRightBar" bindtap="onTapFansBar" data-uid="{{item.uid}}">
+  <view wx:for="{{people}}" wx:key="id" class="imgRightBar" bindtap="onTapFollowsBar" data-uid="{{item.id}}">
     <view style="margin-left:20rpx;display:flex;align-items:center;">
       <image class="icon" src="{{item.photo}}" style=" border-radius: 50%;"></image>
       <text >{{item.name}}</text>

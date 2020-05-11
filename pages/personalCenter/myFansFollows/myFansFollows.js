@@ -1,52 +1,49 @@
-// pages/books/bookList/bookList.js
+// pages/personalCenter/myFansFollows/myFansFollows.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    userID: "",
+    people: [],
     navBar:[
       {
-        type:"practice",
-        text:"实践"
+        type:"myFollows",
+        url: 'https://tzl.cyyself.name/users/myFollowers?uid=',
+        text:"我的关注"
       },
       {
-        type: "art",
-        text: "文艺"
-      },
-      {
-        type: "sport",
-        text: "体育"
-      },
-      {
-        type: "volunteer",
-        text: "公益"
+        type: "myFans",
+        url: 'https://tzl.cyyself.name/users/myFans?uid=',
+        text: "我的粉丝"
       }
     ],
-    index:0,
-    books:[]
+    index:0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let that=this;
-    for(let x=0;x<4;x++){
-      if(that.data.navBar[x].type==options.type){
-        that.setData({
-          index:x
-        })
-      }
+    var that = this;
+    // 初始化数据
+    that.setData({
+      userID: wx.getStorageSync('information').id
+    })
+    if(options.type=="myFans"){
+      that.setData({
+        index: 1
+      })
     }
-    that.getBooks();
+    that.getPeople();
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    
   },
 
   /**
@@ -74,7 +71,8 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    var that = this;
+    that.getPeople();
   },
 
   /**
@@ -92,13 +90,13 @@ Page({
   },
 
   /**
-   * 获取相应类型的策划
+   * 获取所有关注对象
    */
-  getBooks:function(){
-    let that=this;
-    let index=that.data.index;
+  getPeople() {
+    var that = this;
+    var index=that.data.index;
     wx.request({
-      url: 'https://tzl.cyyself.name/plans/all?theme='+that.data.navBar[index].text,
+      url: that.data.navBar[index].url + that.data.userID,
       method: 'get',
       header: {
         "Content-Type": 'application/json'
@@ -107,11 +105,11 @@ Page({
         console.log(res);
         if (res.data.code == 0) {
           that.setData({
-            books: res.data.data.plans
+            people: res.data.data
           })
         } else {
           wx.showToast({
-            title: '获取策划信息失败,请重试！',
+            title: '获取关注信息失败,请重试！',
             icon: 'none',
             duration: 1500
           })
@@ -128,13 +126,14 @@ Page({
     })
   },
 
+
   /**
-   * 点击查看详情
+   * 单击跳转至他人信息界面
    */
-  seeDetails:function(e){
-    let id = e.currentTarget.dataset.id;
+  onTapFollowsBar: function (event) {
+    var id = event.currentTarget.dataset.uid;
     wx.navigateTo({
-      url: '../bookDetails/bookDetails?id='+id,
+      url: '/pages/othersInfo/othersInfo?uid=' + id,
     })
   }
 })

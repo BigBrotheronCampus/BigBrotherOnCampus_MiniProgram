@@ -17,22 +17,6 @@ App({
       checkIn: "",
       trueName: ""
     }*/
-    // 测试数据
-    info: {
-      account: "",
-      age: 0,
-      area: ['重庆市', '重庆市', '沙坪坝区'],
-      checkIn: 0,
-      country: "中国",
-      gender: null,
-      id: 5,
-      name: "semicircle",
-      phone: "18602368180",
-      photo: "https://tangzl7.club:8080/photo/default.jpg",
-      pwd: "",
-      school: "重庆大学",
-      trueName: "陈方大"
-    }
   },
 
   onLaunch: function() {

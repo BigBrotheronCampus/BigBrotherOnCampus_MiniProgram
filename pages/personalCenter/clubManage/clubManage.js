@@ -5,14 +5,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    cid:""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      cid:options.cid
+    })
   },
 
   /**
@@ -70,7 +72,7 @@ Page({
   onTapFunctionBar:function(e){
     var targetID = e.currentTarget.id;
     wx.navigateTo({
-      url: './'+targetID+'/'+targetID,
+      url: './'+targetID+'/'+targetID + '?cid='+that.data.cid,
     })
   }
 })

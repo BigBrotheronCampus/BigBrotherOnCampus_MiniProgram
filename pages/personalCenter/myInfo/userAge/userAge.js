@@ -37,9 +37,10 @@ Page({
         },
         success: function(res) {
           if (res.data.code == 0) {
-            app.globalData.info.age=inValue;
             // 修改本地缓存信息，每次更新app.globalData都需修改
-            wx.setStorageSync("information", app.globalData.info);
+            let info = wx.getStorageSync('information');
+            info.age = inValue;
+            wx.setStorageSync("information", info);
             wx.showToast({
               title: '信息修改成功！',
               icon: 'success',

@@ -22,7 +22,7 @@
   </view>
   <view id='divLine4'></view>
 
-  <view class="imgRightBar" id="wonderfulMovement" bindtap="onTapPublishBar">
+  <view class="imgRightBar" id="wonderfulMoment" bindtap="onTapPublishBar">
     <view class="publishText">
       <text id="dot">·</text>
       <text >精彩瞬间</text>

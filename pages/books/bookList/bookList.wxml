@@ -1,2 +1,16 @@
 <!--pages/books/bookList/bookList.wxml-->
-<text>pages/books/bookList/bookList.wxml</text>
+<view id="divLine1"></view>
+
+<view class="title">{{navBar[index].text}}活动</view>
+
+<scroll-view class="scollView">
+  <view wx:for="{{books}}" wx:key="id" class="scrollBar" bindtap="seeDetails" style="height:fit-content;padding-left:0rpx;" data-id="{{item.id}}">
+    <view style="display:flex;align-items:center;width:10%;">
+      <image class="icon" src="../../../icons/word.png"></image>
+    </view>
+    <view style="align-items:center;width:90%;">
+      <view >{{item.title}}</view>
+      <view >{{item.time}}</view>
+    </view>
+  </view>
+</scroll-view>

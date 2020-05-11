@@ -1,6 +1,6 @@
 // pages/login/login.js
 
-var app = getApp();     // 全局信息
+var app = getApp(); // 全局信息
 
 Page({
 
@@ -12,21 +12,35 @@ Page({
     pwd: ""
   },
 
-  inputAccount: function (e) {
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function(options) {
+    let that = this;
+    if (wx.getStorageSync('information') != "" && wx.getStorageSync('information')!=null) {
+      that.setData({
+        phone: wx.getStorageSync('information').phone,
+        pwd: wx.getStorageSync('information').pwd
+      })
+      that.login();
+    }
+  },
+
+  inputAccount: function(e) {
     this.setData({
       phone: e.detail.value
     });
   },
 
-  inputPwd: function (e) {
+  inputPwd: function(e) {
     this.setData({
       pwd: e.detail.value
     });
   },
 
-  login: function () {
+  login: function() {
     wx.request({
-      url: 'https://tzl.cyyself.name:2333/users/log',
+      url: 'https://tzl.cyyself.name/users/log',
       method: 'post',
       data: {
         phone: this.data.phone,
@@ -35,7 +49,7 @@ Page({
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res);
         if (res.data.code == -1) {
           wx.showToast({
@@ -43,24 +57,22 @@ Page({
             icon: 'loading',
             duration: 1000
           })
-        }
-        else if (res.data.code == 0) {
+        } else if (res.data.code == 0) {
           wx.setStorageSync("information", res.data.data)
           wx.switchTab({
             url: '../home/home'
           })
-          app.globalData.info=res.data.data;
+          app.globalData.info = res.data.data;
           console.log(app.globalData.info);
-        }
-        else{
+        } else {
           wx.showToast({
             title: '登陆失败，请重试！',
-            icon:'none',
-            duration:1500
+            icon: 'none',
+            duration: 1500
           })
         }
       },
-      fail: function () {
+      fail: function() {
         wx.showToast({
           title: '未连接到服务器',
           icon: 'loading',
@@ -73,7 +85,7 @@ Page({
   /**
    * 注册界面
    */
-  toRegister: function () {
+  toRegister: function() {
     wx.navigateTo({
       url: '../register/register',
     })
@@ -82,9 +94,9 @@ Page({
   /**
    * 找回密码界面
    */
-  toFindPassword:function(){
+  toFindPassword: function() {
     wx.navigateTo({
-      url:'./findPassword/findPassword',
+      url: './findPassword/findPassword',
     })
   }
 })

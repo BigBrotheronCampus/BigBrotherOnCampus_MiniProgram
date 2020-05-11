@@ -1,20 +1,24 @@
 // pages/personalCenter/personalCenter.js
-var app = getApp(); // 获取全局数据
-
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    userID: app.globalData.info.id,
-    userAvatarPath: app.globalData.info.photo
+    userID: "",
+    userAvatarPath: "",
+    name: [], //   用户参加的社团名称
+    id: [] // 用户参加的社团id
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    let that = this;
+    that.setData({
+      userID: wx.getStorageSync('information').id,
+      userAvatarPath: wx.getStorageSync('information').photo
+    })
   },
 
   /**
@@ -28,9 +32,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    var that = this;
+    let that = this;
     that.setData({
-      userAvatarPath: app.globalData.info.photo
+      userAvatarPath: wx.getStorageSync('information').photo
     })
     // 修改本地缓存信息，每次更新app.globalData都需修改
   },
@@ -74,7 +78,7 @@ Page({
    * 单击头像上传头像
    */
   onTapAvatar: function() {
-    var that = this;
+    let that = this;
     wx.chooseImage({
       count: 1,
       sizeType: ['compressed'],
@@ -84,59 +88,30 @@ Page({
         const tempFilePaths = res.tempFilePaths;
         // 成功之后上传到服务器
         wx.uploadFile({
-          url: "http://47.94.45.122:88/uploadImg_Video.php",
+          url: "https://tzl.cyyself.name/file/savePhoto",
           filePath: tempFilePaths[0],
           name: "file",
           method: "POST",
-          formData: {
-            tableName: "userInfo",
-            userID: that.data.userID
-          },
-          header: {
-            'content-type': 'multipart/form-data',
-            'cache-control': 'no-cache',
-          },
-          timeout: 2500,
           success: function(res) {
             console.log(res.data);
-            var result = JSON.parse(res.data); // 将JSON字符串转换成对象
+            let result = JSON.parse(res.data); // 将JSON字符串转换成对象
             console.log(result);
-            var message = "";
-            switch (result.status) {
-              case 1:
-                message = "上传图片格式不正确！";
-                break;
-              case 2:
-                message = "上传图片不能大于2M!";
-                break;
-              case 3:
-                message = "更改头像成功！";
-                break;
-              case 4:
-                message = "网络连接错误，请重试！";
-                break;
-              case 5:
-                message = "网络连接错误，请重试！";
-                break;
-              case 6:
-                message = "上传方式错误！";
-                break;
-              default:
-                message = "更换头像错误，后台将尽快为您解决！";
-            }
-            if (result.status == 3) {
-              var value = "userAvatarPath"
+            if (result.code == 0) {
               that.setData({ // 上传成功后更新头像
-                  [value]: tempFilePaths[0]
-                }),
-                wx.showToast({
-                  title: message,
-                  icon: "success",
-                  duration: 1500
-                })
+                userAvatarPath: result.data
+              })
+              // 修改本地缓存信息，每次更新app.globalData都需修改
+              let info = wx.getStorageSync('information');
+              info.photo = result.data;
+              wx.setStorageSync("information", info);
+              wx.showToast({
+                title: "头像修改成功",
+                icon: "success",
+                duration: 1000
+              })
             } else {
               wx.showToast({
-                title: message,
+                title: "头像修改失败",
                 icon: 'none',
                 duration: 1500
               })
@@ -146,8 +121,8 @@ Page({
             console.log("fail");
             console.log(err);
             wx.showToast({
-              title: '网络连接错误，请重试',
-              icon: "loading",
+              title: '未连接到服务器',
+              icon: "none",
               duration: 1500
             })
           }
@@ -160,16 +135,41 @@ Page({
    * 单击功能栏跳转事件
    */
   onTapFunctionBar: function(event) {
-    var targetID = event.currentTarget.id;
+    let that = this;
+    let targetID = event.currentTarget.id;
     if (targetID == "signOut") {
+      wx.removeStorageSync('information');
       // 跳转到登录界面，必须设置login界面为初始索引界面
       wx.reLaunch({
         url: '../login/login',
       })
+    } else if (targetID == "myHistory" || targetID == "myFavorite") {
+      wx.navigateTo({
+        url: './myPost/myPost?type=' + targetID, //依据id进行不同的跳转
+      })
+    } else if (targetID == 'clubManage') {
+      that.getClubs();
+      if (that.data.clubs == []) {
+        wx.showToast({
+          title: '您还未加入社团',
+          duration: 1500
+        })
+      } else {
+        wx.showActionSheet({
+          itemList: that.data.name,
+          success: function(res) {
+            if (!res.cancel) {
+              //console.log(res.tapIndex) //这里是点击了那个按钮的下标
+              wx.navigateTo({
+                url: "./" + targetID + "/" + targetID + '?cid=' + that.data.id[res.tapIndex], // 传递选择的社团id
+              })
+            }
+          }
+        })
+      }
     } else {
       wx.navigateTo({
         url: "./" + targetID + "/" + targetID, // 依据id进行不同的跳转
-        fail: function() {}
       })
     }
   },
@@ -178,9 +178,52 @@ Page({
    * 单击社交栏跳转事件
    */
   onTapSocial: function(event) {
-    wx.navigateTo({
-      url: "./" + event.currentTarget.id + "/" + event.currentTarget.id, //依据id进行不同的跳转
-      fail: function() {}
+    let that = this;
+    let targetID = event.currentTarget.id;
+    if (targetID == 'myActivity') {
+      wx.navigateTo({
+        url: './myPost/myPost?type=myActivity',
+      })
+    } else {
+      wx.navigateTo({
+        url: './myFansFollows/myFansFollows?type=' + targetID,
+      })
+    }
+  },
+
+  /**
+   * 获取用户参加过的社团
+   */
+  getClubs: function() {
+    let that = this;
+    wx.request({
+      url: 'https://tzl.cyyself.name/getUserCommunities?uid=' + that.data.userID,
+      method: 'get',
+      header: {
+        "Content-Type": 'application/json'
+      },
+      success: function(res) {
+        if (res.data.code == 0) {
+          that.setData({
+            name: res.data.data.name,
+            id: res.data.data.id
+          })
+        } else {
+          wx.showToast({
+            title: '获取社团信息失败,请重试！',
+            icon: 'none',
+            duration: 1500
+          })
+        }
+      },
+      fail: function(err) {
+        console.log(err);
+        wx.showToast({
+          title: '未连接到服务器',
+          icon: 'none',
+          duration: 1500
+        })
+      }
     })
   }
 })

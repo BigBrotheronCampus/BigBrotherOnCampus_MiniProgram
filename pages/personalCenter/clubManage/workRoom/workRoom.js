@@ -75,7 +75,7 @@ Page({
       })
     } else {
       wx.navigateTo({
-        url: './' + targetID + '/' + targetID,
+        url: './' + targetID + '/' + targetID + '?cid=' + this.data.cid,
       })
     }
   }

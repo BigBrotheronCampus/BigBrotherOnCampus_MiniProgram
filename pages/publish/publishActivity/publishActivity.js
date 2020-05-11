@@ -1,5 +1,4 @@
 // pages/publish/publishActivity/publishActivity.js
-const app = getApp(); // 获取全局数据
 var myDate = new Date(); //获取系统当前时间
 
 Page({
@@ -10,7 +9,7 @@ Page({
   data: {
     index: 0,
     types: ['志愿活动', '文体活动', '科研竞赛', '校园讲座'],
-    userID: app.globalData.info.id,
+    userID: "",
     imgPath: "",
     videoPath: "",
     disImgVal: "none",
@@ -28,6 +27,9 @@ Page({
     var d = myDate.getDate(); //日期
     this.setData({
       time: y + "/" + m + "/" + d
+    })
+    this.setData({
+      userID:wx.getStorageSync('information').id
     })
   },
 
@@ -196,8 +198,9 @@ Page({
         'content-type': 'multipart/form-data',
       },
       success: function(res) {
-        console.log(res);
-        if (res.data.code == 0) {
+        var data = JSON.parse(res.data);  // 坑，上传文件返回的是json数据，需要解析
+        //console.log(data);
+        if (data.code == 0) {
           wx.showToast({
             title: '图片已上传！',
             icon: 'success',
@@ -205,7 +208,7 @@ Page({
           })
           that.setData({
             // 将图片路径改为返回的url
-            imgPath: res.data.data
+            imgPath: data.data
           })
         } else {
           wx.showToast({
@@ -247,8 +250,9 @@ Page({
         'content-type': 'multipart/form-data',
       },
       success: function(res) {
-        console.log(res);
-        if (res.data.code == 0) {
+        var data = JSON.parse(res.data);  // 坑，上传文件返回的是json数据，需要解析
+        //console.log(data);
+        if (data.code == 0) {
           wx.showToast({
             title: '视频已上传！',
             icon: 'success',
@@ -256,16 +260,16 @@ Page({
           })
           that.setData({
             // 将图片路径改为返回的url
-            videoPath: res.data.data
+            videoPath: data.data
           })
-        } /*else {
+        } else {
           wx.showToast({
             title: '视频上传失败，请重试！',
             icon: "none",
             duration: 1500
           })
           bool = false;
-        }*/
+        }
       },
       fail: function(err) {
         console.log(err);
@@ -322,7 +326,7 @@ Page({
             'time': that.data.time
           },
           success: function(res) {
-            //console.log(res.data);
+            //console.log(res);
             if (res.data.code == 0) {
               wx.showToast({
                 title: '提交成功！',

@@ -5,26 +5,19 @@ Page({
    * 页面的初始数据
    */
   data: {
-    records: [{
-        "time": "2020年11月1日",
-        "award": "最佳新人奖"
-      },
-      {
-        "time": "2020年11月1日",
-        "award": "最佳新人奖"
-      },
-      {
-        "time": "2020年11月1日",
-        "award": "最佳新人奖"
-      },
-    ]
+    records: [],
+    cid:""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    let that=this;
+    that.setData({
+      cid: options.cid
+    })
+    that.getRecords();
   },
 
   /**
@@ -59,7 +52,8 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
+    let that=this;
+    that.getRecords();
   },
 
   /**
@@ -81,7 +75,43 @@ Page({
    */
   add:function(){
     wx.navigateTo({
-      url: './submitRecord/submitRecord',
+      url: './submitRecord/submitRecord?cid='+this.data.cid,
+    })
+  },
+
+  /**
+   * 获取所有荣誉记录
+   */
+  getRecords:function(){
+    let that=this;
+    wx.request({
+      url: 'https://tzl.cyyself.name/honorRecord/getAll?cid=' + that.data.cid,
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (res) {
+        if (res.data.code == 0) {
+          console.log(res);
+          that.setData({
+            records: res.data.data.honorRecords
+          })
+        } else {
+          wx.showToast({
+            title: '获取荣誉记录失败',
+            icon: 'none',
+            duration: 1500
+          })
+        }
+      },
+      fail: function (err) {
+        console.log(err);
+        wx.showToast({
+          title: '未连接到服务器',
+          icon: 'none',
+          duration: 1500
+        })
+      }
     })
   }
 })

@@ -1,12 +1,9 @@
 <!--pages/personalCenter/OthersInfo/othersInfo.wxml-->
-<view class="divLine">
-  <view id="divLine1"></view>
-  <view id="divLine2"></view>
-</view>
+<view id="divLine1"></view>
 
 <view class="avatar">
   <view id="divLine1"></view>
-  <image class="userAvatar" src="{{userAvatarPath}}" bindtap="onTapAvatar"></image>
+  <image class="avatarImg" src="{{info.photo}}"></image>
   <text id="userID">ID:{{userID}}</text>
 </view>
 
@@ -15,43 +12,43 @@
 <view id="divLine3"></view>
 
 <view>
-  <view class="imgRightBar" id="userName" bindtap="onTapInfoBar">
+  <view class="imgRightBar" id="userName">
     <view class="infoText">
       <text id="dot">·</text>
       <text >昵称</text>
-      <view class="info">{{info.userName}}</view>
+      <view class="info">{{info.name}}</view>
     </view>
   </view>
 
-  <view class="imgRightBar" id="userSex" bindtap="onTapInfoBar">
+  <view class="imgRightBar" id="userSex">
     <view class="infoText">
       <text id="dot">·</text>
       <text >性别</text>
-      <view class="info">{{info.userSex}}</view>
+      <view class="info">{{info.gender}}</view>
     </view>
   </view>
 
-  <view class="imgRightBar" id="userAge" bindtap="onTapInfoBar">
+  <view class="imgRightBar" id="userAge">
     <view class="infoText">
       <text id="dot">·</text>
       <text >年龄</text>
-      <view class="info">{{info.userAge}}</view>
+      <view class="info">{{info.age}}</view>
     </view>
   </view>
 
-  <view class="imgRightBar" id="userSchool" bindtap="onTapInfoBar">
+  <view class="imgRightBar" id="userSchool">
     <view class="infoText">
       <text id="dot">·</text>
       <text >学校</text>
-      <view class="info">{{info.userSchool}}</view>
+      <view class="info">{{info.school}}</view>
     </view>
   </view>
 
-  <view class="imgRightBar" id="userLocation" bindtap="onTapInfoBar">
+  <view class="imgRightBar" id="userLocation">
     <view class="infoText">
       <text id="dot">·</text>
       <text >地区</text>
-      <view class="info">{{info.userLocation}}</view>
+      <view class="info">{{info.area[0]}}{{info.area[1]}}</view>
     </view>
   </view>
   <view  class="blank"></view>

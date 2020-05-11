@@ -1,13 +1,13 @@
-<!--pages/publish/wonderfulMovement/wonderfulMovement.wxml-->
+<!--pages/publish/wonderfulMoment/wonderfulMoment.wxml-->
 <view id="divLine1"></view>
 
 <view class="title">精彩瞬间</view>
 
 <view id='divLine4' style="height:20rpx;"></view>
 
-<form bindsubmit="movementSubmit">
+<form bindsubmit="momentSubmit">
 
-<textarea name="movementContent" class="inContent" focus="true" confirm-type="done" maxlength="500" placeholder="长按可删除图片/视频"></textarea>
+<textarea name="momentContent" class="inContent" focus="true" confirm-type="done" maxlength="500" placeholder="长按可删除图片/视频"></textarea>
 
   <image src="{{imgPath}}" class="attachedFile" style="display:{{disImgVal}}" id='img' bindlongtap="delete"></image>
   <video src="{{videoPath}}" class="attachedFile" style="display:{{disVideoVal}}" id='video'bindlongtap="delete"></video>

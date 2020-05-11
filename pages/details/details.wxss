@@ -13,7 +13,7 @@
   align-items: center;
   margin-top: 10rpx;
 }
-.title image{
+.header image{
   margin-left: 20rpx;
   margin-right: 10rpx;
   border-radius: 50%;
@@ -27,6 +27,7 @@
   margin-right: 20rpx;
   color: #779dce;
 }
+
 .content{
   padding-top: 10rpx;
   padding-left: 40rpx;
@@ -36,10 +37,7 @@
   width: 100%;
   align-items: center;
 }
-.content image{
-  width: 640rpx;
-  height: 350rpx;
-}
+
 .content_1{
   display: flex;
   padding-top: 50rpx;
@@ -63,14 +61,23 @@
 }
 
 .operationContent{
-  display:flex;
+  display: flex;
+  flex-wrap: wrap;
   background: #f1f0fe;
   font-size: 30rpx;
   color:#779dce;
 }
 
-.attachedImg{
-  display: flex;
-  width:600rpx;
+.attachedFile{
+  margin-left:20rpx;
+  margin-right: 20rpx;
+  height: 690rpx;
+}
 
+.inContent{
+  width:75%;
+  height:100rpx;
+  font-size:40rpx;
+  color: #779dce;
+  background: #f1f0fe;
 }

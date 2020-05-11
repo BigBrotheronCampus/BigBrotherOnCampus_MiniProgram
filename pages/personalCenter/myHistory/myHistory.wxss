@@ -1,6 +1,0 @@
-/* pages/myHistory/myHistory.wxss */
-.imgRightBar{
-  background: #de979b;
-  color:#ffffff;
-  text-indent: 50rpx;
-}

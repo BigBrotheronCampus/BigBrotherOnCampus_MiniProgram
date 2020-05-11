@@ -16,13 +16,6 @@
   background: #f1f0fe;
 }
 
-.attachedFile{
-  margin-left:40rpx;
-  margin-right:20rpx;
-  width:690rpx;
-  height: 600rpx;
-}
-
 .imgBar{
   background: #f1f0fe;
   display:flex;

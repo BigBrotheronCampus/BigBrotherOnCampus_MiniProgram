@@ -1,14 +1,12 @@
 // pages/personalCenter/personalInfo/userSex/userSex.js
-var app = getApp(); // 获取全局数据
-
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    userID: app.globalData.info.id,
-    gender:app.globalData.info.gender,
+    userID: "",
+    gender:"",
     sex: 1,
   },
 
@@ -25,6 +23,10 @@ Page({
         sex: 1,
       })
     }
+    this.setData({
+      userID: wx.getStorageSync('information').id,
+      userSex: wx.getStorageSync('information').gender
+    })
   },
 
   /**
@@ -113,8 +115,10 @@ Page({
                       sex: 1,
                     })
                   }
-                  app.globalData.info.gender = inValue;
-                  wx.setStorageSync("information", app.globalData.info);
+                  // 修改本地缓存信息，每次更新app.globalData都需修改
+                  let info = wx.getStorageSync('information');
+                  info.name = inValue;
+                  wx.setStorageSync("information", info);
                   wx.showToast({
                     title: '信息修改成功！',
                     icon: 'success',

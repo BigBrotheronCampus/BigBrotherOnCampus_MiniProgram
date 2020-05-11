@@ -1,1 +1,42 @@
 /* pages/moreResult/moreBooks/moreBooks.wxss */
+.navbar{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  font-size:40rpx;
+  background-color:  #cadbf9;
+  margin-top: 5rpx;
+  align-items: center;
+}
+.navbar .item{
+  width: 33.33%;
+  text-align: center;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  color: white;
+}
+.navbar .active{
+  color: #de979b;
+}
+
+/*搜索栏*/
+.searchBar{
+  background: #cadbf9;
+  display: flex;
+  align-items: center;
+  height: 100rpx;
+  color:#ffffff;
+}
+
+/*搜索栏输入框*/
+.searchIN{
+  width:fit-content;
+  height: 100rpx;
+  font-size: 50rpx;
+  color:#779dce;
+}
+
+.searchPlaceHolder{
+  font-size: 40rpx;
+  color:#779dce;
+}

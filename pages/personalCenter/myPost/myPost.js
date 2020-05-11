@@ -1,15 +1,67 @@
-// pages/ground/searchResult/searchResult.js
+// pages/personalCenter/myPost/myPost.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    val: "",
-    people: [], // 检索的相关用户
-    activities: [], // 检索的活动发布
-    recruits: [], // 检索的队友招募
-    moments: [], // 检索的精彩瞬间
+    navBar: [{
+        type: 'myActivity',
+        url: [{
+            type: 'activity',
+            url: 'https://tzl.cyyself.name/activities/myActivity'
+          },
+          {
+            type: 'recruit',
+            url: 'https://tzl.cyyself.name/findTeammates/myPosts'
+          },
+          {
+            type: 'moment',
+            url: 'https://tzl.cyyself.name/findTeammates/myPosts'
+          }
+        ],
+        text: "个人动态"
+      },
+      {
+        type: 'myHistory',
+        url: [{
+            type: 'activity',
+            url: 'https://tzl.cyyself.name/activities/history'
+          },
+          {
+            type: 'recruit',
+            url: 'https://tzl.cyyself.name/findTeammates/history'
+          },
+          {
+            type: 'moment',
+            url: 'https://tzl.cyyself.name/moments/history'
+          }
+        ],
+        text: "浏览历史"
+      },
+      {
+        type: 'myFavorite',
+        url: [{
+            type: 'activity',
+            url: 'https://tzl.cyyself.name/activities/collection'
+          },
+          {
+            type: 'recruit',
+            url: 'https://tzl.cyyself.name/findTeammates/collection'
+          },
+          {
+            type: 'moment',
+            url: 'https://tzl.cyyself.name/moments/collection'
+          }
+        ],
+        text: "我的收藏"
+      }
+    ],
+    index: 0, // 选择“我的动态”，“浏览历史”，“我的收藏”
+    activities: [],
+    recruits: [],
+    moments: [],
+    uid:""
   },
 
   /**
@@ -17,14 +69,17 @@ Page({
    */
   onLoad: function(options) {
     var that = this;
-
-    // 父组件选中子组件以便调用子组件函数，#searchBar代表的是component组件id名称
-    that.searchBar = that.selectComponent("#searchBar");
-
-    // 调用子组件函数
-    that.searchBar.changeVal(options.val);
-
-    that.getPeople();
+    var x;
+    for (x = 0; x < 3; x++) {
+      if (that.data.navBar[x].type == options.type) {
+        that.setData({
+          index: x
+        })
+      }
+    }
+    that.setData({
+      uid:wx.getStorageSync('information').id
+    })
     that.getActivities();
     that.getRecruits();
     that.getMoments();
@@ -63,7 +118,6 @@ Page({
    */
   onPullDownRefresh: function() {
     var that = this;
-    that.getPeople();
     that.getActivities();
     that.getRecruits();
     that.getMoments();
@@ -84,61 +138,26 @@ Page({
   },
 
   /**
-   * 获取相关用户信息
-   */
-  getPeople() {
-    var that = this;
-    wx.request({
-      url: 'https://tzl.cyyself.name/users/search?search=' + that.data.val,
-      method: 'get',
-      header: {
-        "Content-Type": 'application/json'
-      },
-      success: function(res) {
-        //console.log(res);
-        if (res.data.code == 0) {
-          that.setData({
-            people: res.data.data.users
-          })
-        } else {
-          wx.showToast({
-            title: '搜索相关用户信息失败,请重试！',
-            icon: 'none',
-            duration: 1500
-          })
-        }
-      },
-      fail: function(err) {
-        console.log(err);
-        wx.showToast({
-          title: '未连接到服务器',
-          icon: 'none',
-          duration: 1500
-        })
-      }
-    })
-  },
-
-  /**
-   * 获取相关活动发布信息
+   * 获取所有活动发布信息
    */
   getActivities() {
     var that = this;
+    var index = that.data.index;
     wx.request({
-      url: 'https://tzl.cyyself.name/activities/search?search=' + that.data.val,
+      url: that.data.navBar[index].url[0].url+'?uid='+that.data.uid,
       method: 'get',
       header: {
         "Content-Type": 'application/json'
       },
       success: function(res) {
-        //console.log(res);
+        //console.log(res.data.data.activities);
         if (res.data.code == 0) {
           that.setData({
             activities: res.data.data.activities
           })
         } else {
           wx.showToast({
-            title: '搜索相关活动发布信息失败,请重试！',
+            title: '获取活动发布信息失败,请重试！',
             icon: 'none',
             duration: 1500
           })
@@ -156,25 +175,26 @@ Page({
   },
 
   /**
-   * 获取相关队友招募信息
+   * 获取所有队友招募信息
    */
   getRecruits() {
     var that = this;
+    var index = that.data.index;
     wx.request({
-      url: 'https://tzl.cyyself.name/findTeammates/search?search=' + that.data.val,
+      url: that.data.navBar[index].url[1].url + '?uid=' + that.data.uid,
       method: 'get',
       header: {
         "Content-Type": 'application/json'
       },
       success: function(res) {
-        //console.log(res);
+        //console.log(res.data.data.posts);
         if (res.data.code == 0) {
           that.setData({
             recruits: res.data.data.posts
           })
         } else {
           wx.showToast({
-            title: '搜索相关队友招募信息失败,请重试！',
+            title: '获取队友招募信息失败,请重试！',
             icon: 'none',
             duration: 1500
           })
@@ -193,25 +213,26 @@ Page({
 
 
   /**
-   * 获取相关精彩瞬间信息
+   * 获取所有精彩瞬间信息
    */
   getMoments() {
     var that = this;
+    var index = that.data.index;
     wx.request({
-      url: 'https://tzl.cyyself.name/moments/search?search=' + that.data.val,
+      url: that.data.navBar[index].url[2].url + '?uid=' + that.data.uid,
       method: 'get',
       header: {
         "Content-Type": 'application/json'
       },
       success: function(res) {
-        //console.log(res);
+        //console.log(res.data.data.moments);
         if (res.data.code == 0) {
           that.setData({
             moments: res.data.data.moments
           })
         } else {
           wx.showToast({
-            title: '搜索相关精彩瞬间信息失败,请重试！',
+            title: '获取精彩瞬间信息失败,请重试！',
             icon: 'none',
             duration: 1500
           })
@@ -229,26 +250,18 @@ Page({
   },
 
   /**
-   * 获取更多结果
-   */
-  getMoreResult: function(e) {
+ * 获取更多结果
+ */
+  getMoreResult: function (e) {
+    // 将详细信息传给详情界面
     var that = this;
     var id = e.currentTarget.id;
+    var index = that.data.index;
     // url传值
-    switch(id){
-      case "morePeople":{
-        // 传递url必须使用json格式
-        let url={
-          data: 'https://tzl.cyyself.name/users/search?search=' + that.data.val
-        }
-        wx.navigateTo({
-          url: "../../moreResult/morePeople/morePeople?&url=" + encodeURIComponent(JSON.stringify(url)),
-        })
-        break;
-      }
+    switch (id) {
       case "moreActivity": {
-        let url={
-          data: 'https://tzl.cyyself.name/activities/search?search=' + that.data.val
+        let url = {
+          data: that.data.navBar[index].url[0].url + '?uid=' + that.data.uid
         }
         wx.navigateTo({
           url: "../../moreResult/moreActivity/moreActivity?&url=" + encodeURIComponent(JSON.stringify(url)),
@@ -257,7 +270,7 @@ Page({
       }
       case "moreRecruit": {
         let url = {
-          data: 'https://tzl.cyyself.name/findTeammates/search?search=' + that.data.val
+          data: that.data.navBar[index].url[1].url + '?uid=' + that.data.uid
         }
         wx.navigateTo({
           url: "../../moreResult/moreRecruit/moreRecruit?&url=" + encodeURIComponent(JSON.stringify(url)),
@@ -266,16 +279,18 @@ Page({
       }
       case "moreMoment": {
         let url = {
-          data: 'https://tzl.cyyself.name/moments/search?search=' + that.data.val
+          data: that.data.navBar[index].url[2].url + '?uid=' + that.data.uid
         }
         wx.navigateTo({
           url: "../../moreResult/moreMoment/moreMoment?&url=" + encodeURIComponent(JSON.stringify(url)),
         })
         break;
       }
-      default:break;
+      default: break;
     }
   },
+
+
 
   /**
    * 点击查看详情
@@ -283,24 +298,20 @@ Page({
   seeDetails: function(e) {
     // 将详细信息传给详情界面
     var that = this;
-    var id = e.currentTarget.id;
     var item = e.currentTarget.dataset.item;
+    var id=e.currentTarget.id;
     //console.log(item);
-    if (id == 'people') {
+    if (id == 'activities') {
       wx.navigateTo({
-        url: '../../othersInfo/othersInfo?uid=' + item.id,
-      })
-    } else if (id == 'activities') {
-      wx.navigateTo({
-        url: '../../details/details?currentTap=' + 0 + '&oid=' + item.aid,
+        url: '../../details/details?currentTap=' + 0 + '&oid=' + item.id,
       })
     } else if (id == 'recruits') {
       wx.navigateTo({
-        url: '../../details/details?currentTap=' + 1 + '&oid=' + item.tid,
+        url: '../../details/details?currentTap=' + 1 + '&oid=' + item.id,
       })
     } else if (id == 'moments') {
       wx.navigateTo({
-        url: '../../details/details?currentTap=' + 2 + '&oid=' + item.mid,
+        url: '../../details/details?currentTap=' + 2 + '&oid=' + item.id,
       })
     }
   }

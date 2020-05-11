@@ -4,7 +4,7 @@
 <view class="homeBar">
   <image class="homeAvatar" src="{{userAvatarPath}}"></image>
   <searchBar id="searchBar"></searchBar>
-  <image style="width:100rpx;height:100rpx;" src="../../icons/add.png"></image>
+  <image style="width:100rpx;height:100rpx;" src="../../icons/add.png" bindtap="toPublish"></image>
 </view>
 
 <view class="functionBar">
@@ -48,7 +48,7 @@
   </view>
   <view class="function" id="recruit" bindtap="onTapFunctionBar">
     <image src="../../icons/point.png" class="icon"></image>
-    <text class="txt">招募队友</text>
+    <text class="txt">队友招募</text>
   </view>
   <view class="function" id="sign" bindtap="onTapFunctionBar">
     <image src="../../icons/point.png" class="icon"></image>

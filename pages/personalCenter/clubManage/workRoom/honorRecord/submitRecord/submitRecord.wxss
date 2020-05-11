@@ -16,8 +16,8 @@
 }
 
 .inTxt{
-  width:420rpx;
-  height: fit-content;
+  width:520rpx;
+  height: 70rpx;
   font-size:50rpx;
   color: #779dce;
   background: #f1f0fe;

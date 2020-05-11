@@ -1,14 +1,12 @@
 // pages/personalCenter/personalInfo/userSchool/userSchool.js
-var app = getApp(); // 获取全局数据
-
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    userID: app.globalData.info.id,
-    userSchool: app.globalData.info.school,
+    userID: "",
+    userSchool: "",
     flag: false,
   },
 
@@ -35,8 +33,10 @@ Page({
         },
         success: function(res) {
           if (res.data.code == 0) {
-            app.globalData.info.school = inValue;
-            wx.setStorageSync("information", app.globalData.info);
+            // 修改本地缓存信息，每次更新app.globalData都需修改
+            let info = wx.getStorageSync('information');
+            info.name = inValue;
+            wx.setStorageSync("information", info);
             wx.showToast({
               title: '信息修改成功！',
               icon: 'success',
@@ -76,7 +76,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    let that = this;
+    that.setData({
+      userID: wx.getStorageSync('information').id,
+      userSchool: wx.getStorageSync('information').school
+    })
   },
 
   /**

@@ -3,26 +3,26 @@
 
 <view class="title">上传工作记录</view>
 
-<form bindsubmit="mainPeopleSubmit">
+<textarea class="inContent" focus="true" confirm-type="done" maxlength="1000" placeholder="描述工作内容" bindinput="inputContent"></textarea>
 
-  <view class="inputBar">
-    <text class="txt" style="width:150rpx;">学期：</text>
-    <view style="width:20rpx;"></view>
-    <input placeholder="xxxx-xxxx学年第x学期" placeholder-class="placeHolderTxt" class="inTxt" focus="true" confirm-type="done" style="background: #f1f0fe;" name="teacherName" maxlength="50" style="width:520rpx;"></input>
+<view class="imgRightBar">
+  <view>学期</view>
+  <view style="display:flex;">
+  <picker mode="multiSelector" bindchange="bindMultiPickerChange" value="{{multiIndex}}" range="{{multiArray}}">
+    <view>
+      {{multiArray[0][multiIndex[0]]}}学年{{multiArray[1][multiIndex[1]]}}
+    </view>
+  </picker>
   </view>
+</view>
 
-  <view class="inputBar">
-    <text class="txt" style="width:150rpx;">期数：</text>
-    <view style="width:20rpx;"></view>
-    <input class="inTxt" placeholder="第x期" placeholder-class="placeHolderTxt" focus="true" confirm-type="done" style="background: #f1f0fe;" name="teacherName" maxlength="50" style="width:520rpx;"></input>
+<view class="imgRightBar">
+  <view>期数</view>
+  <view style="display:flex;">
+    <picker bindchange="bindPickerChange" value="{{periodIndex}}" range="{{period}}">
+      <view>{{period[periodIndex]}}</view>
+    </picker>
   </view>
+</view>
 
-  <view class="inputBar">
-    <text class="inTxt" style="width:150rpx;">内容：</text>
-  </view>
-
-  <textarea class="inTextarea" confirm-type="done" maxlength="500" name="peopleContent"></textarea>
-
-  <button class="inTxt" formType="submit" style="width:200rpx;">上传</button>
-
-</form>
+<button class="activityTxt" bindtap="uploadRecord" style="width:200rpx;">上传</button>

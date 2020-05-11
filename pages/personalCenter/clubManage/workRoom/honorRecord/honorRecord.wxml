@@ -6,7 +6,7 @@
 <scroll-view class="scrollView">
   <view wx:for="{{records}}" wx:key="index" class="imgRightBar" id="userName" style="height:fit-content;" bindtap="onTapInfoBar">
     <view class="recordTxt">
-      {{item.time}}荣获{{item.award}}
+      {{item.time}}荣获{{item.event}}
     </view>
     <image class="icon" src="../../../../../icons/delete.png"></image>
   </view>

@@ -1,9 +1,4 @@
 /* pages/ground/ground.wxss */
-page{
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
 .navbar{
   display: flex;
   flex-direction: row;
@@ -75,23 +70,6 @@ page{
 .content_txt{
   text-align: left;
   margin-left: 70rpx;
-}
-.operation{
-  display: flex;
-  flex-direction: row-reverse;
-  background-color: #f1f0fe;
-}
-.operation image{
-  width: 60rpx;
-  height: 60rpx;
-  margin: 10rpx;
-}
-
-.operationContent{
-  display:flex;
-  background: #f1f0fe;
-  font-size: 30rpx;
-  color:#779dce;
 }
 
 .attachedFile{

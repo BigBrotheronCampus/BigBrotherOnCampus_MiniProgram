@@ -12,11 +12,18 @@
   </view>
 </view>
 
+<view class="scrollBar" bindtap="delete" wx:if='{{title!=""}}' style="height:fit-content;padding-left:0rpx;">
+    <view style="display:flex;align-items:center;">
+      <image class="icon" src="../../../icons/word.png"></image>
+      <text style="width:80%;">{{title}}</text>
+    </view>
+</view>
+
 <view class="imgRightBar">
   <view >策划类别</view>
   <view style="display:flex;">
   <picker bindchange="bindPickerChange" value="{{typeIndex}}" range="{{types}}" id="type">
-    <view >{{types[typeIndex]}}</view>
+    <view >{{types[typeIndex]}}活动</view>
   </picker>
   <image src="../../../icons/next.png" class="icon"></image>
   </view>
@@ -32,4 +39,4 @@
   </view>
 </view>
 
-<button class="activityTxt" bindtap="uploadFile">发表</button>
+<button class="activityTxt" bindtap="upBook">发表</button>

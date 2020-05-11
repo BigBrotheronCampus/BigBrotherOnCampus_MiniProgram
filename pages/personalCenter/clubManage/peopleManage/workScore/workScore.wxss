@@ -1,1 +1,24 @@
 /* pages/personalCenter/clubManage/peopleManage/workScore/workScore.wxss */
+.activityTxt{
+  width: 150rpx;
+  height: fit-content;
+  font-size: 50rpx;
+  color: #779dce;
+  background: #f1f0fe;
+}
+
+.inContent{
+  width:auto;
+  height:400rpx;
+  word-wrap:break-wrap;
+  font-size:50rpx;
+  color: #779dce;
+  background: #f1f0fe;
+}
+
+.imgBar{
+  background: #f1f0fe;
+  display:flex;
+  justify-content:space-between;
+  margin-bottom: 5rpx;
+}

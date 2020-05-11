@@ -8,15 +8,19 @@
   <view class="inputBar">
     <text class="txt" style="width:150rpx;">时间：</text>
     <view style="width:20rpx;"></view>
-    <input placeholder="xxxx年xx月xx日" placeholder-class="placeHolderTxt" class="inTxt" focus="true" confirm-type="done" style="background: #f1f0fe;" name="teacherName" maxlength="50" style="width:520rpx;"></input>
+      <picker class='inTxt' mode="date" value="{{date}}" start="1970-01-01" end="2270-01-01" bindchange="bindDateChange">
+        <view>
+          {{date}}
+        </view>
+      </picker>
   </view>
 
   <view class="inputBar">
     <text class="inTxt" style="width:150rpx;">奖项：</text>
   </view>
 
-  <textarea class="inTextarea" confirm-type="done" maxlength="500" name="peopleContent"></textarea>
+  <textarea class="inTextarea" confirm-type="done" maxlength="500" bindinput="inputContent"></textarea>
 
-  <button class="inTxt" formType="submit" style="width:200rpx;">保存</button>
+  <button class="inTxt" bindtap="submitRecord" style="width:200rpx;height:fit-content;">保存</button>
 
 </form>

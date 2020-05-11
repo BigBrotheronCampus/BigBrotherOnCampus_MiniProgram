@@ -1,0 +1,20 @@
+/* pages/books/bookDetails/bookDetails.wxss */
+.content{
+  margin-top: 5rpx;
+  margin-bottom: 5rpx;
+  text-indent: 50rpx;
+  color: #779dce;
+  font-size: 50rpx;
+  background-color: #f1f0fe;
+  width: 100%;
+  height: fit-content;
+  align-items: center;
+}
+
+.activityTxt{
+  width: 150rpx;
+  height: fit-content;
+  font-size: 50rpx;
+  color: #779dce;
+  background: #f1f0fe;
+}

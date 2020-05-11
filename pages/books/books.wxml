@@ -16,7 +16,7 @@
 </view>
 
 <view class="functionBar" style="background:#f1f0fe;">
-  <view class="function" id="recentlyview" bindtap="onTapFunctionBar">
+  <view class="function" id="recentlyView" bindtap="onTapFunctionBar">
     <image src="../../icons/recentlyview.png" class="icon"></image>
     <text class="txt">最近浏览</text>
   </view>

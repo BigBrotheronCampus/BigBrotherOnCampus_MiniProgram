@@ -10,7 +10,7 @@
 <!-- 活动发布 -->
 <scroll-view wx:if="{{currentTab==0}}">
   <!--添加点击查看详情事件、长按收藏事件-->
-  <view wx:for="{{activities}}" wx:key="time" bindtap="seeDetails" bindlongtap="collect" data-content="{{item}}">
+  <view wx:for="{{activities}}" wx:key="index" bindtap="seeDetails" data-item="{{item}}">
     <view class="header">
       <view class="poster">
         <image class="icon" src="{{item.photo}}"></image>
@@ -30,18 +30,13 @@
         <text class="blueTxt" style="width:500rpx;">{{item.content}}</text>
       </view>
     </view>
-    <view class="operation">
-      <image src="../../icons/message.png" bindtap="onTapMessage"></image>
-      <image src="../../icons/send.png" bindtap="onTapSend"></image>
-      <image src="../../icons/like.png" bindtap="onTapLike"></image>
-    </view>
   </view>
 </scroll-view>
 
 <!-- 队友招募 -->
 <scroll-view wx:elif="{{currentTab==1}}">
   <!--添加点击查看详情事件、长按收藏事件-->
-  <view wx:for="{{recruits}}" wx:key="time" bindtap="seeDetails" bindlongtap="collect" data-content="{{item}}">
+  <view wx:for="{{recruits}}" wx:key="index" bindtap="seeDetails" data-item="{{item}}">
     <view class="header">
       <view class="poster">
         <image class="icon" src="{{item.photo}}"></image>
@@ -57,18 +52,13 @@
         <text class="blueTxt" style="width:500rpx;">{{item.content}}</text>
       </view>
     </view>
-    <view class="operation">
-      <image src="../../icons/message.png" bindtap="onTapMessage"></image>
-      <image src="../../icons/send.png" bindtap="onTapSend"></image>
-      <image src="../../icons/like.png" bindtap="onTapLike"></image>
-    </view>
   </view>
 </scroll-view>
 
 <!-- 精彩瞬间 -->
 <scroll-view wx:elif="{{currentTab==2}}">
   <!--添加点击查看详情事件、长按收藏事件-->
-  <view wx:for="{{movements}}" wx:key="time" bindtap="seeDetails" bindlongtap="collect" data-content="{{item}}">
+  <view wx:for="{{moments}}" wx:key="index" bindtap="seeDetails" data-item="{{item}}">
     <view class="header">
       <view class="poster">
         <image class="icon" src="{{item.photo}}"></image>
@@ -82,11 +72,6 @@
       <text class="blueTxt">{{item.content}}</text>
       <image src="{{item.img}}" class="attachedFile" wx:if='{{item.img!="" && item.img != null}}'></image>
       <video src="{{item.video}}" class="attachedFile" wx:if='{{item.video!="" && item.video != null}}'></video>
-    </view>
-    <view class="operation">
-      <image src="../../icons/message.png" bindtap="onTapMessage"></image>
-      <image src="../../icons/send.png" bindtap="onTapSend"></image>
-      <image src="../../icons/like.png" bindtap="onTapLike"></image>
     </view>
   </view>
 </scroll-view>

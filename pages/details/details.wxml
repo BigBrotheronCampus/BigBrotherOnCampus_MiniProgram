@@ -1,6 +1,6 @@
 <!--pages/ground/details/details.wxml-->
 <view class="header">
-  <view class="poster">
+  <view class="poster" bindtap="onTapAvatar">
     <image class="icon" src="{{item.photo}}"></image>
     <text class="name">{{item.name}}</text>
   </view>
@@ -10,7 +10,7 @@
 </view>
 
 <!--活动发布-->
-<view class="content" wx:if="{{currentTap==0}}">
+<view class="content" wx:if="{{currentTap==0}}" bindlongpress="collect">
   <view style="display:flex;">
     <text>活动名称：</text>
     <text>{{item.title}}</text>
@@ -35,10 +35,12 @@
     <text>活动内容：</text>
     <text>{{item.content}}</text>
   </view>
+  <image src="{{item.img}}" class="attachedFile" wx:if='{{item.img!="" && item.img != null}}'></image>
+  <video src="{{item.video}}" class="attachedFile" wx:if='{{item.video!="" && item.video != null}}'></video>
 </view>
 
 <!--队友招募-->
-<view class="content" wx:if="{{currentTap==1}}">
+<view class="content" wx:if="{{currentTap==1}}" bindlongtap="collect">
   <view style="display:flex;">
     <text>姓名：</text>
     <text>{{item.name}}</text>
@@ -54,31 +56,38 @@
 </view>
 
 <!--精彩瞬间-->
-<view class="content" wx:if="{{currentTap==2}}">
-  <text>{{item.movementContent}}</text>
-  <image src="{{item.attachedImg}}"></image>
+<view class="content" wx:if="{{currentTap==2}}" bindlongtap="collect">
+  <text>{{item.content}}</text>
+  <image src="{{item.img}}" class="attachedFile" wx:if='{{item.img!="" && item.img != null}}'></image>
+  <video src="{{item.video}}" class="attachedFile" wx:if='{{item.video!="" && item.video != null}}'></video>
 </view>
 
 <view class="operation">
-  <image src="../../../icons/message.png" bindtap="onTapMessage"></image>
-  <image src="../../../icons/send.png" bindtap="onTapSend"></image>
-  <image src="../../../icons/like.png" bindtap="onTapLike"></image>
+  <image class='icon' src="../../../../../icons/send.png" catchtap="forward"></image>
+  <image class='icon' src="../../../../../icons/message.png" catchtap="comment"></image>
+  <image class='icon' src="../../../../../icons/like.png" catchtap="like"></image>
 </view>
 <!--点赞者列表，点击跳转至othersInfo-->
-<view class="operationContent" wx:if="{{item.liker.length!=0}}">
-  <view wx:for="{{item.liker}}" wx:key="likerID" data-id="{{likerID}}" bindtap="onTapLiker">{{item.likerName}}</view>
+<view class="operationContent" wx:if="{{likes.length!=0}}">
+  <view wx:for="{{likes}}" wx:key="index" >{{item+','}}</view>
   <view>已点赞</view>
 </view>
 <!--转发者列表，点击跳转至othersInfo-->
-<view class="operationContent" wx:if="{{item.liker.length!=0}}">
-  <view wx:for="{{item.sender}}" wx:key="senderID" data-id="{{senderID}}" bindtap="onTapSender">{{item.senderName}}</view>
+<view class="operationContent" wx:if="{{forwards.length!=0}}">
+  <view wx:for="{{forwards}}" wx:key="index">{{item+','}}</view>
   <view>已转发</view>
 </view>
+
+<view style="display:flex;" wx:if="{{boolComment}}">
+  <textarea class="inContent" maxlength="200" focus="true" confirm-type="done" bindconfirm="inputComment"></textarea>
+  <button bindtap="cancel" style="width:25%;height:100rpx;font-size:30rpx;background:#ffffff;color:#779dce;line-height:100rpx;">取消</button>
+</view>
+
 <!--评论详情列表，点击评论人名称跳转至othersInfo-->
-<view class="operationContent" style="justify-content:column;" wx:if="{{item.liker.length!=0}}">
-  <view wx:for="{{item.comment}}" wx:key="commmentatorID" data-id="{{commmentatorID}}" bindtap="onTapCommentaor">
-    <text>{{item.commentatorName}}</text>
+<view class="operationContent" style="flex-direction:column;flex-wrap:wrap;" wx:if="{{comments.length!=0}}">
+  <view wx:for="{{comments}}" wx:key="index">
+    <text>{{item.name}}</text>
     <text>：</text>
-    <text>{{item.comment}}</text>
+    <text>{{item.content}}</text>
   </view>
 </view>

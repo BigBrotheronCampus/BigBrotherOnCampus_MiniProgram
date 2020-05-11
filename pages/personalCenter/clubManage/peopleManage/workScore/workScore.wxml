@@ -1,18 +1,26 @@
 <!--pages/personalCenter/clubManage/peopleManage/workScore/workScore.wxml-->
 <view id="divLine1"></view>
 
-<view class="title">考核评分</view>
+<view class="title">选择考核期次</view>
 
-<scroll-view class="scollView">
-  <view wx:for="{{terms}}" wx:key="index" class="scollBar" bindtap="onTapTermBar" wx:for-item="item">
-    <view style="margin-left:20rpx;display:flex;align-items:center;">
-      <image class="icon" src="../../../../../icons/next.png"></image>
-      <text>{{item.term}}</text>
+<view class="imgRightBar">
+  <view>学期</view>
+  <view style="display:flex;">
+  <picker mode="multiSelector" bindchange="bindMultiPickerChange" value="{{multiIndex}}" range="{{multiArray}}">
+    <view>
+      {{multiArray[0][multiIndex[0]]}}学年{{multiArray[1][multiIndex[1]]}}
     </view>
-    <view wx:if="1" wx:for="{{item.period}}" wx:key="index" class="scollBar" bindtap="onTapPeriodBar" wx:for-item="period">
-      <view style="margin-left:20rpx;display:flex;align-items:center;">
-      {{period}}
-      </view>
-    </view>
+  </picker>
   </view>
-</scroll-view>
+</view>
+
+<view class="imgRightBar">
+  <view>期数</view>
+  <view style="display:flex;">
+    <picker bindchange="bindPickerChange" value="{{periodIndex}}" range="{{period}}">
+      <view>{{period[periodIndex]}}</view>
+    </picker>
+  </view>
+</view>
+
+<button class="activityTxt" bindtap="toScore" style="width:200rpx;">确定</button>

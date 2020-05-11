@@ -5,14 +5,18 @@ Page({
    * 页面的初始数据
    */
   data: {
-    val: "" // 搜索值
+    val: "", // 搜索值
+    uid:""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    let that=this;
+    that.setData({
+      uid:wx.getStorageSync('information').id
+    })
   },
 
   /**
@@ -68,10 +72,13 @@ Page({
    * 跳转到搜索结果界面
    */
   search: function(e) {
-    var that = this;
-    var value = e.detail.value;
+    let that = this;
+    let value = e.detail.value;
+    let url = {
+      data: "https://tzl.cyyself.name/plans/search?search=" + value
+    }
     wx.navigateTo({
-      url: '../moreResult/moreBooks/moreBooks?val=' + value,
+      url: '../moreResult/moreBooks/moreBooks?type=search&url=' + encodeURIComponent(JSON.stringify(url)) + '&val=' + value,
     })
   },
 
@@ -79,14 +86,36 @@ Page({
    * 单击功能栏跳转事件
    */
   onTapFunctionBar: function(e) {
-    var targetID = e.currentTarget.id;
+    let targetID = e.currentTarget.id;
+    let that=this;
     switch (targetID) {
-      case "recentlyview":
+      case "recentlyView":
+      {
+          let url = {
+            data: "https://tzl.cyyself.name/plans/allHistory?uid="+ that.data.uid
+          }
+          wx.navigateTo({
+            url: '../moreResult/moreBooks/moreBooks?type=recentlyView&url=' + encodeURIComponent(JSON.stringify(url)),
+          })
+          break;
+      }
       case "favorites":
+      {
+          let url = {
+            data: "https://tzl.cyyself.name/plans/allCollection?uid=" + that.data.uid
+          }
+          wx.navigateTo({
+            url: '../moreResult/moreBooks/moreBooks?type=favorites&url=' + encodeURIComponent(JSON.stringify(url)),
+          })
+          break;
+      }
       case "cloudfile":
         {
+          let url = {
+            data: "https://tzl.cyyself.name/plans/myPlans?uid=" + that.data.uid
+          }
           wx.navigateTo({
-            url: '../moreResult/moreBooks/moreBooks?val=' + targetID,
+            url: '../moreResult/moreBooks/moreBooks?type=cloudfile&url=' + encodeURIComponent(JSON.stringify(url)),
           })
           break;
         }
@@ -96,7 +125,7 @@ Page({
       case "volunteer":
         {
           wx.navigateTo({
-            url: './bookList/bookList?val=' + targetID,
+            url: './bookList/bookList?type=' + targetID,
           })
           break;
         }

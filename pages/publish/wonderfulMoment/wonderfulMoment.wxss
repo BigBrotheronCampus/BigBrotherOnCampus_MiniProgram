@@ -1,4 +1,4 @@
-/* pages/publish/wonderfulMovement/wonderfulMovement.wxss */
+/* pages/publish/wonderfulMoment/wonderfulMoment.wxss */
 .activityTxt{
   width: 150rpx;
   height: fit-content;

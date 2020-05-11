@@ -1,0 +1,24 @@
+<!--pages/moreResult/moreMoment/moreMoment.wxml-->
+<view id="divLine1"></view>
+
+<view class="title">精彩瞬间</view>
+
+<scroll-view>
+  <!--添加点击查看详情事件、长按收藏事件-->
+  <view wx:for="{{moments}}" wx:key="index" bindtap="seeDetails" data-item="{{item}}">
+    <view class="header">
+      <view class="poster">
+        <image class="icon" src="{{item.photo}}"></image>
+        <text class="name">{{item.name}}</text>
+      </view>
+      <view>
+        <text class="time">{{item.time}}</text>
+      </view>
+    </view>
+    <view class="content">
+      <text class="blueTxt">{{item.content}}</text>
+      <image src="{{item.img}}" class="attachedFile" wx:if='{{item.img!="" && item.img != null}}'></image>
+      <video src="{{item.video}}" class="attachedFile" wx:if='{{item.video!="" && item.video != null}}'></video>
+    </view>
+  </view>
+</scroll-view>

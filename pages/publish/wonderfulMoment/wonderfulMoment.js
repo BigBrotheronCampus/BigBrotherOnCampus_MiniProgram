@@ -1,4 +1,4 @@
-// pages/publish/wonderfulMovement/wonderfulMovement.js
+// pages/publish/wonderfulMoment/wonderfulMoment.js
 const app = getApp(); // 获取全局数据
 var myDate = new Date(); //获取系统当前时间
 
@@ -194,8 +194,9 @@ Page({
         'content-type': 'multipart/form-data',
       },
       success: function(res) {
-        console.log(res);
-        if (res.data.code == 0) {
+        var data = JSON.parse(res.data);  // 坑，上传文件返回的是json数据，需要解析
+        //console.log(data);
+        if (data.code == 0) {
           wx.showToast({
             title: '图片已上传！',
             icon: 'success',
@@ -203,7 +204,7 @@ Page({
           })
           that.setData({
             // 将图片路径改为返回的url
-            imgPath: res.data.data
+            imgPath: data.data
           })
         } else {
           wx.showToast({
@@ -245,7 +246,9 @@ Page({
         'content-type': 'multipart/form-data',
       },
       success: function(res) {
-        if (res.data.code == 0) {
+        var data = JSON.parse(res.data);  // 坑，上传文件返回的是json数据，需要解析
+        //console.log(data);
+        if (data.code == 0) {
           wx.showToast({
             title: '视频已上传！',
             icon: 'success',
@@ -253,7 +256,7 @@ Page({
           })
           that.setData({
             // 将图片路径改为返回的url
-            videoPath: res.data.data
+            videoPath: data.data
           })
         } else {
           wx.showToast({
@@ -280,13 +283,13 @@ Page({
   /**
    * 单击按钮提交表单信息事件
    */
-  movementSubmit: function(event) {
+  momentSubmit: function(event) {
     var that = this;
     // 检查表单信息是否完整
     var formData = event.detail.value;
     if (that.data.imgPath == "" &&
       that.data.videoPath == "" &&
-      formData.movementContent == "") { // 媒体与文字不能同时为空
+      formData.momentContent == "") { // 媒体与文字不能同时为空
       wx.showToast({
         title: '请添加内容！',
         icon: 'loading',
@@ -294,7 +297,7 @@ Page({
       })
     } else {
       // 先上传图片/视频，返回上传结果，再上传表单信息
-      if (that.uploadImg() && that.uploadVideo() && formData.movementContent != "") {
+      if (that.uploadImg() && that.uploadVideo() && formData.momentContent != "") {
         // 上传表单信息
         wx.showLoading({
           title: '正在上传其他信息',
@@ -306,7 +309,7 @@ Page({
           },
           method: "POST",
           data: {
-            'content': formData.movementContent,
+            'content': formData.momentContent,
             'img': that.data.imgPath,
             'video': that.data.videoPath,
             'time': that.data.time

@@ -1,19 +1,20 @@
 // pages/personalCenter/myInfo/myInfo.js
-var app = getApp(); // 获取全局数据
-
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    info:app.globalData.info
+    info:""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    
+    let that=this;
+    that.setData({
+      info:wx.getStorageSync('information')
+    })
   },
 
   /**
@@ -71,8 +72,8 @@ Page({
   /**
    * 单击头像上传头像
    */
-  onTapAvatar: function() {
-    var that = this;
+  onTapAvatar: function () {
+    let that = this;
     wx.chooseImage({
       count: 1,
       sizeType: ['compressed'],
@@ -80,88 +81,47 @@ Page({
       success(res) {
         // tempFilePath可以作为img标签的src属性显示图片
         const tempFilePaths = res.tempFilePaths;
-        //console.log(tempFilePaths[0]);
         // 成功之后上传到服务器
-        const uploadTask = wx.uploadFile({
-          url: "http://47.94.45.122:88/uploadImg_Video.php",
+        wx.uploadFile({
+          url: "https://tzl.cyyself.name/file/savePhoto",
           filePath: tempFilePaths[0],
           name: "file",
           method: "POST",
-          formData: {
-            tableName:"userInfo",
-            userID: that.data.userID
-          },
-          header: {
-            'content-type': 'multipart/form-data',
-            'cache-control': 'no-cache',
-          },
-          timeout: 2500,
-          success: function(res) {
-            var result = JSON.parse(res.data); // 将JSON字符串转换成对象
-            //console.log(result);
-            var message = "";
-            switch (result.status) {
-              case 1:
-                message = "上传图片格式不正确！";
-                break;
-              case 2:
-                message = "上传图片不能大于2M!";
-                break;
-              case 3:
-                message = "更改头像成功！";
-                break;
-              case 4:
-                message = "网络连接错误，请重试！";
-                break;
-              case 5:
-                message = "网络连接错误，请重试！";
-                break;
-              case 6:
-                message = "上传方式错误！";
-                break;
-              default:
-                message = "更换头像错误，后台将尽快为您解决！";
-            }
-            if (result.status == 3) {
-              var value="userAvatarPath"
-              that.setData({      // 上传成功后更新头像
-                [value]: tempFilePaths[0],
-              }),
+          success: function (res) {
+            console.log(res.data);
+            let result = JSON.parse(res.data); // 将JSON字符串转换成对象
+            console.log(result);
+            if (result.code == 0) {
+              // 修改本地缓存信息，每次更新app.globalData都需修改
+              let info = wx.getStorageSync('information');
+              info.photo = result.data;
+              wx.setStorageSync("information", info);
+              that.setData({ // 上传成功后更新头像
+                info: wx.getStorageSync('information')
+              })
               wx.showToast({
-                title: message,
+                title: "头像修改成功",
                 icon: "success",
-                duration: 1500
+                duration: 1000
               })
             } else {
               wx.showToast({
-                title: message,
-                icon:'none',
+                title: "头像修改失败",
+                icon: 'none',
                 duration: 1500
               })
             }
           },
-          fail: function(err) {
+          fail: function (err) {
             console.log("fail");
             console.log(err);
             wx.showToast({
-              title: '网络连接错误，请重试',
-              icon: "loading",
+              title: '未连接到服务器',
+              icon: "none",
               duration: 1500
             })
-          },
-          /*帮助debug，不论success或fail都可以打印结果
-          complete: function(res) {
-            console.log(res);
-            console.log("complete");
-          } */ 
+          }
         })
-        /*
-        uploadTask.onProgressUpdate((res) => {
-          console.log('上传进度', res.progress)
-          console.log('已经上传的数据长度', res.totalBytesSent)
-          console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
-        })
-        */
       }
     });
   },
