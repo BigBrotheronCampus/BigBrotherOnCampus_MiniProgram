@@ -113,5 +113,52 @@ Page({
         })
       }
     })
+  },
+  
+  /**
+   * 删除荣誉记录
+   */ 
+  delete:function(e){
+    let that=this;
+    wx.showModal({
+      title: '提示',
+      content: '是否确定删除',
+      success:function(res){
+        if(res.confirm){
+          wx.request({
+            url: 'https://tzl.cyyself.name/honorRecord/deleteHonorRecord?hid=' + e.currentTarget.dataset.hid,
+            header: {
+              'content-type': 'application/json'
+            },
+            method: "GET",
+            success: function (res) {
+              if (res.data.code == 0) {
+                wx.showToast({
+                  title: '删除记录成功',
+                  icon: 'success',
+                  duration: 1000
+                })
+              } else {
+                wx.showToast({
+                  title: '删除荣誉记录失败',
+                  icon: 'none',
+                  duration: 1500
+                })
+              }
+            },
+            fail: function (err) {
+              console.log(err);
+              wx.showToast({
+                title: '未连接到服务器',
+                icon: 'none',
+                duration: 1500
+              })
+            }
+          })
+        }else{
+          // 取消删除
+        }
+      }
+    })
   }
 })

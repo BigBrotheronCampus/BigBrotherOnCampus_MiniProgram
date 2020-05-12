@@ -7,7 +7,8 @@ Page({
     userID: "",
     userAvatarPath: "",
     name: [], //   用户参加的社团名称
-    id: [] // 用户参加的社团id
+    id: [], // 用户参加的社团id
+    bool:true
   },
 
   /**
@@ -15,10 +16,15 @@ Page({
    */
   onLoad: function(options) {
     let that = this;
-    that.setData({
+    that.setData({  
       userID: wx.getStorageSync('information').id,
       userAvatarPath: wx.getStorageSync('information').photo
     })
+    if(that.data.userID==""){
+      that.setData({
+        bool:false
+      })
+    }
   },
 
   /**
@@ -149,7 +155,7 @@ Page({
       })
     } else if (targetID == 'clubManage') {
       that.getClubs();
-      if (that.data.clubs == []) {
+      if (that.data.name == [] && that.data.id==[]) {
         wx.showToast({
           title: '您还未加入社团',
           duration: 1500
@@ -197,7 +203,7 @@ Page({
   getClubs: function() {
     let that = this;
     wx.request({
-      url: 'https://tzl.cyyself.name/getUserCommunities?uid=' + that.data.userID,
+      url: 'https://tzl.cyyself.name/communities/getUserCommunities?uid=' + that.data.userID,
       method: 'get',
       header: {
         "Content-Type": 'application/json'
@@ -224,6 +230,15 @@ Page({
           duration: 1500
         })
       }
+    })
+  },
+
+  /**
+   * 点击登录
+   */
+  toLogin:function(){
+    wx.reLaunch({
+      url: '../login/login',
     })
   }
 })

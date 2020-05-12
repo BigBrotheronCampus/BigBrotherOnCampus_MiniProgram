@@ -4,7 +4,8 @@
 <view class="avatar">
   <view id="divLine1"></view>
   <image id="userAvatar" src="{{userAvatarPath}}" bindtap="onTapAvatar"></image>
-  <text id="userID">ID:{{userID}}</text>
+  <text class="userID" wx:if="{{bool}}">ID:{{userID}}</text>
+  <text class="userID" wx:if="{{!bool}}" bindtap="toLogin">点击登录</text>
 </view>
 
 <view class="social">

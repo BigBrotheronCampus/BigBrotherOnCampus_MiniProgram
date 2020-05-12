@@ -12,7 +12,7 @@
   </view>
 </view>
 
-<view class="scrollBar" bindtap="delete" wx:if='{{title!=""}}' style="height:fit-content;padding-left:0rpx;">
+<view class="scrollBar" bindlongpress="delete" wx:if='{{title!=""}}' style="height:fit-content;padding-left:0rpx;">
     <view style="display:flex;align-items:center;">
       <image class="icon" src="../../../icons/word.png"></image>
       <text style="width:80%;">{{title}}</text>

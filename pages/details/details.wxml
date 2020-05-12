@@ -12,28 +12,28 @@
 <!--活动发布-->
 <view class="content" wx:if="{{currentTap==0}}" bindlongpress="collect">
   <view style="display:flex;">
-    <text>活动名称：</text>
-    <text>{{item.title}}</text>
+    <text class="content-header">活动名称：</text>
+    <text class='content-text'>{{item.title}}</text>
   </view>
   <view style="display:flex;">
-    <text>发布者：</text>
-    <text>{{item.publisher}}</text>
+    <text class="content-header">发布者：</text>
+    <text class='content-text'>{{item.publisher}}</text>
   </view>
   <view style="display:flex;">
-    <text>活动类型：</text>
-    <text>{{item.type}}</text>
+    <text class="content-header">活动类型：</text>
+    <text class='content-text'>{{item.type}}</text>
   </view>
   <view style="display:flex;">
-    <text>活动负责人：</text>
-    <text>{{item.principal}}</text>
+    <text class="content-header">负责人：</text>
+    <text class='content-text'>{{item.principal}}</text>
   </view>
   <view style="display:flex;">
-    <text>联系方式：</text>
-    <text>{{item.contact}}</text>
+    <text class="content-header">联系方式：</text>
+    <text class='content-text'>{{item.contact}}</text>
   </view>
   <view style="display:flex;">
-    <text>活动内容：</text>
-    <text>{{item.content}}</text>
+    <text class="content-header">活动内容：</text>
+    <text class='content-text'>{{item.content}}</text>
   </view>
   <image src="{{item.img}}" class="attachedFile" wx:if='{{item.img!="" && item.img != null}}'></image>
   <video src="{{item.video}}" class="attachedFile" wx:if='{{item.video!="" && item.video != null}}'></video>
@@ -42,16 +42,16 @@
 <!--队友招募-->
 <view class="content" wx:if="{{currentTap==1}}" bindlongtap="collect">
   <view style="display:flex;">
-    <text>姓名：</text>
-    <text>{{item.name}}</text>
+    <text class="content-header">姓名：</text>
+    <text class='content-text'>{{item.name}}</text>
   </view>
   <view style="display:flex;">
-    <text>招募条件：</text>
-    <text>{{item.content}}</text>
+    <text class="content-header">招募条件：</text>
+    <text class='content-text'>{{item.content}}</text>
   </view>
   <view style="display:flex;">
-    <text>联系方式：</text>
-    <text>{{item.contact}}</text>
+    <text class="content-header">联系方式：</text>
+    <text class='content-text'>{{item.contact}}</text>
   </view>
 </view>
 
@@ -78,9 +78,9 @@
   <view>已转发</view>
 </view>
 
-<view style="display:flex;" wx:if="{{boolComment}}">
-  <textarea class="inContent" maxlength="200" focus="true" confirm-type="done" bindconfirm="inputComment"></textarea>
-  <button bindtap="cancel" style="width:25%;height:100rpx;font-size:30rpx;background:#ffffff;color:#779dce;line-height:100rpx;">取消</button>
+<view style="display:flex;margin-top:5rpx;" wx:if="{{boolComment}}">
+  <textarea class="inContent" maxlength="200" focus="true" confirm-type="done" bindinput="inputComment" bindblur="cancel" value="{{comment}}"></textarea>
+  <button bindtap="send" style="width:25%;height:100rpx;font-size:30rpx;background:#ffffff;color:#779dce;line-height:100rpx;">发送</button>
 </view>
 
 <!--评论详情列表，点击评论人名称跳转至othersInfo-->

@@ -17,7 +17,7 @@ Page({
    */
   onLoad: function(options) {
     let that = this;
-    if (wx.getStorageSync('information') != "" && wx.getStorageSync('information')!=null) {
+    if (wx.getStorageSync('information') !=null && wx.getStorageSync('information').id != "") {
       that.setData({
         phone: wx.getStorageSync('information').phone,
         pwd: wx.getStorageSync('information').pwd
@@ -50,7 +50,7 @@ Page({
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       success: function(res) {
-        console.log(res);
+        //console.log(res);
         if (res.data.code == -1) {
           wx.showToast({
             title: '账号或密码错误',
@@ -62,8 +62,7 @@ Page({
           wx.switchTab({
             url: '../home/home'
           })
-          app.globalData.info = res.data.data;
-          console.log(app.globalData.info);
+          //console.log(app.globalData.info);
         } else {
           wx.showToast({
             title: '登陆失败，请重试！',
@@ -97,6 +96,17 @@ Page({
   toFindPassword: function() {
     wx.navigateTo({
       url: './findPassword/findPassword',
+    })
+  },
+
+  /**
+   * 游客访问
+   */
+  touristVisit:function(){
+    // 设置本地缓存信息
+    wx.setStorageSync("information", app.globalData.info);
+    wx.switchTab({
+      url: '../home/home'
     })
   }
 })

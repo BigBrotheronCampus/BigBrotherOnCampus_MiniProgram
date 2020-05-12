@@ -1,0 +1,50 @@
+<!--pages/personalCenter/clubManage/workRoom/activityInfo/infoDetails/infoDetails.wxml-->
+<view id="divLine1"></view>
+
+<view class="title">活动资料</view>
+
+<view class="content">
+  <view style="display:flex;height:fit-content;">
+    <text style="width:250rpx;">活动名称：</text>
+    <text style="width:450rpx;">{{activityInfo.name}}</text>
+  </view>
+  <view style="display:flex;">
+    <text style="width:250rpx;">举办时间：</text>
+    <text style="width:450rpx;">{{activityInfo.time}}</text>
+  </view>
+</view>
+
+<view class="scrollBar">
+  <view>活动策划：</view>
+</view>
+
+<view class="scrollBar" bindlongpress="delete" wx:if='{{activityInfo.title!=""}}' style="height:fit-content;padding-left:0rpx;">
+  <view style="display:flex;align-items:center;">
+    <image class="icon" src="../../../../../../icons/word.png"></image>
+    <text style="width:80%;">{{activityInfo.title}}</text>
+  </view>
+</view>
+
+<view wx:if="{{activityInfo.img.length !=0}}">
+  <view class="scrollBar">
+    <view>精彩图片：</view>
+  </view>
+  <view class="" wx:for="{{activityInfo.img}}" wx:key="index">
+    <image src="{{item}}" class="attachedFile"></image>
+  </view>
+</view>
+
+<view wx:if="{{activityInfo.video.length !=0}}">
+  <view class="scrollBar">
+    <view>精彩视频：</view>
+  </view>
+  <view class="" wx:for="{{activityInfo.video}}" wx:key="index">
+    <video src="{{item}}" class="attachedFile"></video>
+  </view>
+</view>
+
+<view style="display:flex;">
+  <button class="activityTxt" bindtap="downloadBook">下载策划</button>
+</view>
+
+<view class="filePath" wx:if='{{bool && activityInfo.plan != ""}}'>文件下载路径(访问下载)：{{activityInfo.plan}}</view>

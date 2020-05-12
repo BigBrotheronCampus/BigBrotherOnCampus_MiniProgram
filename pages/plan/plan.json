@@ -1,9 +1,0 @@
-{
-  "usingComponents": {
-    "searchInput": "../../components/searchInput/searchInput"
-  },
-  "backgroundTextStyle": "light",
-  "navigationBarBackgroundColor": "#cadbf9",
-  "navigationBarTitleText": "精品策划",
-  "navigationBarTextStyle": "black"
-}

@@ -1,8 +1,8 @@
-/* pages/books/bookDetails/bookDetails.wxss */
+/* pages/personalCenter/clubManage/workRoom/activityInfo/infoDetails/infoDetails.wxss */
 .content {
   margin-top: 5rpx;
   margin-bottom: 5rpx;
-  text-indent: 50rpx;
+  padding-left: 50rpx;
   color: #779dce;
   font-size: 50rpx;
   background-color: #f1f0fe;
@@ -33,4 +33,11 @@
   position: absolute;
   text-overflow: ellipsis;
   word-wrap: break-word;
+}
+
+.attachedFile{
+  margin-left:40rpx;
+  margin-right:20rpx;
+  width:690rpx;
+  height: 600rpx;
 }

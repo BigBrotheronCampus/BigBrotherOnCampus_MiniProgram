@@ -36,6 +36,16 @@
   background-color: #f1f0fe;
   width: 100%;
   align-items: center;
+  text-overflow:ellipsis;
+  word-wrap:break-word;
+}
+
+.content-header{
+  width:250rpx;
+}
+
+.content-text{
+  width:450rpx;
 }
 
 .content_1{

@@ -40,9 +40,9 @@
   <view id='divLine4' style="height:20rpx;"></view>
 
   <view class="publishBar">
-    <text class="activityTxt" style="width:300rpx;">活动负责人：</text>
+    <text class="activityTxt" style="width:200rpx;">负责人：</text>
     <view style="width:20rpx;"></view>
-    <input class="inActivity" confirm-type="done" style="width:370rpx;" name="activityLeader" maxlength="100"></input>
+    <input class="inActivity" confirm-type="done" style="width:470rpx;" name="activityLeader" maxlength="100"></input>
   </view>
 
   <view id='divLine4' style="height:20rpx;"></view>

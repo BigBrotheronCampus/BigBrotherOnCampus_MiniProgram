@@ -72,7 +72,7 @@ Page({
   onTapFunctionBar:function(e){
     var targetID = e.currentTarget.id;
     wx.navigateTo({
-      url: './'+targetID+'/'+targetID + '?cid='+that.data.cid,
+      url: './'+targetID+'/'+targetID + '?cid='+this.data.cid,
     })
   }
 })

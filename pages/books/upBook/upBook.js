@@ -1,5 +1,8 @@
 // pages/books/upBook/upBook.js
 var myDate = new Date(); //获取系统当前时间
+const app = getApp()
+
+const api = app.globalData.api
 
 Page({
 
@@ -157,55 +160,32 @@ Page({
   /**
    * 上传策划文件
    */
-  uploadFile: async function() {
+  uploadFile: function() {
     var that = this;
-    var bool = true;
-    wx.uploadFile({
-      url: 'https://tzl.cyyself.name/file/uploadPlan',
-      filePath: that.data.filePath,
-      name: 'file',
-      header: {
-        'content-type': 'multipart/form-data'
-      },
-      success: async function(res) {
-        var data = JSON.parse(res.data); // 坑，上传文件返回的是json数据，需要解析
-        //console.log(res);
-        if (data.code == 0) {
-          that.setData({
-            filePath: data.data,
+    return new Promise((resolve, reject) => {
+      api.uploadFileData("https://tzl.cyyself.name/file/uploadPlan", that.data.filePath).then((res) => {
+          this.setData({
+            filePath: res
           })
-          console.log(that.data.filePath);
+          console.log(res);
+          resolve();
+        })
+        .catch((err) => {
+          console.error(err);
+          reject(err);
           wx.showToast({
-            title: '文件上传成功',
-            icon: 'none',
-            duration: 500,
-          })
-        } else {
-          wx.showToast({
-            title: '文件上传失败',
-            icon: 'none',
+            title: '未连接到服务器',
+            icon: "none",
             duration: 1500
           })
-          bool = false;
-        }
-      },
-      fail: function(err) {
-        console.log(err);
-        wx.showToast({
-          title: '未连接到服务器',
-          icon: 'none',
-          duration: 1500
         })
-        bool = false;
-      }
     })
-    return bool;
   },
 
   /**
    * 上传策划信息
    */
-  upBook: async function() {
+  async upBook() {
     var that = this;
     if (that.data.content == "" ||
       that.data.filePath == "") {
@@ -215,58 +195,57 @@ Page({
         duration: 1500
       })
     } else {
-      let val = await that.uploadFile();    // 同步问题，有待修改
-      console.log(val);
-      if (val) {
-        var typeIndex = that.data.typeIndex;
-        wx.showLoading({
-          title: '正在上传其他信息',
-        })
-        wx.request({
-          url: 'https://tzl.cyyself.name/plans/uploadPlan?uid=' + that.data.userID,
-          header: {
-            'content-type': 'application/json'
-          },
-          method: "POST",
-          data: {
-            'uid': that.data.userID,
-            'title': that.data.title,
-            'theme': that.data.types[typeIndex],
-            'content': that.data.content,
-            'path': that.data.filePath,
-            'visible': that.data.whoIndex,
-            'time': that.data.time
-          },
-          success: function(res) {
-            if (res.data.code == 0) {
-              wx.showToast({
-                title: '提交成功',
-                icon: 'none',
-                duration: 1000,
-              })
-              setTimeout(function() {
-                wx.switchTab({
-                  url: '../books',
-                })
-              }, 1000);
-            } else {
-              wx.showToast({
-                title: '提交失败',
-                icon: 'none',
-                duration: 1500
-              })
-            }
-          },
-          fail: function(err) {
-            console.log(err);
+      await api.showLoading() // 显示loading
+      await that.uploadFile() // 请求数据
+      await api.hideLoading() // 等待请求数据成功后，隐藏loading
+      var typeIndex = that.data.typeIndex;
+      wx.showLoading({
+        title: '正在上传其他信息',
+      })
+      wx.request({
+        url: 'https://tzl.cyyself.name/plans/uploadPlan?uid=' + that.data.userID,
+        header: {
+          'content-type': 'application/json'
+        },
+        method: "POST",
+        data: {
+          'uid': that.data.userID,
+          'title': that.data.title,
+          'theme': that.data.types[typeIndex],
+          'content': that.data.content,
+          'path': that.data.filePath,
+          'visible': that.data.whoIndex,
+          'time': that.data.time
+        },
+        success: function(res) {
+          if (res.data.code == 0) {
             wx.showToast({
-              title: '未连接到服务器',
+              title: '提交成功',
+              icon: 'none',
+              duration: 1000,
+            })
+            setTimeout(function() {
+              wx.switchTab({
+                url: '../books',
+              })
+            }, 1000);
+          } else {
+            wx.showToast({
+              title: '提交失败',
               icon: 'none',
               duration: 1500
             })
           }
-        })
-      }
+        },
+        fail: function(err) {
+          console.log(err);
+          wx.showToast({
+            title: '未连接到服务器',
+            icon: 'none',
+            duration: 1500
+          })
+        }
+      })
     }
   }
 })

@@ -8,7 +8,8 @@ Page({
     book:"",
     bid:"",
     uid:"",
-    who:["仅自己能见","所有人可见"]
+    who:["仅自己能见","所有人可见"],
+    bool:false
   },
 
   /**
@@ -116,38 +117,13 @@ Page({
   downloadBook:function(){
     let that=this;
     let book=that.data.book;
-    console.log(book);
-    const downloadTask = wx.downloadFile({
-      url: book.path, //仅为示例，并非真实的资源
-      success: function (res) {
-      // 只要服务器有响应数据，就会把响应内容写入文件并进入 success 回调，业务需要自行判断是否下载到了想要的内容
-        console.log(res)
-        if (res.statusCode == 200) {
-          // 临时文件
-          wx.showToast({
-            title: '临时文件下载成功请选择存储路径',
-            icon:'loading',
-            duration:1000
-          })
-          wx.saveFile({
-            tempFilePath: res.tempFilePath,
-            success(res) {
-              const savedFilePath = res.savedFilePath
-            }
-          })
-        }
-      }
-    })
-    downloadTask.onProgressUpdate((res) => {
-      wx.showToast({
-        title: res.progress,
-        icon:'loading'
-      })
+    that.setData({
+      bool:true
     })
   },
 
   /**
-   * 长按收藏事件
+   * 收藏事件
    */
   collect: function (e) {
     let that = this;

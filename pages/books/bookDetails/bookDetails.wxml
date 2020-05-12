@@ -1,7 +1,7 @@
 <!--pages/books/bookDetails/bookDetails.wxml-->
 <view id="divLine1"></view>
 
-<view class="title"></view>
+<view class="title">策划详情</view>
 
 <view class="content">{{book.content}}</view>
 
@@ -37,3 +37,5 @@
   <button class="activityTxt" bindtap="collect">收藏</button>
   <button class="activityTxt" bindtap="downloadBook">下载</button>
 </view>
+
+<view class="filePath" wx:if="{{bool}}">文件下载路径(访问下载)：{{book.path}}</view>

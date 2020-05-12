@@ -67,38 +67,50 @@ Page({
    */
   getCode: function() {
     var that = this;
-    wx.request({
-      url: 'https://tzl.cyyself.name:2333/users/getCode',
-      method: 'post',
-      data: {
-        'phone': that.data.phone
-      },
-      header: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      success: function(res) {
-        if (res.data.code == 0) {
-          that.setData({
-            getCodeTime: res.data.data.tamp,
-            trueCode: res.data.data.code
-          })
-        } else {
+    if (that.data.phone == "") {
+      wx.showToast({
+        title: '请输入手机号',
+        icon: 'none',
+        duration: 1500
+      })
+    } else {
+      wx.request({
+        url: 'https://tzl.cyyself.name/users/getCode',
+        method: 'post',
+        data: {
+          'phone': that.data.phone
+        },
+        header: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        success: function(res) {
+          if (res.data.code == 0) {
+            that.setData({
+              getCodeTime: res.data.data.tamp,
+              trueCode: res.data.data.code
+            })
+            wx.showModal({
+              title: '温馨提示',
+              content: '获取验证码成功,请注意查收',
+            })
+          } else {
+            wx.showToast({
+              title: '获取验证码失败,请重试',
+              icon: 'none',
+              duration: 1500
+            })
+          }
+        },
+        fail: function(err) {
+          console.log(err);
           wx.showToast({
-            title: '获取验证码失败,请重试',
+            title: '未连接到服务器',
             icon: 'none',
             duration: 1500
           })
         }
-      },
-      fail: function (err) {
-        console.log(err);
-        wx.showToast({
-          title: '未连接到服务器',
-          icon: 'none',
-          duration: 1500
-        })
-      }
-    })
+      })
+    }
   },
 
   /**
@@ -118,7 +130,7 @@ Page({
       })
     } else {
       wx.request({
-        url: 'https://tzl.cyyself.name:2333/users/checkCode',
+        url: 'https://tzl.cyyself.name/users/checkCode',
         method: 'post',
         data: {
           'getCodeTime': that.data.getCodeTime,
@@ -132,7 +144,7 @@ Page({
           // 验证码验证成功则提交表单信息，进行注册
           if (res.data.code == 0) {
             wx.request({
-              url: 'https://tzl.cyyself.name:2333/users/register',
+              url: 'https://tzl.cyyself.name/users/register',
               method: 'POST',
               data: {
                 'phone': that.data.phone,
@@ -169,7 +181,7 @@ Page({
                   })
                 }
               },
-              fail:function(err){
+              fail: function(err) {
                 console.log(err);
                 wx.showToast({
                   title: '未连接到服务器',

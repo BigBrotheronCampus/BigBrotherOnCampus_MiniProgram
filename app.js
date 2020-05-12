@@ -1,14 +1,15 @@
 //app.js
+const api = require('./API/request');   // 路径索引大小写敏感
+
 App({
   globalData: {
-    /*
     info: {
       account: "",
       id: "",
       phone: "",
       pwd: "",
       name: "",
-      photo: "",
+      photo: "https://tzl.cyyself.name:8080/photo/default.jpg",
       gender: "",
       age: "",
       school: "",
@@ -16,7 +17,8 @@ App({
       is_community: "",
       checkIn: "",
       trueName: ""
-    }*/
+    },
+    api
   },
 
   onLaunch: function() {
@@ -26,9 +28,8 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs);
-
-    // 加载本地缓存信息
-    that.globalData.info = wx.getStorageSync("information")
-
+    
+    // 设置游客访问信息
+    wx.setStorageSync("information", that.globalData.info);
   }
 })

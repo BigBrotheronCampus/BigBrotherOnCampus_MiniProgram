@@ -373,6 +373,16 @@ Page({
   },
 
   /**
+   * 点击开始评论
+   */
+  comment: function (e) {
+    let that = this;
+    that.setData({
+      boolComment: true
+    })
+  },
+
+  /**
    * 取消评论
    */
   cancel:function(){
@@ -387,11 +397,18 @@ Page({
    */
   inputComment:function(e){
     let that=this;
-    let tap = that.data.currentTap;
-    let url;
     that.setData({
       comment:e.detail.value
     })
+  },
+
+  /**
+   * 发送评论
+   */
+  send:function(){
+    let that = this;
+    let tap = that.data.currentTap;
+    let url;
     // 提交评论
     if (tap == 0) {
       url = 'https://tzl.cyyself.name/comments/addComment?uid=' + that.data.uid + '&aid=' + that.data.oid + '&type=activity';
@@ -421,7 +438,9 @@ Page({
           let comments = that.data.comments;
           comments.push(temp);
           that.setData({
-            comments: comments
+            comments: comments,
+            comment:"",
+            boolComment:false
           })
         } else {
           wx.showToast({
@@ -439,13 +458,6 @@ Page({
           duration: 1500
         })
       }
-    })
-  },
-
-  comment: function(e) {
-    let that = this;
-    that.setData({
-      boolComment:true
     })
   },
 

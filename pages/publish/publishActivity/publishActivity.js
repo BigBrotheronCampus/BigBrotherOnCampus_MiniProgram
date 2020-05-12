@@ -1,5 +1,8 @@
 // pages/publish/publishActivity/publishActivity.js
 var myDate = new Date(); //获取系统当前时间
+const app = getApp()
+
+const api = app.globalData.api
 
 Page({
 
@@ -29,7 +32,7 @@ Page({
       time: y + "/" + m + "/" + d
     })
     this.setData({
-      userID:wx.getStorageSync('information').id
+      userID: wx.getStorageSync('information').id
     })
   },
 
@@ -178,116 +181,56 @@ Page({
   },
 
   /**
-   * 提交图片/视频，返回执行结果
+   * 提交图片/视频
    */
   uploadImg: function() {
     var that = this;
-    var bool = true;
-    if (that.data.imgPath == "") {
-      return true;
-    }
-    wx.showLoading({
-      title: '正在上传图片',
-    })
-    wx.uploadFile({
-      url: "https://tzl.cyyself.name/file/saveActivityImg",
-      filePath: that.data.imgPath,
-      name: "file",
-      method: "POST",
-      header: {
-        'content-type': 'multipart/form-data',
-      },
-      success: function(res) {
-        var data = JSON.parse(res.data);  // 坑，上传文件返回的是json数据，需要解析
-        //console.log(data);
-        if (data.code == 0) {
-          wx.showToast({
-            title: '图片已上传！',
-            icon: 'success',
-            duration: 1000
+    return new Promise((resolve, reject) => {
+      api.uploadFileData("https://tzl.cyyself.name/file/saveActivityImg", that.data.imgPath).then((res) => {
+          this.setData({
+            imgPath: res
           })
-          that.setData({
-            // 将图片路径改为返回的url
-            imgPath: data.data
-          })
-        } else {
+          console.log(res);
+          resolve();
+        })
+        .catch((err) => {
+          console.error(err);
+          reject(err);
           wx.showToast({
-            title: '图片上传失败，请重试！',
+            title: '未连接到服务器',
             icon: "none",
             duration: 1500
           })
-          bool = false;
-        }
-      },
-      fail: function(err) {
-        console.log(err);
-        wx.showToast({
-          title: '未连接到服务器',
-          icon: "none",
-          duration: 1500
         })
-        bool = false;
-      }
     })
-    return bool;
   },
 
   uploadVideo: function() {
     var that = this;
-    var bool = true;
-    if (that.data.videoPath == "") {
-      return true;
-    }
-    wx.showLoading({
-      title: '正在上传视频',
-    })
-    wx.uploadFile({
-      url: "https://tzl.cyyself.name/file/saveActivityVideo",
-      filePath: that.data.videoPath,
-      name: "file",
-      method: "POST",
-      header: {
-        'content-type': 'multipart/form-data',
-      },
-      success: function(res) {
-        var data = JSON.parse(res.data);  // 坑，上传文件返回的是json数据，需要解析
-        //console.log(data);
-        if (data.code == 0) {
-          wx.showToast({
-            title: '视频已上传！',
-            icon: 'success',
-            duration: 1000
+    return new Promise((resolve, reject) => {
+      api.uploadFileData("https://tzl.cyyself.name/file/saveActivityVideo", that.data.videoPath).then((res) => {
+          this.setData({
+            videoPath: res
           })
-          that.setData({
-            // 将图片路径改为返回的url
-            videoPath: data.data
-          })
-        } else {
+          console.log(res);
+          resolve();
+        })
+        .catch((err) => {
+          console.error(err);
+          reject(err);
           wx.showToast({
-            title: '视频上传失败，请重试！',
+            title: '未连接到服务器',
             icon: "none",
             duration: 1500
           })
-          bool = false;
-        }
-      },
-      fail: function(err) {
-        console.log(err);
-        wx.showToast({
-          title: '未连接到服务器',
-          icon: "none",
-          duration: 1500
         })
-        bool = false;
-      }
     })
-    return bool;
   },
 
   /**
    * 单击按钮提交表单信息事件
    */
-  activitySubmit: function(event) {
+  async activitySubmit(event) {
     var that = this;
     // 检查表单信息是否完整
     //console.log(event.detail.value);
@@ -304,58 +247,66 @@ Page({
       })
     } else {
       // 先上传图片/视频，再上传表单信息
-      if (that.uploadImg() && that.uploadVideo()) {
-        wx.showLoading({
-          title: '正在上传其他信息',
-        })
-        wx.request({
-          url: 'https://tzl.cyyself.name/activities/add?uid=' + that.data.userID,
-          header: {
-            "Content-Type": "application/json"
-          },
-          method: "POST",
-          data: {
-            'title': formData.activityName,
-            'publisher': formData.activityPublisher,
-            'type': that.data.types[that.data.index],
-            'principal': formData.activityLeader,
-            'contact': formData.activityPhoneNum,
-            'content': formData.activityContent,
-            'img': that.data.imgPath,
-            'video': that.data.videoPath,
-            'time': that.data.time
-          },
-          success: function(res) {
-            //console.log(res);
-            if (res.data.code == 0) {
-              wx.showToast({
-                title: '提交成功！',
-                icon: 'success',
-                duration: 1000
-              })
-              setTimeout(function() {
-                wx.switchTab({
-                  url: '../../ground/ground',
-                })
-              }, 1000);
-            } else {
-              wx.showToast({
-                title: "活动信息提交失败，请重试！",
-                icon: "none",
-                duration: 1500
-              })
-            }
-          },
-          fail: function(err) {
-            console.log(err);
+      if (that.data.imgPath != "") {
+        await api.showLoading() // 显示loading
+        await that.uploadImg() // 请求数据
+        await api.hideLoading() // 等待请求数据成功后，隐藏loading
+      }
+      if (that.data.videoPath != "") {
+        await api.showLoading() // 显示loading
+        await that.uploadVideo() // 请求数据
+        await api.hideLoading() // 等待请求数据成功后，隐藏loading
+      }
+      wx.showLoading({
+        title: '正在上传其他信息',
+      })
+      wx.request({
+        url: 'https://tzl.cyyself.name/activities/add?uid=' + that.data.userID,
+        header: {
+          "Content-Type": "application/json"
+        },
+        method: "POST",
+        data: {
+          'title': formData.activityName,
+          'publisher': formData.activityPublisher,
+          'type': that.data.types[that.data.index],
+          'principal': formData.activityLeader,
+          'contact': formData.activityPhoneNum,
+          'content': formData.activityContent,
+          'img': that.data.imgPath,
+          'video': that.data.videoPath,
+          'time': that.data.time
+        },
+        success: function(res) {
+          //console.log(res);
+          if (res.data.code == 0) {
             wx.showToast({
-              title: "未连接到服务器！",
+              title: '提交成功！',
+              icon: 'success',
+              duration: 1000
+            })
+            setTimeout(function() {
+              wx.switchTab({
+                url: '../../ground/ground',
+              })
+            }, 1000);
+          } else {
+            wx.showToast({
+              title: "活动信息提交失败，请重试！",
               icon: "none",
               duration: 1500
             })
           }
-        })
-      }
+        },
+        fail: function(err) {
+          console.log(err);
+          wx.showToast({
+            title: "未连接到服务器！",
+            icon: "none",
+            duration: 1500
+          })
+        }
+      })
     }
   },
 

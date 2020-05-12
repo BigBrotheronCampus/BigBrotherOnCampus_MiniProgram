@@ -14,7 +14,7 @@
     <image class="icon" src="../../../../icons/next.png"></image>
   </view>
 
-  <view class="imgRightBar" id="workScore" bindtap="onTapFunctionBar">
+  <view class="imgRightBar" id="workScore" bindtap="onTapFunctionBar" wx:if="{{boolManager}}">
     <text style="text-indent:50rpx;">考核评分</text>
     <image class="icon" src="../../../../icons/next.png"></image>
   </view>
