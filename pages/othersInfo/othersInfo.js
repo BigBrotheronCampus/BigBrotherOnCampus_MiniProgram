@@ -29,52 +29,23 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
+    let that = this;
+    that.getInfo();
+    that.checkShip();
   },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
-  },
-
+  
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-
+    return {
+      title: 'CQU校园大哥大',
+      path: '/pages/home/home',
+      imageUrl: '/icons/eye.png'
+    }
   },
 
   /**
@@ -89,12 +60,11 @@ Page({
         "Content-Type": 'application/json'
       },
       success: function(res) {
-        console.log(res);
+        //console.log(res);
         if (res.data.code == 0) {
           that.setData({
             info: res.data.data
           })
-          console.log(that.data.info);
         } else {
           wx.showToast({
             title: '获取用户信息失败,请重试！',
@@ -183,6 +153,11 @@ Page({
           that.setData({
             followTxt: follow[1]
           })
+          wx.showToast({
+            title: '关注成功',
+            icon: 'success',
+            duration: 1000
+          })
         } else {
           wx.showToast({
             title: '关注失败,请重试！',
@@ -217,6 +192,11 @@ Page({
         if (res.data.code == 0) {
           that.setData({
             followTxt: follow[0]
+          })
+          wx.showToast({
+            title: '取消关注成功',
+            icon: 'success',
+            duration: 1000
           })
         } else {
           wx.showToast({

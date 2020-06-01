@@ -26,7 +26,7 @@
   <view class="publishBar">
     <text class="activityTxt">活动类型：</text>
     <view style="width:20rpx;"></view>
-    <view class="imgRightBar" style="width:420rpx;height:80rpx;">
+    <view class="imgRightBar" style="width:470rpx;height:80rpx;">
     <view></view>
     <view style="display:flex;">
       <picker bindchange="bindPickerChange" value="{{index}}" range="{{types}}">
@@ -64,8 +64,8 @@
 
   <textarea class="inContent" confirm-type="done" maxlength="500" name="activityContent" placeholder="长按可删除图片/视频"></textarea>
 
-  <image src="{{imgPath}}" class="attachedFile" style="display:{{disImgVal}}" id='img' bindlongtap="delete"></image>
-  <video src="{{videoPath}}" class="attachedFile" style="display:{{disVideoVal}}" id='video'bindlongtap="delete"></video>
+  <image src="{{imgPath}}" class="attachedFile" style="display:{{disImgVal}}" id='img' bindlongpress="delete"></image>
+  <video src="{{videoPath}}" class="attachedFile" style="display:{{disVideoVal}}" id='video'bindlongpress="delete"></video>
 
 
   <view id='divLine4'></view>
@@ -76,7 +76,7 @@
       <image class="icon" src="../../../icons/video.png" bindtap="onTapVideo"></image>
     </view>
     <view style="margin-top:10rpx;">
-      <button class="activityTxt" formType="submit">提交审核</button>
+      <button class="activityTxt" formType="submit" style="height:fit-content;">提交审核</button>
     </view>
   </view>
 

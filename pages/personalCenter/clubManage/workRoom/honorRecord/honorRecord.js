@@ -6,14 +6,14 @@ Page({
    */
   data: {
     records: [],
-    cid:""
+    cid: ""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    let that=this;
+    let that = this;
     that.setData({
       cid: options.cid
     })
@@ -21,78 +21,47 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-    let that=this;
+    let that = this;
     that.getRecords();
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-
+    return {
+      title: 'CQU校园大哥大',
+      path: '/pages/home/home',
+      imageUrl: '/icons/eye.png'
+    }
   },
 
   /**
    * 单击进入添加记录界面
    */
-  add:function(){
+  add: function() {
     wx.navigateTo({
-      url: './submitRecord/submitRecord?cid='+this.data.cid,
+      url: './submitRecord/submitRecord?cid=' + this.data.cid,
     })
   },
 
   /**
    * 获取所有荣誉记录
    */
-  getRecords:function(){
-    let that=this;
+  getRecords: function() {
+    let that = this;
     wx.request({
       url: 'https://tzl.cyyself.name/honorRecord/getAll?cid=' + that.data.cid,
       header: {
         'content-type': 'application/json'
       },
       method: "GET",
-      success: function (res) {
+      success: function(res) {
         if (res.data.code == 0) {
-          console.log(res);
+          //console.log(res);
           that.setData({
             records: res.data.data.honorRecords
           })
@@ -104,7 +73,7 @@ Page({
           })
         }
       },
-      fail: function (err) {
+      fail: function(err) {
         console.log(err);
         wx.showToast({
           title: '未连接到服务器',
@@ -114,24 +83,24 @@ Page({
       }
     })
   },
-  
+
   /**
    * 删除荣誉记录
-   */ 
-  delete:function(e){
-    let that=this;
+   */
+  delete: function(e) {
+    let that = this;
     wx.showModal({
       title: '提示',
       content: '是否确定删除',
-      success:function(res){
-        if(res.confirm){
+      success: function(res) {
+        if (res.confirm) {
           wx.request({
             url: 'https://tzl.cyyself.name/honorRecord/deleteHonorRecord?hid=' + e.currentTarget.dataset.hid,
             header: {
               'content-type': 'application/json'
             },
             method: "GET",
-            success: function (res) {
+            success: function(res) {
               if (res.data.code == 0) {
                 wx.showToast({
                   title: '删除记录成功',
@@ -146,7 +115,7 @@ Page({
                 })
               }
             },
-            fail: function (err) {
+            fail: function(err) {
               console.log(err);
               wx.showToast({
                 title: '未连接到服务器',
@@ -155,7 +124,7 @@ Page({
               })
             }
           })
-        }else{
+        } else {
           // 取消删除
         }
       }

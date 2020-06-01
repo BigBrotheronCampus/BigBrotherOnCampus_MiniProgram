@@ -2,7 +2,8 @@
 <view class="header">
   <view class="poster" bindtap="onTapAvatar">
     <image class="icon" src="{{item.photo}}"></image>
-    <text class="name">{{item.name}}</text>
+    <text class="name" wx:if="{{currentTap!=1}}">{{item.name}}</text>
+    <text class="name" wx:if="{{currentTap==1}}">{{item.userName}}</text>
   </view>
   <view>
     <text class="time">{{item.time}}</text>
@@ -69,18 +70,18 @@
 </view>
 <!--点赞者列表，点击跳转至othersInfo-->
 <view class="operationContent" wx:if="{{likes.length!=0}}">
-  <view wx:for="{{likes}}" wx:key="index" >{{item+','}}</view>
+  {{likes}}
   <view>已点赞</view>
 </view>
 <!--转发者列表，点击跳转至othersInfo-->
 <view class="operationContent" wx:if="{{forwards.length!=0}}">
-  <view wx:for="{{forwards}}" wx:key="index">{{item+','}}</view>
+  {{forwards}}
   <view>已转发</view>
 </view>
 
-<view style="display:flex;margin-top:5rpx;" wx:if="{{boolComment}}">
-  <textarea class="inContent" maxlength="200" focus="true" confirm-type="done" bindinput="inputComment" bindblur="cancel" value="{{comment}}"></textarea>
-  <button bindtap="send" style="width:25%;height:100rpx;font-size:30rpx;background:#ffffff;color:#779dce;line-height:100rpx;">发送</button>
+<view style="display:flex;margin-top:5rpx;margin-bottom:5rpx;" wx:if="{{boolComment}}">
+  <textarea class="inContent" maxlength="200" focus="true" confirm-type="done" bindinput="inputComment" bindblur="cancel" value="{{comment}}" style="height:70rpx;line-height:50rpx;" auto-focus="true"></textarea>
+  <button bindtap="send" class="sendBtn">发送</button>
 </view>
 
 <!--评论详情列表，点击评论人名称跳转至othersInfo-->

@@ -4,7 +4,7 @@
 <view class="title">相关用户</view>
 
 <scroll-view class="scollView">
-  <view wx:for="{{people}}" wx:key="uid" class="imgRightBar" bindtap="onTapFansBar" data-uid="{{item.uid}}">
+  <view wx:for="{{people}}" wx:key="uid" class="imgRightBar" bindtap="onTapFansBar" data-item="{{item}}">
     <view style="margin-left:20rpx;display:flex;align-items:center;">
       <image class="icon" src="{{item.photo}}" style=" border-radius: 50%;"></image>
       <text >{{item.name}}</text>

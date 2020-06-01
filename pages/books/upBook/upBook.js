@@ -18,7 +18,8 @@ Page({
     filePath: "",
     title: "",
     userID: "",
-    time: ""
+    time: "",
+    boolSync: true
   },
 
   /**
@@ -37,52 +38,21 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
+    this.onLoad();
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-
+    return {
+      title: 'CQU校园大哥大',
+      path: '/pages/home/home',
+      imageUrl: '/icons/eye.png'
+    }
   },
 
   /**
@@ -119,19 +89,29 @@ Page({
     var that = this;
     var targetID = e.target.id;
     var ex = ['dox', 'docx'];
-    if (targetID == "pdf") {
-      ex = ['pdf', 'PDF'];
-    }
-    wx.chooseMessageFile({
-      count: 1,
-      type: 'file',
-      extension: ex,
-      success(res) {
-        that.setData({
-          filePath: res.tempFiles[0].path,
-          title: res.tempFiles[0].name
-        })
-        //console.log(res.tempFiles[0]);
+    wx.showModal({
+      title: '温馨提示',
+      content: '仅支持从客户端会话选择文件,即需要将文件发送给某个微信好友，从与该好友的会话记录中选择文件上传',
+      success: function(res) {
+        if (res.confirm) {
+          if (targetID == "pdf") {
+            ex = ['pdf', 'PDF'];
+          }
+          wx.chooseMessageFile({
+            count: 1,
+            type: 'file',
+            extension: ex,
+            success(res) {
+              that.setData({
+                filePath: res.tempFiles[0].path,
+                title: res.tempFiles[0].name
+              })
+              //console.log(res.tempFiles[0]);
+            }
+          })
+        } else {
+          // 用户取消
+        }
       }
     })
   },
@@ -163,18 +143,21 @@ Page({
   uploadFile: function() {
     var that = this;
     return new Promise((resolve, reject) => {
-      api.uploadFileData("https://tzl.cyyself.name/file/uploadPlan", that.data.filePath).then((res) => {
+      api.uploadFileData("https://tzl.cyyself.name/file/uploadPlan?name=" + that.data.title, that.data.filePath).then((res) => {
           this.setData({
             filePath: res
           })
-          console.log(res);
+          //console.log(res);
           resolve();
         })
         .catch((err) => {
           console.error(err);
           reject(err);
+          that.setData({
+            boolSync: false
+          })
           wx.showToast({
-            title: '未连接到服务器',
+            title: '上传策划文件错误',
             icon: "none",
             duration: 1500
           })
@@ -199,53 +182,57 @@ Page({
       await that.uploadFile() // 请求数据
       await api.hideLoading() // 等待请求数据成功后，隐藏loading
       var typeIndex = that.data.typeIndex;
-      wx.showLoading({
-        title: '正在上传其他信息',
-      })
-      wx.request({
-        url: 'https://tzl.cyyself.name/plans/uploadPlan?uid=' + that.data.userID,
-        header: {
-          'content-type': 'application/json'
-        },
-        method: "POST",
-        data: {
-          'uid': that.data.userID,
-          'title': that.data.title,
-          'theme': that.data.types[typeIndex],
-          'content': that.data.content,
-          'path': that.data.filePath,
-          'visible': that.data.whoIndex,
-          'time': that.data.time
-        },
-        success: function(res) {
-          if (res.data.code == 0) {
-            wx.showToast({
-              title: '提交成功',
-              icon: 'none',
-              duration: 1000,
-            })
-            setTimeout(function() {
-              wx.switchTab({
-                url: '../books',
+      if (that.data.boolSync) {
+        wx.showLoading({
+          title: '正在上传其他信息',
+        })
+        wx.request({
+          url: 'https://tzl.cyyself.name/plans/uploadPlan?uid=' + that.data.userID,
+          header: {
+            'content-type': 'application/json'
+          },
+          method: "POST",
+          data: {
+            'uid': that.data.userID,
+            'title': that.data.title,
+            'theme': that.data.types[typeIndex],
+            'content': that.data.content,
+            'path': that.data.filePath,
+            'visible': that.data.whoIndex,
+            'time': that.data.time
+          },
+          success: function(res) {
+            if (res.data.code == 0) {
+              wx.showToast({
+                title: '提交成功',
+                icon: 'success',
+                duration: 1000,
               })
-            }, 1000);
-          } else {
+              setTimeout(function() {
+                wx.switchTab({
+                  url: '../books',
+                })
+              }, 1000);
+            } else {
+              wx.showToast({
+                title: '提交失败',
+                icon: 'none',
+                duration: 1500
+              })
+            }
+          },
+          fail: function(err) {
+            console.log(err);
             wx.showToast({
-              title: '提交失败',
+              title: '未连接到服务器',
               icon: 'none',
               duration: 1500
             })
           }
-        },
-        fail: function(err) {
-          console.log(err);
-          wx.showToast({
-            title: '未连接到服务器',
-            icon: 'none',
-            duration: 1500
-          })
-        }
-      })
+        })
+      } else {
+        // 上传文件错误
+      }
     }
   }
 })

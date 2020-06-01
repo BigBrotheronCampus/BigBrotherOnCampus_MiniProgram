@@ -13,7 +13,7 @@
 <view class="publishBar">
   <text class="activityTxt">身份信息：</text>
   <view style="width:20rpx;"></view>
-  <input name="recruitName" class="inActivity" focus="true" placeholder="年级-学院-姓名" placeholder-class="placeholderStyle" confirm-type="done" style="  background: #f1f0fe;" maxlength="50"></input>
+  <input name="recruitName" class="inActivity" focus="true" placeholder="年级-专业-姓名" placeholder-class="placeholderStyle" confirm-type="done" style="  background: #f1f0fe;" maxlength="50"></input>
 </view>
 
 <view id='divLine4' style="height:20rpx;"></view>

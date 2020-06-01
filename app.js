@@ -25,11 +25,8 @@ App({
     var that = this;
 
     // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs);
-    
-    // 设置游客访问信息
-    wx.setStorageSync("information", that.globalData.info);
+    //var logs = wx.getStorageSync('logs') || []
+    //logs.unshift(Date.now())
+    //wx.setStorageSync('logs', logs);
   }
 })

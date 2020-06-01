@@ -16,11 +16,22 @@
 }
 
 .name{
-  width:fit-content;
+  width:460rpx;
   height: 120rpx;
   text-align: center;
   line-height: 120rpx;
-  font-size: 60rpx;
+  font-size: 50rpx;
+  color:#de979b;
+  background: #f1f0fe;
+}
+
+.cid{
+  width:460rpx;
+  height: 50rpx;
+  text-align: center;
+  line-height: 50rpx;
+  margin-top: 10rpx;
+  font-size: 40rpx;
   color:#de979b;
   background: #f1f0fe;
 }
@@ -38,17 +49,19 @@
 }
 
 .txt{
-  width: 250rpx;
-  height: fit-content;
-  font-size: 50rpx;
+  width: 200rpx;
+  height: 80rpx;
+  font-size: 40rpx;
+  line-height: 80rpx;
   color: #779dce;
   background: #f1f0fe;
 }
 
 .inTxt{
-  width:420rpx;
-  height: 70rpx;
-  font-size:50rpx;
+  width:470rpx;
+  height: 80rpx;
+  font-size:40rpx;
+  line-height: 80rpx;
   color: #779dce;
   background: #f1f0fe;
 }
@@ -59,7 +72,7 @@
   margin-bottom: 20rpx;
   width:690rpx;
   height:400rpx;
-  font-size:50rpx;
+  font-size:40rpx;
   color: #779dce;
   background: #f1f0fe;
 }

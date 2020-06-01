@@ -3,7 +3,6 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-top: 5rpx;
   justify-content:space-between;
   background-color: #f1f0fe;
 }
@@ -35,6 +34,7 @@
   background-color: #f1f0fe;
   width: 100%;
   align-items: center;
+  margin-bottom: 5rpx;
 }
 .content image{
   width: 640rpx;

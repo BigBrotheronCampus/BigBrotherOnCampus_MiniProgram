@@ -26,7 +26,7 @@ Page({
         text: '活动发布'
       }
     ],
-    index:"",
+    index: "",
     url: "",
     activities: []
   },
@@ -35,8 +35,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    var that = this;
-    var url = JSON.parse(decodeURIComponent(options.url));
+    let that = this;
+    let url = JSON.parse(decodeURIComponent(options.url));
     for (let x = 0; x < 5; x++) {
       if (that.data.headerBar[x].type == options.type) {
         that.setData({
@@ -49,59 +49,29 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
+    let that=this;
+    that.getActivities();
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
-  },
-
-  /**
+  /** 
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-
+    return {
+      title: 'CQU校园大哥大',
+      path: '/pages/home/home',
+      imageUrl: '/icons/eye.png'
+    }
   },
 
   /**
    * 获取相关活动发布信息
    */
   getActivities() {
-    var that = this;
+    let that = this;
     wx.request({
       url: that.data.url,
       method: 'get',
@@ -109,7 +79,7 @@ Page({
         "Content-Type": 'application/json'
       },
       success: function(res) {
-        console.log(res);
+        //console.log(res);
         if (res.data.code == 0) {
           that.setData({
             activities: res.data.data.activities
@@ -138,10 +108,10 @@ Page({
    */
   seeDetails: function(e) {
     // 将详细信息传给详情界面
-    var that = this;
-    var item = e.currentTarget.dataset.item;
-    var tap = 0;
-    var oid = item.aid;
+    let that = this;
+    let item = e.currentTarget.dataset.item;
+    let tap = 0;
+    let oid = item.aid;
     //console.log(item);
     wx.navigateTo({
       url: '../../details/details?currentTap=' + tap + '&oid=' + oid,

@@ -7,7 +7,7 @@
 
 <form bindsubmit="momentSubmit">
 
-<textarea name="momentContent" class="inContent" focus="true" confirm-type="done" maxlength="500" placeholder="长按可删除图片/视频"></textarea>
+<textarea name="momentContent" class="inContent" focus="true" confirm-type="done" maxlength="500" placeholder="长按可删除图片/视频" placeholder-class="placeholderStyle"></textarea>
 
   <image src="{{imgPath}}" class="attachedFile" style="display:{{disImgVal}}" id='img' bindlongtap="delete"></image>
   <video src="{{videoPath}}" class="attachedFile" style="display:{{disVideoVal}}" id='video'bindlongtap="delete"></video>
@@ -19,7 +19,7 @@
       <image class="icon" src="../../../icons/img.png"  style="height:75rpx;" bindtap="onTapImg"></image>
       <image class="icon" src="../../../icons/video.png" bindtap="onTapVideo"></image>
     </view>
-  <button class="activityTxt" form-type="submit">发表</button>
+  <button class="activityTxt" form-type="submit"  style="height:fit-content;">发表</button>
 </view>
 
 </form>

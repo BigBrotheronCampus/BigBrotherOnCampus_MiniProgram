@@ -43,6 +43,17 @@ Page({
   },
 
   /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function() {
+    return {
+      title: 'CQU校园大哥大',
+      path: '/pages/home/home',
+      imageUrl: '/icons/eye.png'
+    }
+  },
+
+  /**
    * 顶部导航栏切换
    */
   navbarTap: function(e) {
@@ -67,6 +78,7 @@ Page({
           that.setData({
             activities: res.data.data.activities
           })
+          //console.log(res);
         } else {
           wx.showToast({
             title: '获取活动发布信息失败,请重试！',

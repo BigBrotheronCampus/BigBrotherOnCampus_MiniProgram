@@ -3,7 +3,7 @@
 
 <view class="title">上传工作记录</view>
 
-<textarea class="inContent" focus="true" confirm-type="done" maxlength="1000" placeholder="描述工作内容" bindinput="inputContent"></textarea>
+<textarea class="inContent" focus="true" confirm-type="done" maxlength="1000" placeholder="描述工作内容" bindinput="inputContent" style="margin-bottom:5rpx;"></textarea>
 
 <view class="imgRightBar">
   <view>学期</view>

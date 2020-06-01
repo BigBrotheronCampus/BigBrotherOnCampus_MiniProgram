@@ -29,7 +29,4 @@
     </view>
     <image class="icon" src="../../icons/next.png"></image>
   </view>
-
-
-  <view  class="blank"></view>
 </view>

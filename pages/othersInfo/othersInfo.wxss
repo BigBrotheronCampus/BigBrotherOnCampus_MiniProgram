@@ -51,5 +51,5 @@
   bottom: 50rpx;
   font-size: 40rpx;
   color: #779dce;
-  background: #ffffff;
+  background: #f1f0fe;
 }

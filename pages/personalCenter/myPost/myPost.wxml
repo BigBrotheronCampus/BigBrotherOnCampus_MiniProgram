@@ -9,7 +9,7 @@
 <!--活动发布-->
 <view class="imgRightBar" id="moreActivity" bindtap="getMoreResult">
   <text>活动发布</text>
-  <view style="display:flex;">
+  <view style="display:flex;align-items:center;">
     <text>更多</text>
     <image class="icon" src="../../../icons/searchNext.png"></image>
   </view>
@@ -29,12 +29,12 @@
   </view>
   <view class="content">
     <view style="display:flex;">
-      <text>活动名称：</text>
-      <text>{{item.name}}</text>
-    </view>
-    <view style="display:flex;">
-      <text>活动内容：</text>
-      <text>{{item.content}}</text>
+        <text class="blueTxt" style="width:200rpx;">活动名称：</text>
+        <text class="blueTxt" style="width:500rpx;">{{item.title}}</text>
+      </view>
+      <view style="display:flex;">
+        <text class="blueTxt" style="width:200rpx;">活动内容：</text>
+        <text class="blueTxt" style="width:500rpx;">{{item.content}}</text>
     </view>
   </view>
 </view>
@@ -43,7 +43,7 @@
 <!--队友招募-->
 <view class="imgRightBar" id="moreRecruit" bindtap="getMoreResult">
   <text>队友招募</text>
-  <view style="display:flex;">
+  <view style="display:flex;align-items:center;">
     <text>更多</text>
     <image class="icon" src="../../../icons/searchNext.png"></image>
   </view>
@@ -64,8 +64,8 @@
   </view>
   <view class="content">
     <view style="display:flex;">
-      <text>招募条件：</text>
-      <text>{{item.content}}</text>
+        <text class="blueTxt" style="width:200rpx;">招募条件：</text>
+        <text class="blueTxt" style="width:500rpx;">{{item.content}}</text>
     </view>
   </view>
 </view>
@@ -74,7 +74,7 @@
 <!--精彩瞬间-->
 <view class="imgRightBar" id="moreMoment" bindtap="getMoreResult">
   <text>精彩瞬间</text>
-  <view style="display:flex;">
+  <view style="display:flex;align-items:center;">
     <text>更多</text>
     <image class="icon" src="../../../icons/searchNext.png"></image>
   </view>
@@ -94,7 +94,7 @@
     </view>
   </view>
   <view class="content">
-    <text>{{item.content}}</text>
+    <text class="blueTxt">{{item.content}}</text>
     <image src="{{item.img}}" class="attachedFile" wx:if='{{item.img!="" && item.img != null}}'></image>
       <video src="{{item.video}}" class="attachedFile" wx:if='{{item.video!="" && item.video != null}}'></video>
   </view>

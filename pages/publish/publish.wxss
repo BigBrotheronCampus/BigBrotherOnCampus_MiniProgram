@@ -2,9 +2,3 @@
 .publishText{
   display: flex;
 }
-
-.blank{
-  width: 100%;
-  height:645rpx;
-  background: #f1f0fe;
-}

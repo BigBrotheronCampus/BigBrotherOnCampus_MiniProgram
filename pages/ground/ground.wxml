@@ -40,7 +40,7 @@
     <view class="header">
       <view class="poster">
         <image class="icon" src="{{item.photo}}"></image>
-        <text class="name">{{item.name}}</text>
+        <text class="name">{{item.userName}}</text>
       </view>
       <view>
         <text class="time">{{item.time}}</text>

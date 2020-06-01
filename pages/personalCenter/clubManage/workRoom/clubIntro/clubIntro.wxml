@@ -5,23 +5,26 @@
 
 <view class="header">
   <image class="avatar" src="{{avatarPath}}"></image>
-  <view  class="name">{{name}}</view>
+  <view>
+    <view class="name">{{name}}</view>
+    <view class='cid'>社团注册ID：{{cid}}</view>
+  </view>
 </view>
 
-  <view class="inputBar">
-    <text class="txt" style="width:200rpx;">成立于：</text>
-    <view style="width:20rpx;"></view>
-    <view class="inTxt" style="background: #f1f0fe;width:470rpx;">{{time}}</view>
-  </view>
+<view class="inputBar">
+  <text class="txt" style="width:160rpx;">成立于：</text>
+  <view style="width:20rpx;"></view>
+  <view class="inTxt" style="background: #f1f0fe;width:510rpx;">{{time}}</view>
+</view>
 
-  <view class="inputBar">
-    <text class="inTxt" style="width:250rpx;">社团简介：</text>
-  </view>
+<view class="inputBar">
+  <text class="inTxt" style="width:200rpx;">社团简介：</text>
+</view>
 
-  <view class="inTextarea" >{{intro}}</view>
+<view class="inTextarea">{{intro}}</view>
 
-  <view class="inputBar">
-    <text class="txt" style="width:250rpx;">现任社长：</text>
-    <view style="width:20rpx;"></view>
-    <view class="inTxt" style="background: #f1f0fe;width:420rpx;">{{president}}</view>
-  </view>
+<view class="inputBar">
+  <text class="txt" style="width:200rpx;">现任社长：</text>
+  <view style="width:20rpx;"></view>
+  <view class="inTxt" style="background: #f1f0fe;width:470rpx;">{{president}}</view>
+</view>

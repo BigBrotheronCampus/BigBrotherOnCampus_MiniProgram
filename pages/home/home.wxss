@@ -16,7 +16,7 @@
 
 #searchBar{
   border: 5rpx solid #ffffff;
-  width: 600rpx;
+  width: 500rpx;
   height: 100rpx;
 }
 

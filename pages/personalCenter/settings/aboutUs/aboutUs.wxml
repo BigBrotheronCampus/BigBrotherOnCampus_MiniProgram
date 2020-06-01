@@ -11,5 +11,3 @@
 <view class="intro">
   <text class="blueTxt" style="font-size:60rpx;">产品介绍：一款集组织、策划、宣传、管理、反馈于一体的第二课堂活动共享平台</text>
 </view>
-
-<view style="background:#f1f0fe;height:420rpx;"></view>

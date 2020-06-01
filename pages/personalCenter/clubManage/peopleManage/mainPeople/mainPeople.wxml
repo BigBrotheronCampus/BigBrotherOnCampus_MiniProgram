@@ -10,23 +10,23 @@
   </view>
 
   <view class="inputBar">
-    <text class="txt" style="width:150rpx;">社长：</text>
+    <text class="txt" style="width:120rpx;">社长：</text>
     <view style="width:20rpx;"></view>
-    <view class="inTxt" style="background: #f1f0fe;width:520rpx;">{{president}}</view>
+    <view class="inTxt" style="background: #f1f0fe;width:550rpx;">{{president}}</view>
   </view>
 
   <view class="inputBar">
-    <text class="txt" style="width:200rpx;">副社长：</text>
+    <text class="txt" style="width:160rpx;">副社长：</text>
     <view style="width:20rpx;"></view>
-    <view class="inTxt" style="background: #f1f0fe;width:470rpx;">{{vicePresident}}</view>
+    <view class="inTxt" style="background: #f1f0fe;width:510rpx;">{{vicePresident}}</view>
   </view>
 
   <view class="inputBar">
-    <text class="inTxt" style="width:150rpx;">社员：</text>
+    <text class="inTxt" style="width:120rpx;">社员：</text>
   </view>
 
   <view class="inTextarea" style="display:flex;">
-    <view wx:for="{{members}}" wx:key="index">{{item + "、"}}</view>
+      {{members}}
   </view>
 
   <view style="display:flex;">

@@ -4,7 +4,7 @@
 <view class="title">{{headerBar[index].text}}</view>
 
 <view class="searchBar" wx:if="{{headerBar[index].type=='search'}}">
-  <image class="icon" src="../../../icons/searchbooks.png"></image>
+  <image class="icon" src="../../../icons/searchDelete.png" bindtap="returnBooks"></image>
   <input class="searchIN" confirm-type="search" value="{{value}}" placeholder="查找" placeholder-class="searchPlaceHolder" bindconfirm="search"></input>
 </view>
 
@@ -18,8 +18,8 @@
       <image class="icon" src="../../../icons/word.png"></image>
     </view>
     <view style="align-items:center;width:90%;">
-      <view >{{item.title}}</view>
-      <view >{{item.time}}</view>
+      <view>{{item.title}}</view>
+      <view>{{item.time}}</view>
     </view>
   </view>
 </scroll-view>

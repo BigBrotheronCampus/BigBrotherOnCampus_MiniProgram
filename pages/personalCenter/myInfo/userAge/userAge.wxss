@@ -1,14 +1,9 @@
 /* pages/personalCenter/personalInfo/userAge/userAge.wxss */
 .placeholderStyle{
-  font-size: 40rpx;
+  font-size: 30rpx;
 }
 
 #inAge{
   padding-left: 50rpx;
 }
 
-.blank{
-  width: 100%;
-  height:950rpx;
-  background: #f1f0fe;
-}

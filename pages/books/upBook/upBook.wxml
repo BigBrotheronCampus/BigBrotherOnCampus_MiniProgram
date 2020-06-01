@@ -12,16 +12,16 @@
   </view>
 </view>
 
-<view class="scrollBar" bindlongpress="delete" wx:if='{{title!=""}}' style="height:fit-content;padding-left:0rpx;">
+<view class="scrollBar" bindlongpress="delete" wx:if='{{title!=""}}' style="height:fit-content;padding-left:0rpx;width:fit-content;">
     <view style="display:flex;align-items:center;">
       <image class="icon" src="../../../icons/word.png"></image>
-      <text style="width:80%;">{{title}}</text>
+      <text style="width:670rpx;">{{title}}</text>
     </view>
 </view>
 
 <view class="imgRightBar">
   <view >策划类别</view>
-  <view style="display:flex;">
+  <view style="display:flex;align-items:center;">
   <picker bindchange="bindPickerChange" value="{{typeIndex}}" range="{{types}}" id="type">
     <view >{{types[typeIndex]}}活动</view>
   </picker>
@@ -31,7 +31,7 @@
 
 <view class="imgRightBar">
   <view >谁能看见</view>
-  <view style="display:flex;">
+  <view style="display:flex;align-items:center;">
   <picker bindchange="bindPickerChange" value="{{whoIndex}}" range="{{who}}" id="who">
     <view >{{who[whoIndex]}}</view>
   </picker>

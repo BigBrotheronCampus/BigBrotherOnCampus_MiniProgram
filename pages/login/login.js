@@ -17,12 +17,30 @@ Page({
    */
   onLoad: function(options) {
     let that = this;
-    if (wx.getStorageSync('information') !=null && wx.getStorageSync('information').id != "") {
+    if (wx.getStorageSync('information') != null && wx.getStorageSync('information').id != "") {
       that.setData({
         phone: wx.getStorageSync('information').phone,
         pwd: wx.getStorageSync('information').pwd
       })
       that.login();
+    }
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function() {
+    this.onLoad();
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function() {
+    return {
+      title: 'CQU校园大哥大',
+      path: '/pages/home/home',
+      imageUrl: '/icons/eye.png'
     }
   },
 
@@ -58,7 +76,11 @@ Page({
             duration: 1000
           })
         } else if (res.data.code == 0) {
-          wx.setStorageSync("information", res.data.data)
+          let info = res.data.data;
+          // 本地数据的area存数组，数据库里为字符串，上传和获取的时候需要转换成数组格式
+          info.area = info.area.split('|');
+          wx.setStorageSync("information", info);
+          //console.log(res.data.data);
           wx.switchTab({
             url: '../home/home'
           })
@@ -102,7 +124,7 @@ Page({
   /**
    * 游客访问
    */
-  touristVisit:function(){
+  touristVisit: function() {
     // 设置本地缓存信息
     wx.setStorageSync("information", app.globalData.info);
     wx.switchTab({

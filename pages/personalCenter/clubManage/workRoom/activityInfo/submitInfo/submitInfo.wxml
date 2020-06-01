@@ -5,33 +5,33 @@
 
 
 <view class="inputBar">
-  <text class="txt" style="width:250rpx;">活动名称：</text>
+  <text class="txt">活动名称：</text>
   <view style="width:20rpx;"></view>
-  <input class="inTxt" focus="true" confirm-type="done" style="background: #f1f0fe;" maxlength="50" style="width:420rpx;" bindinput="inputName"></input>
+  <input class="inTxt" focus="true" confirm-type="done" style="background: #f1f0fe;" maxlength="50" bindinput="inputName"></input>
 </view>
 
 <view class="inputBar">
-  <text class="txt" style="width:250rpx;">举办时间：</text>
+  <text class="txt">举办时间：</text>
   <view style="width:20rpx;"></view>
-  <input placeholder="xxxx年或第x届" placeholder-class="placeHolderTxt" class="inTxt" focus="true" confirm-type="done" style="background: #f1f0fe;" maxlength="50" style="width:420rpx;" bindinput="inputTime"></input>
+  <input placeholder="xxxx年或第x届" placeholder-class="placeHolderTxt" class="inTxt" focus="true" confirm-type="done" style="background: #f1f0fe;" maxlength="50" bindinput="inputTime"></input>
 </view>
 
 <view class="inputBar">
-  <text class="inTxt" style="width:250rpx;">活动策划：</text>
+  <text class="txt">活动策划：</text>
   <view style="width:20rpx;"></view>
   <image class="icon" src="../../../../../../icons/word.png" bindtap="chooseFile"></image>
   <image class="icon" src="../../../../../../icons/pdf.png" bindtap="chooseFile"></image>
 </view>
 
-<view class="scrollBar" bindlongpress="deleteFile" wx:if='{{title!=""}}' style="height:fit-content;margin-left:40rpx;margin-right:20rpx;padding-left:0rpx;width:fit-content;">
+<view class="scrollBar" bindlongpress="deleteFile" wx:if='{{title!=""}}' style="height:fit-content;margin-left:40rpx;padding-left:0rpx;width:fit-content;">
     <view style="display:flex;align-items:center;">
       <image class="icon" src="../../../../../../icons/word.png"></image>
-      <text style="width:80%;">{{title}}</text>
+      <text style="width:610rpx;">{{title}}</text>
     </view>
 </view>
 
 <view class="inputBar">
-  <text class="inTxt" style="width:250rpx;">精彩图片：</text>
+  <text class="txt">精彩图片：</text>
 </view>
 
 <view wx:if="{{img!=[]}}">
@@ -47,7 +47,7 @@
 </view>
 
 <view class="inputBar">
-  <text class="inTxt" style="width:250rpx;">精彩视频：</text>
+  <text class="txt">精彩视频：</text>
 </view>
 
 <view wx:if="{{video!=[]}}">
@@ -62,4 +62,4 @@
   </view>
 </view>
 
-<button class="inTxt" bindtap="submit" style="width:200rpx;">提交</button>
+<button class="inTxt" bindtap="submit" style="width:fit-content;height:fit-content;">提交</button>

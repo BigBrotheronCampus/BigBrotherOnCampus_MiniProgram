@@ -17,7 +17,7 @@ Page({
           },
           {
             type: 'moment',
-            url: 'https://tzl.cyyself.name/findTeammates/myPosts'
+            url: 'https://tzl.cyyself.name/moments/userMoments'
           }
         ],
         text: "个人动态"
@@ -61,7 +61,7 @@ Page({
     activities: [],
     recruits: [],
     moments: [],
-    uid:""
+    uid: ""
   },
 
   /**
@@ -78,39 +78,11 @@ Page({
       }
     }
     that.setData({
-      uid:wx.getStorageSync('information').id
+      uid: wx.getStorageSync('information').id
     })
     that.getActivities();
     that.getRecruits();
     that.getMoments();
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
   },
 
   /**
@@ -124,17 +96,14 @@ Page({
   },
 
   /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
-  },
-
-  /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-
+    return {
+      title: 'CQU校园大哥大',
+      path: '/pages/home/home',
+      imageUrl: '/icons/eye.png'
+    }
   },
 
   /**
@@ -144,7 +113,7 @@ Page({
     var that = this;
     var index = that.data.index;
     wx.request({
-      url: that.data.navBar[index].url[0].url+'?uid='+that.data.uid,
+      url: that.data.navBar[index].url[0].url + '?uid=' + that.data.uid,
       method: 'get',
       header: {
         "Content-Type": 'application/json'
@@ -250,43 +219,47 @@ Page({
   },
 
   /**
- * 获取更多结果
- */
-  getMoreResult: function (e) {
+   * 获取更多结果
+   */
+  getMoreResult: function(e) {
     // 将详细信息传给详情界面
     var that = this;
     var id = e.currentTarget.id;
     var index = that.data.index;
     // url传值
     switch (id) {
-      case "moreActivity": {
-        let url = {
-          data: that.data.navBar[index].url[0].url + '?uid=' + that.data.uid
+      case "moreActivity":
+        {
+          let url = {
+            data: that.data.navBar[index].url[0].url + '?uid=' + that.data.uid
+          }
+          wx.navigateTo({
+            url: "../../moreResult/moreActivity/moreActivity?&url=" + encodeURIComponent(JSON.stringify(url)) + '&type=search',
+          })
+          break;
         }
-        wx.navigateTo({
-          url: "../../moreResult/moreActivity/moreActivity?&url=" + encodeURIComponent(JSON.stringify(url)),
-        })
-        break;
-      }
-      case "moreRecruit": {
-        let url = {
-          data: that.data.navBar[index].url[1].url + '?uid=' + that.data.uid
+      case "moreRecruit":
+        {
+          let url = {
+            data: that.data.navBar[index].url[1].url + '?uid=' + that.data.uid
+          }
+          wx.navigateTo({
+            url: "../../moreResult/moreRecruit/moreRecruit?&url=" + encodeURIComponent(JSON.stringify(url)),
+          })
+          break;
         }
-        wx.navigateTo({
-          url: "../../moreResult/moreRecruit/moreRecruit?&url=" + encodeURIComponent(JSON.stringify(url)),
-        })
-        break;
-      }
-      case "moreMoment": {
-        let url = {
-          data: that.data.navBar[index].url[2].url + '?uid=' + that.data.uid
+      case "moreMoment":
+        {
+          let url = {
+            data: that.data.navBar[index].url[2].url + '?uid=' + that.data.uid
+          }
+          wx.navigateTo({
+            url: "../../moreResult/moreMoment/moreMoment?&url=" + encodeURIComponent(JSON.stringify(url)),
+          })
+          break;
         }
-        wx.navigateTo({
-          url: "../../moreResult/moreMoment/moreMoment?&url=" + encodeURIComponent(JSON.stringify(url)),
-        })
+      default:
         break;
-      }
-      default: break;
     }
   },
 
@@ -299,19 +272,19 @@ Page({
     // 将详细信息传给详情界面
     var that = this;
     var item = e.currentTarget.dataset.item;
-    var id=e.currentTarget.id;
+    var id = e.currentTarget.id;
     //console.log(item);
     if (id == 'activities') {
       wx.navigateTo({
-        url: '../../details/details?currentTap=' + 0 + '&oid=' + item.id,
+        url: '../../details/details?currentTap=' + 0 + '&oid=' + item.aid,
       })
     } else if (id == 'recruits') {
       wx.navigateTo({
-        url: '../../details/details?currentTap=' + 1 + '&oid=' + item.id,
+        url: '../../details/details?currentTap=' + 1 + '&oid=' + item.tid,
       })
     } else if (id == 'moments') {
       wx.navigateTo({
-        url: '../../details/details?currentTap=' + 2 + '&oid=' + item.id,
+        url: '../../details/details?currentTap=' + 2 + '&oid=' + item.mid,
       })
     }
   }

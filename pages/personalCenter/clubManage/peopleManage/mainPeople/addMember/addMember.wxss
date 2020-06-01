@@ -11,14 +11,14 @@
 .txt{
   width: 250rpx;
   height: fit-content;
-  font-size: 50rpx;
+  font-size: 40rpx;
   color: #779dce;
 }
 
 .inTxt{
   width:400rpx;
   height: 100rpx;
-  font-size:50rpx;
+  font-size:40rpx;
   text-align: center;
   color: #779dce;
   background: #f1f0fe;
@@ -26,7 +26,7 @@
 
 .placeHolderTxt{
   text-align: center;
-  font-size: 50rpx;
+  font-size: 40rpx;
   color:#779dce;
 }
 
@@ -38,4 +38,13 @@
   justify-items:center;
   align-items: center;
   text-align:center;
+}
+
+.btn{
+  width:150rpx;
+  height:fit-content;
+  margin-bottom: 30rpx;
+  font-size:40rpx;
+  color: #779dce;
+  background: #f1f0fe;
 }

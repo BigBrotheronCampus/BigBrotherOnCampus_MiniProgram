@@ -19,7 +19,7 @@
   border-radius: 50%;
 }
 .name{
-  font-size: 50rpx;
+  font-size: 40rpx;
   color: #779dce;
 }
 .time{
@@ -32,7 +32,7 @@
   padding-top: 10rpx;
   padding-left: 40rpx;
   color: #779dce;
-  font-size: 50rpx;
+  font-size: 40rpx;
   background-color: #f1f0fe;
   width: 100%;
   align-items: center;
@@ -41,11 +41,11 @@
 }
 
 .content-header{
-  width:250rpx;
+  width:200rpx;
 }
 
 .content-text{
-  width:450rpx;
+  width:500rpx;
 }
 
 .content_1{
@@ -85,9 +85,19 @@
 }
 
 .inContent{
-  width:75%;
+  width:1000rpx;
   height:100rpx;
   font-size:40rpx;
   color: #779dce;
   background: #f1f0fe;
+}
+
+.sendBtn{
+  width:100rpx;
+  height:70rpx;
+  font-size:30rpx;
+  font-weight: bolder;
+  background:#de979b;
+  color:#ffffff;
+  line-height:50rpx;
 }

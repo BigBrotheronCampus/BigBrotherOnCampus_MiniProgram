@@ -6,13 +6,14 @@
   align-items: center;
   height: 100rpx;
   color:#ffffff;
+  margin-bottom: 5rpx;
 }
 
 /*搜索栏输入框*/
 .searchIN{
   width:fit-content;
   height: 100rpx;
-  font-size: 50rpx;
+  font-size: 40rpx;
   color:#779dce;
 }
 
@@ -22,6 +23,6 @@
 
 /*普通小图标*/
 .icon{
-  width:80rpx;
-  height:80rpx;
+  width:60rpx;
+  height:60rpx;
 }

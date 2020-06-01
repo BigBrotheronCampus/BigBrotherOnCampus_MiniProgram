@@ -1,4 +1,9 @@
 // pages/ground/details/details.js
+var myDate = new Date(); //获取系统当前时间
+const app = getApp()
+
+const api = app.globalData.api
+
 Page({
 
   /**
@@ -8,12 +13,15 @@ Page({
     oid: "", // 另外三种类型信息的id值，aid,mid,tid
     uid: "",
     currentTap: "",
+    time: "",
     item: "",
     forwards: [],
     comments: [],
     likes: [],
-    comment:"",
-    boolComment:false
+    comment: "",
+    boolLike: true,
+    boolComment: false,
+    boolSync:true
   },
 
   /**
@@ -27,39 +35,18 @@ Page({
       currentTap: options.currentTap,
       oid: options.oid
     })
+    // 获取当前日期
+    var y = myDate.getFullYear(); //年份
+    var m = myDate.getMonth() + 1; //月份
+    var d = myDate.getDate(); //日期
+    that.setData({
+      time: y + "/" + m + "/" + d
+    })
     //console.log(that.data.oid);
     var tap = that.data.currentTap;
     if (tap == 0) that.getActivity();
     else if (tap == 1) that.getRecruit();
     else that.getMoment();
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
   },
 
   /**
@@ -74,17 +61,14 @@ Page({
   },
 
   /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
-  },
-
-  /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-
+    return {
+      title: 'CQU校园大哥大',
+      path: '/pages/home/home',
+      imageUrl: '/icons/eye.png'
+    }
   },
 
   /**
@@ -104,13 +88,13 @@ Page({
         'Content-Type': 'application/json'
       },
       success: function(res) {
-        console.log(res);
+        //console.log(res);
         if (res.data.code == 0) {
           that.setData({
             item: res.data.data.activity,
-            forwards: res.data.data.forwards,
+            forwards: res.data.data.forwards.join(","),
             comments: res.data.data.comments,
-            likes: res.data.data.likes
+            likes: res.data.data.likes.join(",")
           })
         } else {
           wx.showToast({
@@ -148,7 +132,7 @@ Page({
         'Content-Type': 'application/json'
       },
       success: function(res) {
-        console.log(res);
+        //console.log(res);
         if (res.data.code == 0) {
           that.setData({
             item: res.data.data.post,
@@ -192,7 +176,7 @@ Page({
         'Content-Type': 'application/json'
       },
       success: function(res) {
-        console.log(res);
+        //console.log(res);
         if (res.data.code == 0) {
           that.setData({
             item: res.data.data.moment,
@@ -246,7 +230,7 @@ Page({
             },
             method: "GET",
             success: function(res) {
-              console.log(res);
+              //console.log(res);
               if (res.data.code == 0) {
                 wx.showToast({
                   title: '添加收藏成功',
@@ -286,45 +270,61 @@ Page({
     let tap = that.data.currentTap;
     let url;
     let bool;
+    let data;
     if (tap == 0) {
-      url = 'https://tzl.cyyself.name/activities/checkLike?uid=' + that.data.uid + '&aid=' + that.data.oid;
-    } else if (tap == 1) {
-      url = 'https://tzl.cyyself.name/findTeammates/checkLike?uid=' + that.data.uid + '&tid=' + that.data.oid;
-    } else {
-      url = 'https://tzl.cyyself.name/moments/checkLike?uid=' + that.data.uid + '&mid=' + that.data.oid;
-    }
-    wx.request({
-      url: url,
-      header: {
-        'content-type': 'application/json'
-      },
-      method: "GET",
-      success: function(res) {
-        console.log(res);
-        if (res.data.code == 0) {
-          bool = true;
-        } else if (res.data.code == -1) {
-          bool = false;
-        }
-        return bool;
-      },
-      fail: function(err) {
-        console.log(err);
-        wx.showToast({
-          title: '未连接到服务器',
-          icon: 'none',
-          duration: 1500
-        })
+      url = 'https://tzl.cyyself.name/activities/checkLike';
+      data = {
+        'uid': that.data.uid,
+        'aid': that.data.oid
       }
+    } else if (tap == 1) {
+      url = 'https://tzl.cyyself.name/findTeammates/checkLike';
+      data = {
+        'uid': that.data.uid,
+        'tid': that.data.oid
+      }
+    } else {
+      url = 'https://tzl.cyyself.name/moments/checkLike';
+      data = {
+        'uid': that.data.uid,
+        'mid': that.data.oid
+      }
+    }
+    return new Promise((resolve, reject) => {
+      api.getData(url, data).then((res) => {
+          //console.log(res);
+          if (res.code == 0) {
+            // 可以点赞
+            that.setData({
+              boolLike: true
+            })
+          } else if (res.code == -1) {
+            // 不可以点赞
+            that.setData({
+              boolLike: false
+            })
+          }
+          resolve();
+        })
+        .catch((err) => {
+          console.log(err);
+          reject(err);
+          wx.showToast({
+            title: '未连接到服务器',
+            icon: "none",
+            duration: 1500
+          })
+        })
     })
   },
 
-  like: function(e) {
+  async like(e) {
     let that = this;
     let tap = that.data.currentTap;
     let url;
     // 检查是否点赞
-    if (that.checkLike()) {
+    await that.checkLike() // 请求数据
+    if (that.data.boolLike) {
       wx.showToast({
         title: '你已点赞',
         icon: 'none',
@@ -345,12 +345,13 @@ Page({
         },
         method: "GET",
         success: function(res) {
-          console.log(res);
+          //console.log(res);
           if (res.data.code == 0) {
-            let likes=that.data.likes;
-            likes.push(wx.getStorageSync('information').name);
+            let likes = that.data.likes;
+            let name = wx.getStorageSync('information').name;
+            likes.push(name);
             that.setData({
-              likes:likes
+              likes: likes
             })
           } else {
             wx.showToast({
@@ -375,7 +376,7 @@ Page({
   /**
    * 点击开始评论
    */
-  comment: function (e) {
+  comment: function(e) {
     let that = this;
     that.setData({
       boolComment: true
@@ -385,93 +386,108 @@ Page({
   /**
    * 取消评论
    */
-  cancel:function(){
-    let that=this;
+  cancel: function() {
+    let that = this;
     that.setData({
-      boolComment:false
+      boolComment: false
     })
   },
 
   /**
    * 输入评论
    */
-  inputComment:function(e){
-    let that=this;
+  inputComment: function(e) {
+    let that = this;
     that.setData({
-      comment:e.detail.value
+      comment: e.detail.value
     })
   },
 
   /**
    * 发送评论
    */
-  send:function(){
+  send: function() {
     let that = this;
     let tap = that.data.currentTap;
     let url;
-    // 提交评论
-    if (tap == 0) {
-      url = 'https://tzl.cyyself.name/comments/addComment?uid=' + that.data.uid + '&aid=' + that.data.oid + '&type=activity';
-    } else if (tap == 1) {
-      url = 'https://tzl.cyyself.name/comments/addComment?uid=' + that.data.uid + '&tid=' + that.data.oid + '&type=teammate';
+    if (that.data.comment == "") {
+      wx.showToast({
+        title: '评论失败，评论不能为空',
+        icon: 'none',
+        duration: 1500
+      })
     } else {
-      url = 'https://tzl.cyyself.name/comments/addComment?uid=' + that.data.uid + '&mid=' + that.data.oid + '&type=moment';
-    }
-    wx.request({
-      url: url,
-      header: {
-        'content-type': 'application/json'
-      },
-      method: "GET",
-      data: {
-        'comment': that.data.comment
-      },
-      success: function (res) {
-        console.log(res);
-        if (res.data.code == 0) {
-          let temp = {
-            'uid': that.data.uid,
-            'img': wx.getStorageSync('information').photo,
-            'name': wx.getStorageSync('information').name,
-            'content': that.data.comment
+      // 提交评论
+      if (tap == 0) {
+        url = 'https://tzl.cyyself.name/comments/addComment?uid=' + that.data.uid + '&aid=' + that.data.oid + '&type=activity';
+      } else if (tap == 1) {
+        url = 'https://tzl.cyyself.name/comments/addComment?uid=' + that.data.uid + '&aid=' + that.data.oid + '&type=teammate';
+      } else {
+        url = 'https://tzl.cyyself.name/comments/addComment?uid=' + that.data.uid + '&aid=' + that.data.oid + '&type=moment';
+      }
+      wx.request({
+        url: url,
+        header: {
+          'content-type': 'application/json'
+        },
+        method: "GET",
+        data: {
+          'comment': that.data.comment
+        },
+        success: function(res) {
+          //console.log(res);
+          if (res.data.code == 0) {
+            let temp = {
+              'uid': that.data.uid,
+              'img': wx.getStorageSync('information').photo,
+              'name': wx.getStorageSync('information').name,
+              'content': that.data.comment
+            }
+            let comments = that.data.comments;
+            comments.push(temp);
+            that.setData({
+              comments: comments,
+              comment: "",
+              boolComment: false
+            })
+          } else {
+            wx.showToast({
+              title: '评论失败,请重试',
+              icon: 'none',
+              duration: 1500
+            })
           }
-          let comments = that.data.comments;
-          comments.push(temp);
-          that.setData({
-            comments: comments,
-            comment:"",
-            boolComment:false
-          })
-        } else {
+        },
+        fail: function(err) {
+          console.log(err);
           wx.showToast({
-            title: '评论失败,请重试',
+            title: '未连接到服务器',
             icon: 'none',
             duration: 1500
           })
         }
-      },
-      fail: function (err) {
-        console.log(err);
-        wx.showToast({
-          title: '未连接到服务器',
-          icon: 'none',
-          duration: 1500
-        })
-      }
-    })
+      })
+    }
   },
 
-  forward: function(e) {
+  async forward(e) {
     let that = this;
     let tap = that.data.currentTap;
     let url;
     if (tap == 0) {
       url = 'https://tzl.cyyself.name/activities/forward?uid=' + that.data.uid + '&aid=' + that.data.oid;
+      // 调用发布发布活动的接口
+      await that.addActivity();
     } else if (tap == 1) {
       url = 'https://tzl.cyyself.name/findTeammates/forward?uid=' + that.data.uid + '&tid=' + that.data.oid;
+      // 调用发布队友招募的接口
+      await that.addRecruit();
     } else {
       url = 'https://tzl.cyyself.name/moments/forward?uid=' + that.data.uid + '&mid=' + that.data.oid;
+      // 调用发布精彩瞬间的接口
+      await that.addMoment();
     }
+    if(that.data.boolSync){
     wx.request({
       url: url,
       header: {
@@ -479,7 +495,7 @@ Page({
       },
       method: "GET",
       success: function(res) {
-        console.log(res);
+        //console.log(res);
         if (res.data.code == 0) {
           wx.showToast({
             title: '转发成功',
@@ -503,6 +519,13 @@ Page({
         })
       }
     })
+    }else{
+      wx.showToast({
+        title: '转发失败,请重试',
+        icon: 'none',
+        duration: 1500
+      })
+    }
   },
 
   /**
@@ -510,9 +533,94 @@ Page({
    */
   onTapAvatar: function(e) {
     let that = this;
-    console.log(that.data.item.uid);
+    //console.log(that.data.item.uid);
     wx.navigateTo({
       url: '../othersInfo/othersInfo?uid=' + that.data.item.uid,
+    })
+  },
+
+  /**
+   * 发布活动
+   */
+  addActivity: function() {
+    let that = this;
+    let data = {
+      'title': that.data.item.title,
+      'publisher': that.data.item.publisher,
+      'type': that.data.item.type,
+      'principal': that.data.item.principal,
+      'contact': that.data.item.contact,
+      'content': that.data.item.content,
+      'img': that.data.item.img,
+      'video': that.data.item.video,
+      'time': that.data.time
+    };
+    return new Promise((resolve, reject) => {
+      api.postData("https://tzl.cyyself.name/activities/add?uid=" + that.data.uid, data).then((res) => {
+          //console.log(res);
+          resolve();
+        })
+        .catch((err) => {
+          console.log(err);
+          reject(err);
+          that.setData({
+            boolSync:false
+          })
+        })
+    })
+  },
+
+  /**
+   * 发布队友招募
+   */
+  addRecruit: function() {
+    let that = this;
+    let data = {
+      'uid': that.data.uid,
+      'name': that.data.item.name,
+      'contact': that.data.item.contact,
+      'content': that.data.item.content,
+      'time': that.data.time
+    };
+    return new Promise((resolve, reject) => {
+      api.postData("https://tzl.cyyself.name/findTeammates/add?uid=" + that.data.uid, data).then((res) => {
+          //console.log(res);
+          resolve();
+        })
+        .catch((err) => {
+          console.log(err);
+          reject(err);
+          that.setData({
+            boolSync: false
+          })
+        })
+    })
+  },
+
+  /**
+   * 发布精彩瞬间
+   */
+  addMoment: function() {
+    let that = this;
+    let data = {
+      'uid': that.data.uid,
+      'content': that.data.item.content,
+      'img': that.data.item.img,
+      'video': that.data.item.video,
+      'time': that.data.time
+    };
+    return new Promise((resolve, reject) => {
+      api.postData("https://tzl.cyyself.name/moments/add?uid=" + that.data.uid, data).then((res) => {
+          //console.log(res);
+          resolve();
+        })
+        .catch((err) => {
+          console.log(err);
+          reject(err);
+          that.setData({
+            boolSync: false
+          })
+        })
     })
   }
 })

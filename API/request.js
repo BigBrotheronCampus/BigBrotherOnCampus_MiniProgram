@@ -61,7 +61,7 @@ const uploadFileData = (url,filePath)=>{
 const showLoading = () => {
   return new Promise((resolve, reject) => {
     wx.showLoading({
-      title: '加载中...',
+      title: '上传中...',
       mask: true,
       success(res) {
         //console.log('显示loading')

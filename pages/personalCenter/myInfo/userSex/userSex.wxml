@@ -1,8 +1,5 @@
 <!--pages/personalCenter/personalInfo/userSex/userSex.wxml-->
-<view class="divLine">
-  <view id="divLine1"></view>
-  <view id="divLine2"></view>
-</view>
+<view id="divLine1"></view>
 
 <view class="title">性别</view>
 
@@ -21,5 +18,3 @@
   </view>
 </view>
 <view id='divLine4'></view>
-
-<view  class="blank"></view>

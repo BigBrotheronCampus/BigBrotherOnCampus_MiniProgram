@@ -1,5 +1,5 @@
 // pages/personalCenter/clubManage/peopleManage/workScore/scoreIndex/scoreIndex.js
-var score=[];
+var score = [];
 
 Page({
 
@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    uid:"",
+    uid: "",
     term: "",
     period: "",
     cid: "",
@@ -20,7 +20,7 @@ Page({
   onLoad: function(options) {
     let that = this;
     that.setData({
-      uid:wx.getStorageSync('information').id,
+      uid: wx.getStorageSync('information').id,
       term: options.term,
       period: options.period,
       cid: options.cid
@@ -29,70 +29,40 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
+    let that = this;
+    that.getScores();
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-
+    return {
+      title: 'CQU校园大哥大',
+      path: '/pages/home/home',
+      imageUrl: '/icons/eye.png'
+    }
   },
 
   /**
    * 阻止冒泡事件
    */
-  tap:function(){
+  tap: function() {
     //
   },
 
   /**
    * 输入分数
    */
-  inputScore:function(e){
-    let that=this;
-    let index=e.currentTarget.id;
+  inputScore: function(e) {
+    let that = this;
+    let index = e.currentTarget.id;
     //console.log(index);
     //console.log(e.detail.value);
-    score[index]=e.detail.value
+    score[index] = e.detail.value
     //console.log(score);
   },
 
@@ -113,7 +83,7 @@ Page({
         'period': that.data.period,
       },
       success: function(res) {
-        console.log(res);
+        //console.log(res);
         if (res.data.code == 0) {
           that.setData({
             work: res.data.data.scores
@@ -146,27 +116,27 @@ Page({
     let content = item.event;
     wx.showModal({
       title: '工作记录',
-      content: content ,
+      content: content,
     })
   },
 
   /**
    * 提交工作记录
    */
-  submitScore:function(){
-    let that=this;
-    let work=that.data.work;
-    for(let i=0;i<work.length;i++){
-      if (score[i] == "" || score[i] == null){
+  submitScore: function() {
+    let that = this;
+    let work = that.data.work;
+    for (let i = 0; i < work.length; i++) {
+      if (score[i] == "" || score[i] == null) {
         wx.showToast({
           title: '有部分成员没有打分',
-          icon:'none',
-          duration:1500
+          icon: 'none',
+          duration: 1500
         })
         return;
       }
     }
-    for (let i = 0; i < work.length;i++){
+    for (let i = 0; i < work.length; i++) {
       wx.request({
         url: 'https://tzl.cyyself.name/examScores/setScore',
         header: {
@@ -178,10 +148,10 @@ Page({
           'id': work[i].id,
           'score': score[i],
         },
-        success: function (res) {
+        success: function(res) {
           //console.log(res);
           if (res.data.code == 0) {
-            if(i==work.length-1){
+            if (i == work.length - 1) {
               wx.showToast({
                 title: '提交成功',
                 icon: 'success',
@@ -196,7 +166,7 @@ Page({
             })
           }
         },
-        fail: function (err) {
+        fail: function(err) {
           console.log(err);
           wx.showToast({
             title: '未连接到服务器',

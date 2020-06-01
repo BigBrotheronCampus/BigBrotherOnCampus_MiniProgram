@@ -1,4 +1,6 @@
 // pages/home/home.js
+const app = getApp();
+
 Page({
 
   /**
@@ -13,59 +15,35 @@ Page({
    */
   onLoad: function(options) {
     let that = this;
+
+    //console.log(wx.getStorageSync('information'));
+    if (wx.getStorageSync('information').id == "") {
+      // 设置游客访问信息
+      wx.setStorageSync("information", app.globalData.info);
+    }
     that.setData({
       userAvatarPath: wx.getStorageSync('information').photo
     })
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
+    this.onLoad();
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-
+    return {
+      title: 'CQU校园大哥大',
+      path: '/pages/home/home',
+      imageUrl: '/icons/eye.png'
+    }
   },
+
 
   /**
    * 单击功能栏跳转事件
@@ -152,7 +130,7 @@ Page({
   /**
    * 跳转发布界面
    */
-  toPublish:function(){
+  toPublish: function() {
     wx.switchTab({
       url: '../publish/publish',
     })

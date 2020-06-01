@@ -21,41 +21,28 @@ Page({
     // 父组件选中子组件以便调用子组件函数，#searchBar代表的是component组件id名称
     that.searchBar = that.selectComponent("#searchBar");
 
-    // 调用子组件函数
+    /**
+     * 调用子组件函数
+     */ 
+    // 改变搜索框初始值
     that.searchBar.changeVal(options.val);
+
+    //console.log(options.val);
+
+    // 改变左侧icon
+    that.searchBar.changeIcon();
+
+
+    // 设置搜索初始值
+    that.setData({
+      val: options.val
+    })
+
 
     that.getPeople();
     that.getActivities();
     that.getRecruits();
     that.getMoments();
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
   },
 
   /**
@@ -70,17 +57,14 @@ Page({
   },
 
   /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
-  },
-
-  /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-
+    return {
+      title: 'CQU校园大哥大',
+      path: '/pages/home/home',
+      imageUrl: '/icons/eye.png'
+    }
   },
 
   /**
@@ -98,7 +82,7 @@ Page({
         //console.log(res);
         if (res.data.code == 0) {
           that.setData({
-            people: res.data.data.users
+            people: res.data.data
           })
         } else {
           wx.showToast({
@@ -235,45 +219,50 @@ Page({
     var that = this;
     var id = e.currentTarget.id;
     // url传值
-    switch(id){
-      case "morePeople":{
-        // 传递url必须使用json格式
-        let url={
-          data: 'https://tzl.cyyself.name/users/search?search=' + that.data.val
+    switch (id) {
+      case "morePeople":
+        {
+          // 传递url必须使用json格式
+          let url = {
+            data: 'https://tzl.cyyself.name/users/search?search=' + that.data.val
+          }
+          wx.navigateTo({
+            url: "../../moreResult/morePeople/morePeople?&url=" + encodeURIComponent(JSON.stringify(url)),
+          })
+          break;
         }
-        wx.navigateTo({
-          url: "../../moreResult/morePeople/morePeople?&url=" + encodeURIComponent(JSON.stringify(url)),
-        })
-        break;
-      }
-      case "moreActivity": {
-        let url={
-          data: 'https://tzl.cyyself.name/activities/search?search=' + that.data.val
+      case "moreActivity":
+        {
+          let url = {
+            data: 'https://tzl.cyyself.name/activities/search?search=' + that.data.val
+          }
+          wx.navigateTo({
+            url: "../../moreResult/moreActivity/moreActivity?&url=" + encodeURIComponent(JSON.stringify(url))+'&type=search',
+          })
+          break;
         }
-        wx.navigateTo({
-          url: "../../moreResult/moreActivity/moreActivity?&url=" + encodeURIComponent(JSON.stringify(url)),
-        })
-        break;
-      }
-      case "moreRecruit": {
-        let url = {
-          data: 'https://tzl.cyyself.name/findTeammates/search?search=' + that.data.val
+      case "moreRecruit":
+        {
+          let url = {
+            data: 'https://tzl.cyyself.name/findTeammates/search?search=' + that.data.val
+          }
+          wx.navigateTo({
+            url: "../../moreResult/moreRecruit/moreRecruit?&url=" + encodeURIComponent(JSON.stringify(url)),
+          })
+          break;
         }
-        wx.navigateTo({
-          url: "../../moreResult/moreRecruit/moreRecruit?&url=" + encodeURIComponent(JSON.stringify(url)),
-        })
-        break;
-      }
-      case "moreMoment": {
-        let url = {
-          data: 'https://tzl.cyyself.name/moments/search?search=' + that.data.val
+      case "moreMoment":
+        {
+          let url = {
+            data: 'https://tzl.cyyself.name/moments/search?search=' + that.data.val
+          }
+          wx.navigateTo({
+            url: "../../moreResult/moreMoment/moreMoment?&url=" + encodeURIComponent(JSON.stringify(url)),
+          })
+          break;
         }
-        wx.navigateTo({
-          url: "../../moreResult/moreMoment/moreMoment?&url=" + encodeURIComponent(JSON.stringify(url)),
-        })
+      default:
         break;
-      }
-      default:break;
     }
   },
 

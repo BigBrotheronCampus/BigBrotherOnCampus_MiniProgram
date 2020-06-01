@@ -3,11 +3,10 @@
 
 <view class="title">学校</view>
 
+
+<!--仅能输入，不能自动选择-->
 <view class="imgRightBar">
   <input id="inName" placeholder="高校名称" placeholder-class="placeholderStyle" focus="true" value="{{userSchool}}" style="padding-left:50rpx;" confirm-type="done" bindconfirm="bindconfirm" bindfocus="bindfocus"></input>
   <image wx:if="{{!flag}}" class="icon" src="../../../../icons/edit.png"></image>
   <image wx:if="{{flag}}" class="icon" src="../../../../icons/done.png"></image>
 </view>
-
-<!--仅能输入，不能自动选择-->
-<view  class="blank"></view>

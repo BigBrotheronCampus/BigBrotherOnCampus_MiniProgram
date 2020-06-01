@@ -25,34 +25,6 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
@@ -61,23 +33,21 @@ Page({
   },
 
   /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
-  },
-
-  /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-
+    return {
+      title: 'CQU校园大哥大',
+      path: '/pages/home/home',
+      imageUrl: '/icons/eye.png'
+    }
   },
 
   /**
    * 点击编辑跳转到添加成员界面
    */
   edit: function() {
+    let that = this;
     wx.navigateTo({
       url: './addMember/addMember?cid=' + that.data.cid,
     })
@@ -108,7 +78,7 @@ Page({
           that.setData({
             president: res.data.data.president,
             vicePresident: res.data.data.vice_president,
-            members: res.data.data.members
+            members: res.data.data.members.join("、")
           })
         } else {
           wx.showToast({

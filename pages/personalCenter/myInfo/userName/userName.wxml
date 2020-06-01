@@ -8,5 +8,3 @@
   <image wx:if="{{!flag}}" class="icon" src="../../../../icons/edit.png"></image>
   <image wx:if="{{flag}}" class="icon" src="../../../../icons/done.png"></image>
 </view>
-
-<view  class="blank"></view>

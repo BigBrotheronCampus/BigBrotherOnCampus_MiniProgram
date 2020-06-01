@@ -11,7 +11,8 @@ Component({
    * 组件的初始数据
    */
   data: {
-    val: ""
+    val: "",
+    bool:false  // 设置直接返回广场界面
   },
 
   /**
@@ -32,9 +33,20 @@ Component({
      * 进入搜索结果界面
      */
     search: function(e) {
-      var val = e.detail.value;
+      let val = e.detail.value;
       wx.navigateTo({
         url: '/pages/ground/searchResult/searchResult?val=' + val,
+      })
+    },
+
+
+    /**
+     * 进入搜索结果界面修改左侧icon
+     */
+    changeIcon:function(){
+      let that = this;
+      that.setData({
+        bool: true
       })
     },
 
@@ -42,11 +54,13 @@ Component({
      * 返回广场界面
      */
     returnGround:function(){
-      /*  待修改，后期统一修改界面的返回与关闭
+      let that = this;
+      that.setData({
+        bool: false
+      })
       wx.switchTab({
         url:'/pages/ground/ground'
       })
-      */
     }
   }
 

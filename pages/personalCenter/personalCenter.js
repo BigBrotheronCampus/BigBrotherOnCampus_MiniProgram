@@ -1,4 +1,6 @@
 // pages/personalCenter/personalCenter.js
+const app = getApp(); // 获取全局数据
+
 Page({
   /**
    * 页面的初始数据
@@ -8,7 +10,7 @@ Page({
     userAvatarPath: "",
     name: [], //   用户参加的社团名称
     id: [], // 用户参加的社团id
-    bool:true
+    bool: true
   },
 
   /**
@@ -16,68 +18,33 @@ Page({
    */
   onLoad: function(options) {
     let that = this;
-    that.setData({  
+    that.setData({
       userID: wx.getStorageSync('information').id,
       userAvatarPath: wx.getStorageSync('information').photo
     })
-    if(that.data.userID==""){
+    if (that.data.userID == "") {
       that.setData({
-        bool:false
+        bool: false
       })
     }
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-    let that = this;
-    that.setData({
-      userAvatarPath: wx.getStorageSync('information').photo
-    })
-    // 修改本地缓存信息，每次更新app.globalData都需修改
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
+    this.onLoad();
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-
+    return {
+      title: 'CQU校园大哥大',
+      path: '/pages/home/home',
+      imageUrl: '/icons/eye.png'
+    }
   },
 
   /**
@@ -103,17 +70,43 @@ Page({
             let result = JSON.parse(res.data); // 将JSON字符串转换成对象
             console.log(result);
             if (result.code == 0) {
-              that.setData({ // 上传成功后更新头像
-                userAvatarPath: result.data
-              })
-              // 修改本地缓存信息，每次更新app.globalData都需修改
-              let info = wx.getStorageSync('information');
-              info.photo = result.data;
-              wx.setStorageSync("information", info);
-              wx.showToast({
-                title: "头像修改成功",
-                icon: "success",
-                duration: 1000
+              wx.request({
+                url: 'https://tzl.cyyself.name/users/updateInfo',
+                header: {
+                  "Content-Type": "application/json"
+                },
+                method: "POST",
+                data: {
+                  'id': that.data.userID,
+                  'photo': result.data,
+                },
+                success: function(res) {
+                  if (res.data.code == 0) {
+                    // 修改本地缓存信息，每次更新app.globalData都需修改
+                    let info = wx.getStorageSync('information');
+                    info.photo = result.data;
+                    wx.setStorageSync("information", info);
+                    wx.showToast({
+                      title: '头像修改成功！',
+                      icon: 'success',
+                      duration: 1000
+                    });
+                  } else {
+                    wx.showToast({
+                      title: "头像修改失败",
+                      icon: "none",
+                      duration: 1500
+                    })
+                  }
+                },
+                fail: function(err) {
+                  console.log(err);
+                  wx.showToast({
+                    title: "未连接到服务器！",
+                    icon: "none",
+                    duration: 1500
+                  })
+                }
               })
             } else {
               wx.showToast({
@@ -144,8 +137,8 @@ Page({
     let that = this;
     let targetID = event.currentTarget.id;
     if (targetID == "signOut") {
-      wx.removeStorageSync('information');
-      // 跳转到登录界面，必须设置login界面为初始索引界面
+      wx.setStorageSync("information", app.globalData.info);
+      // 跳转到登录界面
       wx.reLaunch({
         url: '../login/login',
       })
@@ -155,7 +148,7 @@ Page({
       })
     } else if (targetID == 'clubManage') {
       that.getClubs();
-      if (that.data.name == [] && that.data.id==[]) {
+      if (that.data.name == [] && that.data.id == []) {
         wx.showToast({
           title: '您还未加入社团',
           duration: 1500
@@ -236,7 +229,7 @@ Page({
   /**
    * 点击登录
    */
-  toLogin:function(){
+  toLogin: function() {
     wx.reLaunch({
       url: '../login/login',
     })

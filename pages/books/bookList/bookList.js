@@ -5,10 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    navBar:[
-      {
-        type:"practice",
-        text:"实践"
+    navBar: [{
+        type: "practice",
+        text: "实践"
       },
       {
         type: "art",
@@ -23,19 +22,19 @@ Page({
         text: "公益"
       }
     ],
-    index:0,
-    books:[]
+    index: 0,
+    books: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    let that=this;
-    for(let x=0;x<4;x++){
-      if(that.data.navBar[x].type==options.type){
+  onLoad: function(options) {
+    let that = this;
+    for (let x = 0; x < 4; x++) {
+      if (that.data.navBar[x].type == options.type) {
         that.setData({
-          index:x
+          index: x
         })
       }
     }
@@ -43,68 +42,37 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
+  onPullDownRefresh: function() {
+    this.getBooks();
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
+  onShareAppMessage: function() {
+    return {
+      title: 'CQU校园大哥大',
+      path: '/pages/home/home',
+      imageUrl: '/icons/eye.png'
+    }
   },
 
   /**
    * 获取相应类型的策划
    */
-  getBooks:function(){
-    let that=this;
-    let index=that.data.index;
+  getBooks: function() {
+    let that = this;
+    let index = that.data.index;
     wx.request({
-      url: 'https://tzl.cyyself.name/plans/all?theme='+that.data.navBar[index].text,
+      url: 'https://tzl.cyyself.name/plans/all?theme=' + that.data.navBar[index].text,
       method: 'get',
       header: {
         "Content-Type": 'application/json'
       },
-      success: function (res) {
-        console.log(res);
+      success: function(res) {
+        //console.log(res);
         if (res.data.code == 0) {
           that.setData({
             books: res.data.data.plans
@@ -117,7 +85,7 @@ Page({
           })
         }
       },
-      fail: function (err) {
+      fail: function(err) {
         console.log(err);
         wx.showToast({
           title: '未连接到服务器',
@@ -131,10 +99,10 @@ Page({
   /**
    * 点击查看详情
    */
-  seeDetails:function(e){
+  seeDetails: function(e) {
     let id = e.currentTarget.dataset.id;
     wx.navigateTo({
-      url: '../bookDetails/bookDetails?id='+id,
+      url: '../bookDetails/bookDetails?id=' + id,
     })
   }
 })

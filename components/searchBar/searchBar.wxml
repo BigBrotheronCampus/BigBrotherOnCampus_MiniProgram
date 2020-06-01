@@ -1,4 +1,5 @@
 <view class="searchBar">
-  <image class="icon" src="../../icons/search.png" bindtap="returnGround"></image>
-  <input class="searchIN" confirm-type="search" value="{{val}}" placeholder="搜索" placeholder-class="searchPlaceHolder" bindconfirm="search"></input>
+  <image class="icon" src="../../icons/search.png" wx:if="{{!bool}}"></image>
+  <image class="icon" src="../../icons/searchDelete.png" wx:if="{{bool}}" bindtap="returnGround"></image>
+  <input class="searchIN" confirm-type="search" value="{{val}}" placeholder="输入关键字搜索" placeholder-class="searchPlaceHolder" bindconfirm="search"></input>
 </view>

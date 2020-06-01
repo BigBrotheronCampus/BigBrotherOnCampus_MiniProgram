@@ -17,31 +17,14 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面加载
+   * 用户点击右上角分享
    */
-  onLoad: function(options) {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {
-
+  onShareAppMessage: function() {
+    return {
+      title: 'CQU校园大哥大',
+      path: '/pages/home/home',
+      imageUrl: '/icons/eye.png'
+    }
   },
 
   /***
@@ -84,7 +67,7 @@ Page({
   getCode: function() {
     var that = this;
     wx.request({
-      url: 'https://tzl.cyyself.name:2333/users/findPwd',
+      url: 'https://tzl.cyyself.name/users/findPwd',
       method: 'post',
       data: {
         'phone': that.data.phone,
@@ -101,6 +84,10 @@ Page({
             getCodeTime: res.data.data.tamp,
             trueCode: res.data.data.code,
             uid: res.data.data.uid
+          })
+          wx.showModal({
+            title: '温馨提示',
+            content: '获取验证码成功,请注意查收',
           })
         } else if (res.data.code == -2) {
           wx.showToast({
@@ -134,7 +121,7 @@ Page({
     var that = this;
     if (that.data.phone == "" ||
       that.data.account == "") {
-      console.log(that.data);
+      //console.log(that.data);
       wx.showToast({
         title: '请将信息填写完整',
         icon: 'none',
@@ -142,7 +129,7 @@ Page({
       })
     } else {
       wx.request({
-        url: 'https://tzl.cyyself.name:2333/users/checkCode',
+        url: 'https://tzl.cyyself.name/users/checkCode',
         method: 'post',
         data: {
           'getCodeTime': that.data.getCodeTime,
@@ -212,7 +199,7 @@ Page({
       })
     } else {
       wx.request({
-        url: 'https://tzl.cyyself.name:2333/users/updatePwd',
+        url: 'https://tzl.cyyself.name/users/updatePwd',
         method: 'post',
         data: {
           'id': that.data.uid,
@@ -253,5 +240,4 @@ Page({
       })
     }
   }
-
 })

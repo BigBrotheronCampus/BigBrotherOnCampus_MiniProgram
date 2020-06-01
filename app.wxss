@@ -69,7 +69,7 @@
   height: 100rpx;
   margin-bottom: 5rpx;
   display: flex;
-  font-size: 50rpx;
+  font-size: 40rpx;
   align-items: center;
   padding-left: 50rpx;
   color: #779dce;
@@ -88,7 +88,7 @@
   height: 100rpx;
   margin-bottom: 5rpx;
   display: flex;
-  font-size: 50rpx;
+  font-size: 40rpx;
   justify-content: space-between;
   align-items: center;
   color: #779dce;

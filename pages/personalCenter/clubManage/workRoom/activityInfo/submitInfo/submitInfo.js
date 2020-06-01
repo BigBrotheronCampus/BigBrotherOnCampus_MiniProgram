@@ -16,7 +16,8 @@ Page({
     name: "",
     time: "",
     filePath: "",
-    addVideo: true
+    addVideo: true,
+    boolSync: true
   },
 
   /**
@@ -29,52 +30,14 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
-  },
-
-  /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-
+    return {
+      title: 'CQU校园大哥大',
+      path: '/pages/home/home',
+      imageUrl: '/icons/eye.png'
+    }
   },
 
   /**
@@ -103,19 +66,29 @@ Page({
     let that = this;
     let targetID = e.target.id;
     let ex = ['dox', 'docx'];
-    if (targetID == "pdf") {
-      ex = ['pdf', 'PDF'];
-    }
-    wx.chooseMessageFile({
-      count: 1,
-      type: 'file',
-      extension: ex,
-      success(res) {
-        that.setData({
-          filePath: res.tempFiles[0].path,
-          title: res.tempFiles[0].name
-        })
-        //console.log(res.tempFiles[0]);
+    wx.showModal({
+      title: '温馨提示',
+      content: '仅支持从客户端会话选择文件,即需要将文件发送给某个微信好友，从与该好友的会话记录中选择文件上传',
+      success: function(res) {
+        if (res.confirm) {
+          if (targetID == "pdf") {
+            ex = ['pdf', 'PDF'];
+          }
+          wx.chooseMessageFile({
+            count: 1,
+            type: 'file',
+            extension: ex,
+            success(res) {
+              that.setData({
+                filePath: res.tempFiles[0].path,
+                title: res.tempFiles[0].name
+              })
+              //console.log(res.tempFiles[0]);
+            }
+          })
+        } else {
+          // 用户取消
+        }
       }
     })
   },
@@ -237,7 +210,7 @@ Page({
   uploadFile: function() {
     let that = this;
     return new Promise((resolve, reject) => {
-      api.uploadFileData("https://tzl.cyyself.name/file/uploadCommunityPlan", that.data.filePath).then((res) => {
+      api.uploadFileData("https://tzl.cyyself.name/file/uploadCommunityPlan?name="+that.data.title, that.data.filePath).then((res) => {
           this.setData({
             filePath: res
           })
@@ -247,8 +220,11 @@ Page({
         .catch((err) => {
           console.error(err);
           reject(err);
+          that.setData({
+            boolSync: false
+          })
           wx.showToast({
-            title: '未连接到服务器',
+            title: '上传策划文件错误',
             icon: "none",
             duration: 1500
           })
@@ -276,8 +252,11 @@ Page({
         .catch((err) => {
           console.error(err);
           reject(err);
+          that.setData({
+            boolSync: false
+          })
           wx.showToast({
-            title: '未连接到服务器',
+            title: '上传图片文件错误',
             icon: "none",
             duration: 1500
           })
@@ -289,20 +268,23 @@ Page({
     let that = this;
     return new Promise((resolve, reject) => {
       api.uploadFileData("https://tzl.cyyself.name/file/uploadCommunityVideo", that.data.video[i]).then((res) => {
-        let videoArr = that.data.video;
-        videoArr[i] = res[0];
-        that.setData({
-          video: videoArr
+          let videoArr = that.data.video;
+          videoArr[i] = res[0];
+          that.setData({
+            video: videoArr
+          })
+          //console.log(i + ':');
+          //console.log(res[0]);
+          resolve();
         })
-        //console.log(i + ':');
-        //console.log(res[0]);
-        resolve();
-      })
         .catch((err) => {
           console.error(err);
           reject(err);
+          that.setData({
+            boolSync: false
+          })
           wx.showToast({
-            title: '未连接到服务器',
+            title: '上传视频文件错误',
             icon: "none",
             duration: 1500
           })
@@ -348,57 +330,61 @@ Page({
         await api.hideLoading() // 等待请求数据成功后，隐藏loading
         //console.log(that.data.video);
       }
-      wx.showLoading({
-        title: '正在上传其他信息',
-      })
-      wx.request({
-        url: 'https://tzl.cyyself.name/data/addData?cid=' + that.data.cid,
-        header: {
-          'content-type': 'application/json'
-        },
-        method: "POST",
-        data: {
-          'name': that.data.name,
-          'time': that.data.time,
-          'plan': that.data.filePath,
-          'title': that.data.title,
-          'img1': that.data.img[0],
-          'img2': that.data.img[1],
-          'img3': that.data.img[2],
-          'video1': that.data.video[0],
-          'video2': that.data.video[1],
-          'video3': that.data.video[2]
-        },
-        success: function(res) {
-          //console.log(res);
-          if (res.data.code == 0) {
-            wx.showToast({
-              title: '提交成功',
-              icon: 'none',
-              duration: 1000,
-            })
-            setTimeout(function() {
-              wx.navigateBack({ //返回上一页面或多级页面
-                delta: 1
+      if (that.data.boolSync) {
+        wx.showLoading({
+          title: '正在上传其他信息',
+        })
+        wx.request({
+          url: 'https://tzl.cyyself.name/data/addData?cid=' + that.data.cid,
+          header: {
+            'content-type': 'application/json'
+          },
+          method: "POST",
+          data: {
+            'name': that.data.name,
+            'time': that.data.time,
+            'plan': that.data.filePath,
+            'title': that.data.title,
+            'img1': that.data.img[0],
+            'img2': that.data.img[1],
+            'img3': that.data.img[2],
+            'video1': that.data.video[0],
+            'video2': that.data.video[1],
+            'video3': that.data.video[2]
+          },
+          success: function(res) {
+            //console.log(res);
+            if (res.data.code == 0) {
+              wx.showToast({
+                title: '提交成功',
+                icon: 'none',
+                duration: 1000,
               })
-            }, 1000);
-          } else {
+              setTimeout(function() {
+                wx.navigateBack({ //返回上一页面或多级页面
+                  delta: 1
+                })
+              }, 1000);
+            } else {
+              wx.showToast({
+                title: '提交失败',
+                icon: 'none',
+                duration: 1500
+              })
+            }
+          },
+          fail: function(err) {
+            console.log(err);
             wx.showToast({
-              title: '提交失败',
+              title: '未连接到服务器',
               icon: 'none',
               duration: 1500
             })
           }
-        },
-        fail: function(err) {
-          console.log(err);
-          wx.showToast({
-            title: '未连接到服务器',
-            icon: 'none',
-            duration: 1500
-          })
-        }
-      })
+        })
+      } else {
+        // 上传文件发生错误
+      }
     }
   }
 

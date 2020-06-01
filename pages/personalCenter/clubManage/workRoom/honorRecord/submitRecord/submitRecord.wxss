@@ -8,17 +8,19 @@
 }
 
 .txt{
-  width: 250rpx;
-  height: fit-content;
-  font-size: 50rpx;
+  width: 120rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 40rpx;
   color: #779dce;
   background: #f1f0fe;
 }
 
 .inTxt{
-  width:520rpx;
-  height: 70rpx;
-  font-size:50rpx;
+  width:550rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size:40rpx;
   color: #779dce;
   background: #f1f0fe;
 }
@@ -29,7 +31,7 @@
   margin-bottom: 20rpx;
   width:690rpx;
   height:400rpx;
-  font-size:50rpx;
+  font-size:40rpx;
   color: #779dce;
   background: #f1f0fe;
 }

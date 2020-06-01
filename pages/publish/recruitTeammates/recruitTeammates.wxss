@@ -4,20 +4,21 @@
   display: flex;
   align-items: center;
   margin-left: 40rpx;
+  line-height: 70rpx;
 }
 
 .activityTxt{
-  width: 250rpx;
+  width: 200rpx;
   height: 70rpx;
-  font-size: 50rpx;
+  font-size: 40rpx;
   color: #779dce;
   background: #f1f0fe;
 }
 
 .inActivity{
-  width:420rpx;
+  width:470rpx;
   height: 70rpx;
-  font-size:50rpx;
+  font-size:40rpx;
   color: #779dce;
   background: #f1f0fe;
 }
@@ -28,11 +29,11 @@
   width:auto;
   height:400rpx;
   word-wrap:break-wrap;
-  font-size:50rpx;
+  font-size:40rpx;
   color: #779dce;
   background: #f1f0fe;
 }
 
 .placeholderStyle{
-  font-size: 40rpx;
+  font-size: 30rpx;
 }

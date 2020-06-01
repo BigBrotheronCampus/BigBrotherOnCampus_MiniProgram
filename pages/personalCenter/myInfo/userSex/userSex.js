@@ -6,7 +6,7 @@ Page({
    */
   data: {
     userID: "",
-    gender:"",
+    gender: "",
     sex: 1,
   },
 
@@ -14,68 +14,42 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    if (this.data.gender == "女") {
-      this.setData({
+    let that = this;
+    that.setData({
+      userID: wx.getStorageSync('information').id,
+      gender: wx.getStorageSync('information').gender
+    })
+    if (that.data.gender == null) {
+      that.setData({
+        sex: null,
+      })
+    } else if (that.data.gender == "女") {
+      that.setData({
         sex: 0,
       })
     } else {
-      this.setData({
+      that.setData({
         sex: 1,
       })
     }
-    this.setData({
-      userID: wx.getStorageSync('information').id,
-      userSex: wx.getStorageSync('information').gender
-    })
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
+    this.onLoad();
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-
+    return {
+      title: 'CQU校园大哥大',
+      path: '/pages/home/home',
+      imageUrl: '/icons/eye.png'
+    }
   },
 
   /**
@@ -85,17 +59,17 @@ Page({
     var that = this;
     var option = event.currentTarget.id;
     var s = that.data.sex;
-    if ((option == "female" && s == 1) || (option == "male" && s == 0)) {
+    if ((option == "female" && s == 1) || (option == "male" && s == 0) || s == null) {
       wx.showModal({
         title: '提示',
         content: '确定是否修改',
         success: function(res) {
           if (res.confirm) { // 用户确定修改
-            var inValue=null;
+            var inValue = null;
             if (option == "female") inValue = "女";
             else inValue = "男";
             wx.request({
-              url: 'https://tangzl7.club:2333/users/updateInfo',
+              url: 'https://tzl.cyyself.name/users/updateInfo',
               header: {
                 "Content-Type": "application/json"
               },
@@ -117,7 +91,7 @@ Page({
                   }
                   // 修改本地缓存信息，每次更新app.globalData都需修改
                   let info = wx.getStorageSync('information');
-                  info.name = inValue;
+                  info.gender = inValue;
                   wx.setStorageSync("information", info);
                   wx.showToast({
                     title: '信息修改成功！',
@@ -127,6 +101,11 @@ Page({
                   that.setData({
                     flag: true,
                   })
+                  setTimeout(function() {
+                    wx.navigateBack({ //返回上一页面或多级页面
+                      delta: 1
+                    })
+                  }, 1000);
                 } else {
                   wx.showToast({
                     title: "信息修改失败，请重试！",
@@ -135,7 +114,7 @@ Page({
                   })
                 }
               },
-              fail: function (err) {
+              fail: function(err) {
                 console.log(err);
                 wx.showToast({
                   title: "未连接到服务器！",

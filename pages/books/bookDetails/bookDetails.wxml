@@ -5,10 +5,10 @@
 
 <view class="content">{{book.content}}</view>
 
-<view class="scrollBar" bindtap="delete" wx:if='{{title!=""}}' style="height:fit-content;padding-left:0rpx;">
+<view class="scrollBar" bindtap="delete" wx:if='{{title!=""}}' style="height:fit-content;padding-left:0rpx;width:fit-content;">
   <view style="display:flex;align-items:center;">
     <image class="icon" src="../../../icons/word.png"></image>
-    <text style="width:80%;">{{book.title}}</text>
+    <text style="width:670rpx;">{{book.title}}</text>
   </view>
 </view>
 
@@ -38,4 +38,7 @@
   <button class="activityTxt" bindtap="downloadBook">下载</button>
 </view>
 
-<view class="filePath" wx:if="{{bool}}">文件下载路径(访问下载)：{{book.path}}</view>
+<view class="filePath" wx:if="{{bool}}">
+  <text>文件下载链接(访问下载)：</text>
+  <text selectable='true'>{{book.path}}</text>
+</view>

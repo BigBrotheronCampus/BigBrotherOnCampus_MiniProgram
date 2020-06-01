@@ -10,10 +10,39 @@ Page({
     flag: false,
   },
 
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function(options) {
+    let that = this;
+    that.setData({
+      userID: wx.getStorageSync('information').id,
+      userSchool: wx.getStorageSync('information').school
+    })
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function() {
+    this.onLoad();
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function() {
+    return {
+      title: 'CQU校园大哥大',
+      path: '/pages/home/home',
+      imageUrl: '/icons/eye.png'
+    }
+  },
+
   // 输入完成时通过接口上传到MySQL，并显示完成图标
   bindconfirm: function(event) {
-    var that = this;
-    var inValue = event.detail.value;
+    let that = this;
+    let inValue = event.detail.value;
     if (inValue.length == 0) { // 昵称不能为空
       wx.showToast({
         title: '学校名称不能为空',
@@ -22,7 +51,7 @@ Page({
       })
     } else {
       wx.request({
-        url: 'https://tzl.cyyself.name:2333/users/updateInfo',
+        url: 'https://tzl.cyyself.name/users/updateInfo',
         header: {
           "Content-Type": "application/json"
         },
@@ -35,7 +64,7 @@ Page({
           if (res.data.code == 0) {
             // 修改本地缓存信息，每次更新app.globalData都需修改
             let info = wx.getStorageSync('information');
-            info.name = inValue;
+            info.school = inValue;
             wx.setStorageSync("information", info);
             wx.showToast({
               title: '信息修改成功！',
@@ -45,6 +74,11 @@ Page({
             that.setData({
               flag: true,
             })
+            setTimeout(function() {
+              wx.navigateBack({ //返回上一页面或多级页面
+                delta: 1
+              })
+            }, 1000);
           } else {
             wx.showToast({
               title: "信息修改失败，请重试！",
@@ -70,65 +104,5 @@ Page({
     this.setData({
       flag: false,
     })
-  },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function(options) {
-    let that = this;
-    that.setData({
-      userID: wx.getStorageSync('information').id,
-      userSchool: wx.getStorageSync('information').school
-    })
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
-
   }
 })

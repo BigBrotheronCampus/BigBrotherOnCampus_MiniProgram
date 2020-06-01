@@ -6,7 +6,7 @@
 <form bindsubmit="mainPeopleSubmit">
 
   <view class="inputBar">
-    <text class="txt" style="width:150rpx;">时间：</text>
+    <text class="txt">时间：</text>
     <view style="width:20rpx;"></view>
       <picker class='inTxt' mode="date" value="{{date}}" start="1970-01-01" end="2270-01-01" bindchange="bindDateChange">
         <view>
@@ -16,7 +16,7 @@
   </view>
 
   <view class="inputBar">
-    <text class="inTxt" style="width:150rpx;">奖项：</text>
+    <text class="txt">奖项：</text>
   </view>
 
   <textarea class="inTextarea" confirm-type="done" maxlength="500" bindinput="inputContent"></textarea>

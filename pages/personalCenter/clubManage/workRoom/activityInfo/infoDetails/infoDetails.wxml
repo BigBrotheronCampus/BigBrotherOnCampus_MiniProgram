@@ -5,12 +5,12 @@
 
 <view class="content">
   <view style="display:flex;height:fit-content;">
-    <text style="width:250rpx;">活动名称：</text>
-    <text style="width:450rpx;">{{activityInfo.name}}</text>
+    <text style="width:200rpx;">活动名称：</text>
+    <text style="width:500rpx;">{{activityInfo.name}}</text>
   </view>
   <view style="display:flex;">
-    <text style="width:250rpx;">举办时间：</text>
-    <text style="width:450rpx;">{{activityInfo.time}}</text>
+    <text style="width:200rpx;">举办时间：</text>
+    <text style="width:500rpx;">{{activityInfo.time}}</text>
   </view>
 </view>
 
@@ -18,7 +18,7 @@
   <view>活动策划：</view>
 </view>
 
-<view class="scrollBar" bindlongpress="delete" wx:if='{{activityInfo.title!=""}}' style="height:fit-content;padding-left:0rpx;">
+<view class="scrollBar" bindlongpress="delete" wx:if='{{activityInfo.title!=""}}' style="height:fit-content;padding-left:50rpx;">
   <view style="display:flex;align-items:center;">
     <image class="icon" src="../../../../../../icons/word.png"></image>
     <text style="width:80%;">{{activityInfo.title}}</text>
@@ -47,4 +47,7 @@
   <button class="activityTxt" bindtap="downloadBook">下载策划</button>
 </view>
 
-<view class="filePath" wx:if='{{bool && activityInfo.plan != ""}}'>文件下载路径(访问下载)：{{activityInfo.plan}}</view>
+<view class="filePath" wx:if='{{bool && activityInfo.plan != ""}}'>
+  <text>文件下载链接(访问下载)：</text>
+  <text selectable='true'>{{activityInfo.plan}}</text>
+</view>

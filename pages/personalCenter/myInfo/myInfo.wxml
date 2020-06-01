@@ -4,7 +4,8 @@
 <view class="avatar">
   <view id="divLine1"></view>
   <image class="avatarImg" src="{{info.photo}}" bindtap="onTapAvatar"></image>
-  <text id="userID">ID:{{info.id}}</text>
+  <text class="userID" wx:if="{{bool}}">ID:{{info.id}}</text>
+  <text class="userID" wx:if="{{!bool}}" bindtap="toLogin">点击登录</text>
 </view>
 
 <view class="personalInfoTitle">个人信息</view>
@@ -25,7 +26,8 @@
     <view class="infoText">
       <text id="dot">·</text>
       <text >性别</text>
-      <view class="info">{{info.gender}}</view>
+      <view class="info" wx:if="{{info.gender!=null}}">{{info.gender}}</view>
+      <view class="info" wx:if="{{info.gender==null}}"></view>
     </view>
     <image class="icon" src="../../../icons/edit.png"></image>
   </view>
@@ -34,7 +36,8 @@
     <view class="infoText">
       <text id="dot">·</text>
       <text >年龄</text>
-      <view class="info">{{info.age}}</view>
+      <view class="info" wx:if="{{info.age!=null}}">{{info.age}}</view>
+      <view class="info" wx:if="{{info.age==null}}"></view>
     </view>
     <image class="icon" src="../../../icons/edit.png"></image>
   </view>
@@ -56,6 +59,4 @@
     </view>
     <image class="icon" src="../../../icons/edit.png"></image>
   </view>
-
-  <view  class="blank"></view>
 </view>

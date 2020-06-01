@@ -17,7 +17,8 @@ Page({
     videoPath: "",
     disImgVal: "none",
     disVideoVal: "none",
-    time: ""
+    time: "",
+    boolSync: false
   },
 
   /**
@@ -37,52 +38,21 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
+    this.onLoad();
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-
+    return {
+      title: 'CQU校园大哥大',
+      path: '/pages/home/home',
+      imageUrl: '/icons/eye.png'
+    }
   },
 
   /**
@@ -112,7 +82,7 @@ Page({
       fail: function(err) {
         console.log(err);
         wx.showToast({
-          title: '选择图片错误请重试！',
+          title: '选择图片错误，请重试！',
           icon: 'none',
           duration: 1500
         })
@@ -143,7 +113,7 @@ Page({
       fail: function(err) {
         console.log(err);
         wx.showToast({
-          title: '选择视频错误请重试！',
+          title: '选择视频错误，请重试！',
           icon: 'none',
           duration: 1500
         })
@@ -190,14 +160,17 @@ Page({
           this.setData({
             imgPath: res
           })
-          console.log(res);
+          //console.log(res);
           resolve();
         })
         .catch((err) => {
-          console.error(err);
+          console.log(err);
           reject(err);
+          that.setData({
+            boolSync: false
+          })
           wx.showToast({
-            title: '未连接到服务器',
+            title: '上传图片文件错误',
             icon: "none",
             duration: 1500
           })
@@ -212,14 +185,17 @@ Page({
           this.setData({
             videoPath: res
           })
-          console.log(res);
+          //console.log(res);
           resolve();
         })
         .catch((err) => {
-          console.error(err);
+          console.log(err);
           reject(err);
+          that.setData({
+            boolSync:false
+          })
           wx.showToast({
-            title: '未连接到服务器',
+            title: '上传视频文件错误',
             icon: "none",
             duration: 1500
           })
@@ -257,56 +233,60 @@ Page({
         await that.uploadVideo() // 请求数据
         await api.hideLoading() // 等待请求数据成功后，隐藏loading
       }
-      wx.showLoading({
-        title: '正在上传其他信息',
-      })
-      wx.request({
-        url: 'https://tzl.cyyself.name/activities/add?uid=' + that.data.userID,
-        header: {
-          "Content-Type": "application/json"
-        },
-        method: "POST",
-        data: {
-          'title': formData.activityName,
-          'publisher': formData.activityPublisher,
-          'type': that.data.types[that.data.index],
-          'principal': formData.activityLeader,
-          'contact': formData.activityPhoneNum,
-          'content': formData.activityContent,
-          'img': that.data.imgPath,
-          'video': that.data.videoPath,
-          'time': that.data.time
-        },
-        success: function(res) {
-          //console.log(res);
-          if (res.data.code == 0) {
-            wx.showToast({
-              title: '提交成功！',
-              icon: 'success',
-              duration: 1000
-            })
-            setTimeout(function() {
-              wx.switchTab({
-                url: '../../ground/ground',
+      if (that.data.boolSync) {
+        wx.showLoading({
+          title: '正在上传其他信息',
+        })
+        wx.request({
+          url: 'https://tzl.cyyself.name/activities/add?uid=' + that.data.userID,
+          header: {
+            "Content-Type": "application/json"
+          },
+          method: "POST",
+          data: {
+            'title': formData.activityName,
+            'publisher': formData.activityPublisher,
+            'type': that.data.types[that.data.index],
+            'principal': formData.activityLeader,
+            'contact': formData.activityPhoneNum,
+            'content': formData.activityContent,
+            'img': that.data.imgPath,
+            'video': that.data.videoPath,
+            'time': that.data.time
+          },
+          success: function(res) {
+            //console.log(res);
+            if (res.data.code == 0) {
+              wx.showToast({
+                title: '提交成功！',
+                icon: 'success',
+                duration: 1000
               })
-            }, 1000);
-          } else {
+              setTimeout(function() {
+                wx.switchTab({
+                  url: '../../ground/ground',
+                })
+              }, 1000);
+            } else {
+              wx.showToast({
+                title: "活动信息提交失败，请重试！",
+                icon: "none",
+                duration: 1500
+              })
+            }
+          },
+          fail: function(err) {
+            console.log(err);
             wx.showToast({
-              title: "活动信息提交失败，请重试！",
+              title: "未连接到服务器！",
               icon: "none",
               duration: 1500
             })
           }
-        },
-        fail: function(err) {
-          console.log(err);
-          wx.showToast({
-            title: "未连接到服务器！",
-            icon: "none",
-            duration: 1500
-          })
-        }
-      })
+        })
+      }else{
+          // 上传文件错误
+      }
     }
   },
 

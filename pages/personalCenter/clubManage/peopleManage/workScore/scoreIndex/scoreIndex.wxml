@@ -13,7 +13,7 @@
     <view class="row" wx:for="{{work}}" wx:key="index" data-item="{{item}}" id="work" bindtap="seeContent">
       <view class="dd" id="name">{{item.name}}</view>
       <view class="dd" id="content">点击查看</view>
-      <input class="dd" id="{{index}}" bindinput="inputScore" catchtap="tap"></input>
+      <input class="dd" id="{{index}}" bindinput="inputScore" catchtap="tap" value="{{item.score}}"></input>
     </view>
   </scroll-view>
 </view>

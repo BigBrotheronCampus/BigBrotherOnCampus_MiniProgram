@@ -22,8 +22,8 @@ Page({
         text: "云文件"
       },
       {
-        type:'home',
-        text:'精品策划'
+        type: 'home',
+        text: '精品策划'
       }
     ],
     url: "",
@@ -31,7 +31,7 @@ Page({
     type: ["全部", "实践", "文艺", "体育", "公益"],
     typeIndex: 0,
     typeBool: 1,
-    value:""      // 搜索框初始值
+    value: "" // 搜索框初始值
   },
 
   /**
@@ -48,9 +48,9 @@ Page({
         })
       }
     }
-    if (options.type=="search"){
+    if (options.type == "search") {
       that.setData({
-        value:options.val
+        value: options.val
       })
     }
     //console.log(that.data.url);
@@ -58,63 +58,43 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
+    let that = this;
+    that.getBooks();
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-
+    return {
+      title: 'CQU校园大哥大',
+      path: '/pages/home/home',
+      imageUrl: '/icons/eye.png'
+    }
   },
 
   /**
    * 点击搜索
    */
-  search:function(e){
-    let that=this;
+  search: function(e) {
+    let that = this;
     that.setData({
-      url:"https://tzl.cyyself.name/plans/search" + e.detail.value,
+      url: "https://tzl.cyyself.name/plans/search?search=" + e.detail.value
     })
     that.getBooks();
+  },
+
+  /**
+   * 返回精品策划界面
+   */
+  returnBooks: function() {
+    let that = this;
+    wx.switchTab({
+      url: '/pages/books/books'
+    })
   },
 
   /*
@@ -148,7 +128,7 @@ Page({
         "Content-Type": 'application/json'
       },
       success: function(res) {
-        console.log(res);
+        //console.log(res);
         if (res.data.code == 0) {
           that.setData({
             books: res.data.data.plans

@@ -5,10 +5,7 @@
 
 <view text-indent="50rpx"></view>
 <view class="imgRightBar">
-  <input id="inAge" placeholder="请输入您的真实年龄" placeholder-class="placeholderStyle" type="number" maxlength="3" value="{{userAge}}" focus="true" confirm-type="done" bindconfirm="bindconfirm" bindfocus="bindfocus" ></input>
+  <input id="inAge" placeholder="请输入您的真实年龄" placeholder-class="placeholderStyle" type="text" maxlength="3" value="{{userAge}}" focus="true" confirm-type="done" bindconfirm="bindconfirm" bindfocus="bindfocus" ></input>
   <image wx:if="{{!flag}}" class="icon" src="../../../../icons/edit.png"></image>
   <image wx:if="{{flag}}" class="icon" src="../../../../icons/done.png"></image>
 </view>
-<view id='divLine4'></view>
-
-<view  class="blank"></view>

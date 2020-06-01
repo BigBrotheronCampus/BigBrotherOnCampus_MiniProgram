@@ -24,7 +24,8 @@
     <view class="infoText">
       <text id="dot">·</text>
       <text >性别</text>
-      <view class="info">{{info.gender}}</view>
+      <view class="info" wx:if="{{info.gender!=null}}">{{info.gender}}</view>
+      <view class="info" wx:if="{{info.gender==null}}"></view>
     </view>
   </view>
 
@@ -32,7 +33,8 @@
     <view class="infoText">
       <text id="dot">·</text>
       <text >年龄</text>
-      <view class="info">{{info.age}}</view>
+      <view class="info" wx:if="{{info.age!=null}}">{{info.age}}</view>
+      <view class="info" wx:if="{{info.age==null}}"></view>
     </view>
   </view>
 
@@ -51,7 +53,6 @@
       <view class="info">{{info.area[0]}}{{info.area[1]}}</view>
     </view>
   </view>
-  <view  class="blank"></view>
   <button class="followBtn" bindtap="onTapFollowBtn" style="width:280rpx;height: fit-content;">{{followTxt}}</button>
 </view>
 

@@ -32,7 +32,7 @@
 .searchIN{
   width:fit-content;
   height: 100rpx;
-  font-size: 50rpx;
+  font-size: 40rpx;
   color:#779dce;
 }
 

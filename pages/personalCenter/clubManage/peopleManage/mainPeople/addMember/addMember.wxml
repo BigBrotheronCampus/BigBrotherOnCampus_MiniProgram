@@ -1,7 +1,7 @@
 <!--pages/personalCenter/clubManage/peopleManage/mainPeople/addMember/addMember.wxml-->
 <view id="divLine1"></view>
 
-<view class="title" style="margin-bottom:50rpx;">添加成员</view>
+<view class="title" style="margin-bottom:50rpx;">编辑成员</view>
 
 <view style="width: 100%;height:fit-content;justify-items:center;">
 
@@ -12,10 +12,10 @@
   <button class="inTxt" bindtap="search" style="width:400rpx;">查找</button>
 </view>
 
-<view class="searchResult" wx:if="1">
+<view class="searchResult" wx:if="{{trueName!=''}}">
   <image src="../../../../../../icons/dropdown.png" style="width:150rpx;height:150rpx;"></image>
   <image src="{{photo}}" style="width:200rpx;height:200rpx;border-radius:50%;overflow:hidden;"></image>
-  <text class="txt" style="margin-bottom:20rpx;">{{trueName}}</text>
-  <button class="inTxt" bindtap="add" style="width:400rpx;height:fit-content;">确认</button>
+  <text class="txt" style="margin-top:10rpx;margin-bottom:20rpx;">{{trueName}}</text>
+  <button class="btn" bindtap="add">添加</button>
+  <button class="btn" bindtap="delete">删除</button>
 </view>
-
