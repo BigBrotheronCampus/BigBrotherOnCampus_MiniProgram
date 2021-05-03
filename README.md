@@ -32,7 +32,7 @@
 
 ### 其他界面
 
-![界面一览](http://img.fdchen.host//%E7%95%8C%E9%9D%A2%E4%B8%80%E8%A7%88.png)
+![校园大哥大-其他界面](http://img.fdchen.host//%E7%95%8C%E9%9D%A2%E4%B8%80%E8%A7%88.png)
 
 # 技术栈
 
